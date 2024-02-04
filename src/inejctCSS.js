@@ -8,7 +8,7 @@ const injectCSS = () => {
     
     if (process.env.NODE_ENV  == 'production') {
       // A CDN link to your production CSS
-      link.href = "https://cdn.jsdelivr.net/gh/joseph-farruggio/js-widget@1.0/dist/styles.css";
+      link.href = "https://cdn.jsdelivr.net/gh/quak/koledar2@1.0/dist/styles.css";
     } else {
       // Your local CSS for local development
       link.href = "./../dist/styles.css";
