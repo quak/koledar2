@@ -3408,23 +3408,6 @@ var initAlpine = function initAlpine() {
 
   window.Alpine = alpinejs__WEBPACK_IMPORTED_MODULE_0__["default"];
   alpinejs__WEBPACK_IMPORTED_MODULE_0__["default"].start();
-  function pokeSearch() {
-    return {
-      // other default properties
-      isLoading: false,
-      pokemon: null,
-      fetchPokemon: function fetchPokemon() {
-        var _this = this;
-        this.isLoading = true;
-        fetch("https://pokeapi.co/api/v2/pokemon/".concat(this.pokemonSearch)).then(function (res) {
-          return res.json();
-        }).then(function (data) {
-          _this.isLoading = false;
-          _this.pokemon = data;
-        });
-      }
-    };
-  }
 
   // #app is a div that we're going to inject our markup into
   document.getElementById("app").innerHTML = _widget_html__WEBPACK_IMPORTED_MODULE_1__["default"];
@@ -3444,7 +3427,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 // Module
-var code = "<div x-data=\"{open: false}\">\n    <button @click=\"open = !open\">Toggle</button>\n    <p x-show=\"open\">Now you see me</p>\n</div>\n<div x-data=\"pokeSearch()\">\n    <!-- rest of HTML -->\n    <button\n      type=\"submit\"\n      @click=\"fetchPokemon()\"\n      :disabled=\"isLoading\"\n    >\n      Search\n    </button>\n    <template x-if=\"pokemon\">\n        <img\n          :src=\"pokemon.sprites.front_default\"\n          :alt=\"pokemon.name\"\n        />\n        <h3 x-text=\"pokemon.name\"></h3>\n        <template\n          x-for=\"abilityObj in pokemon.abilities\"\n          :key=\"abilityObj.ability.url\"\n        >\n          <span x-text=\"abilityObj.ability.name\"></span>\n        </template>\n      </template>\n  </div>\n\n\n  <" + "script>\n    function pokeSearch() {\n      return {\n        // other default properties\n        isLoading: false,\n        pokemon: null,\n        fetchPokemon() {\n          this.isLoading = true;\n          fetch(`https://pokeapi.co/api/v2/pokemon/${this.pokemonSearch}`)\n            .then(res => res.json())\n            .then(data => {\n              this.isLoading = false;\n              this.pokemon = data;\n            });\n        }\n      }\n    }\n  <" + "/script>";
+var code = "<div x-data=\"{open: false}\">\n    <button @click=\"open = !open\">Toggle</button>\n    <p x-show=\"open\">Now you see me</p>\n</div>\n<div x-data=\"pokeSearch()\">\n    <!-- rest of HTML -->\n    <button\n      type=\"submit\"\n      @click=\"fetchPokemon()\"\n      :disabled=\"isLoading\"\n    >\n      Search\n    </button>\n    <template x-if=\"pokemon\">\n        <img\n          :src=\"pokemon.sprites.front_default\"\n          :alt=\"pokemon.name\"\n        />\n        <h3 x-text=\"pokemon.name\"></h3>\n        <template\n          x-for=\"abilityObj in pokemon.abilities\"\n          :key=\"abilityObj.ability.url\"\n        >\n          <span x-text=\"abilityObj.ability.name\"></span>\n        </template>\n      </template>\n  </div>\n\n\n  <" + "script>\n    function pokeSearch() {\n      return {\n        // other default properties\n        isLoading: false,\n        pokemon: null,\n        fetchPokemon() {\n          this.isLoading = true;\n          fetch('https://pokeapi.co/api/v2/pokemon/${this.pokemonSearch}')\n            .then(res => res.json())\n            .then(data => {\n              this.isLoading = false;\n              this.pokemon = data;\n            });\n        }\n      }\n    }\n  <" + "/script>";
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (code);
 
