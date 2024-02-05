@@ -2,3 +2,45 @@
     <button @click="open = !open">Toggle</button>
     <p x-show="open">Now you see me</p>
 </div>
+<div x-data="pokeSearch()">
+    <!-- rest of HTML -->
+    <button
+      type="submit"
+      @click="fetchPokemon()"
+      :disabled="isLoading"
+    >
+      Search
+    </button>
+    <template x-if="pokemon">
+        <img
+          :src="pokemon.sprites.front_default"
+          :alt="pokemon.name"
+        />
+        <h3 x-text="pokemon.name"></h3>
+        <template
+          x-for="abilityObj in pokemon.abilities"
+          :key="abilityObj.ability.url"
+        >
+          <span x-text="abilityObj.ability.name"></span>
+        </template>
+      </template>
+  </div>
+
+<script>
+  function pokeSearch() {
+    return {
+      // other default properties
+      isLoading: false,
+      pokemon: null,
+      fetchPokemon() {
+        this.isLoading = true;
+        fetch(`https://pokeapi.co/api/v2/pokemon/${this.pokemonSearch}`)
+          .then(res => res.json())
+          .then(data => {
+            this.isLoading = false;
+            this.pokemon = data;
+          });
+      }
+    }
+  }
+</script>
