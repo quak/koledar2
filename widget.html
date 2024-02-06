@@ -4,7 +4,7 @@
     <div x-init="fetchEventList"></div>
     <div><img @click="hideDetail()" src="https://www.slogled.at/wp-content/themes/Slogled/js/dist/images/logo.webp"></div>
     <template x-if="events">
-        <div x-show="open" x-transition></div>
+        <div x-show="listview" x-transition></div>
             <template x-for="event in events.items">
                 <div class="flex flex-row gap-6 max-w-60"  @click="showDetail($data.event)">
                     <div class="basis-1/5 flex border-black border-t">
