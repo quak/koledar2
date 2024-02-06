@@ -5,10 +5,11 @@ const injectCSS = () => {
     // Set the link type to and rel attributes
     link.type = "text/css";
     link.rel = "stylesheet";
-    
-    if (process.env.NODE_ENV  == 'production') {
+    var environment = 'production';
+    //if (process.env.NODE_ENV  == 'production') {
+    if (environment  == 'production') {
       // A CDN link to your production CSS
-      link.href = "https://cdn.jsdelivr.net/gh/quak/koledar2@1.0/dist/styles.css";
+      link.href = "https://cdn.jsdelivr.net/gh/quak/koledar2/dist/styles.css";
     } else {
       // Your local CSS for local development
       link.href = "./../dist/styles.css";
@@ -17,6 +18,8 @@ const injectCSS = () => {
     // Append the stylesheet to the <head> of the DOM
     var head = document.head;
     head.appendChild(link);
+
+    
   }
   
   export default injectCSS;

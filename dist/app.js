@@ -3419,7 +3419,12 @@ var injectCSS = function injectCSS() {
   // Set the link type to and rel attributes
   link.type = "text/css";
   link.rel = "stylesheet";
-  if (false) {} else {
+  var environment = 'production';
+  //if (process.env.NODE_ENV  == 'production') {
+  if (environment == 'production') {
+    // A CDN link to your production CSS
+    link.href = "https://cdn.jsdelivr.net/gh/quak/koledar2/dist/styles.css";
+  } else {
     // Your local CSS for local development
     link.href = "./../dist/styles.css";
   }
@@ -3443,7 +3448,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 // Module
-var code = "\n<div x-data=\"pokeSearch\" id=\"stuhudicev\">\n    <!-- rest of HTML -->\n    <button\n      type=\"submit\"\n      @click=\"fetchPokemon\"\n      :disabled=\"isLoading\"\n    >\n      Search\n    </button>\n    <div x-if=\"events\">\n        <template x-for=\"event in events.items\">\n            <div class=\"flex flex-row gap-6 max-w-60\">\n                <div class=\"basis-1/5 flex border-t\">\n                    <div class=\"w-20\">\n                        <span class=\"px-2 py-1 flex flex-col items-center\">\n                            <span class=\"text-4xl font-bold\">11</span>\n                            <span class=\"text-4xl font-bold\">08</span>\n                        </span>\n                    </div>\n                </div>\n                <div class=\"basis-4/5 border-t\">\n                    \n                    \n                        \n                        <a href=\"/prireditev/tinje-koncert-musica-latinoamericana\" class=\"mb-4 block\">\n                            <p class=\"tracking-widedate uppercase font-bold text-lg\">Tinje</p>\n                            <p class=\"font-serif\" x-text=\"event.title_sl\"></p>\n                        </a>\n                    \n\n                </div>\n            </div>\n        </template>\n\n\n    </div>\n</div>\n\n";
+var code = "\n<div x-data=\"pokeSearch\" id=\"stuhudicev\">\n    <!-- rest of HTML -->\n    <button\n      type=\"submit\"\n      @click=\"fetchPokemon\"\n      :disabled=\"isLoading\"\n    >\n      Search\n    </button>\n    <template x-if=\"events\">\n        <template x-for=\"event in events.items\">\n            <div class=\"flex flex-row gap-6 max-w-60\">\n                <div class=\"basis-1/5 flex border-black border-t\">\n                    <div class=\"w-20\">\n                        <span class=\"px-2 py-1 flex flex-col items-center\">\n                            <span class=\"text-4xl font-bold font-sans text-kblue\">11</span>\n                            <span class=\"text-4xl font-bold font-sans  text-kblue\">08</span>\n                        </span>\n                    </div>\n                </div>\n                <div class=\"basis-4/5 border-black border-t\">\n                    \n                    \n                        \n                        <a href=\"/prireditev/tinje-koncert-musica-latinoamericana\" class=\"mb-4 block\">\n                            <p class=\"tracking-widedate uppercase font-bold text-lg font-sans text-kred\">Tinje</p>\n                            <p class=\"font-serif text-black\" x-text=\"event.title_sl\"></p>\n                        </a>\n                    \n\n                </div>\n            </div>\n        </template>\n\n\n    </template>\n</div>\n\n";
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (code);
 
