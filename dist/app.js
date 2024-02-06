@@ -3376,12 +3376,13 @@ var initAlpine = function initAlpine() {
    *  Alpine.data('widget', widget); 
    */
 
-  alpinejs__WEBPACK_IMPORTED_MODULE_0__["default"].data('pokeSearch', function () {
+  alpinejs__WEBPACK_IMPORTED_MODULE_0__["default"].data('eventCal', function () {
     return {
       // other default properties
       isLoading: false,
       events: null,
-      fetchPokemon: function fetchPokemon() {
+      actevent: null,
+      fetchEventList: function fetchEventList() {
         var _this = this;
         this.isLoading = true;
         fetch('https://koledar.ntoljic.com/v1/events?limit=20&offset=0').then(function (res) {
@@ -3391,15 +3392,11 @@ var initAlpine = function initAlpine() {
           _this.events = data;
         });
       },
-      fetchPokemon2: function fetchPokemon2() {
-        var _this2 = this;
-        this.isLoading = true;
-        fetch('https://koledar.ntoljic.com/v1/events?limit=20&offset=0').then(function (res) {
-          return res.json();
-        }).then(function (data) {
-          _this2.isLoading = false;
-          _this2.events = data;
-        });
+      fetchPokemon2: function fetchPokemon2(ev) {
+        console.log(ev);
+        console.log(JSON.stringify(ev));
+        console.log(ev.title_sl);
+        this.actevent = ev;
       }
     };
   });
@@ -3458,7 +3455,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 // Module
-var code = "\n<div x-data=\"pokeSearch\" id=\"stuhudicev\">\n    <!-- rest of HTML -->\n    <div x-init=\"fetchPokemon\"></div>\n    <div><img src=\"https://www.slogled.at/wp-content/themes/Slogled/js/dist/images/logo.webp\"></div>\n    <template x-if=\"events\">\n        \n        <template x-for=\"event in events.items\">\n            <div class=\"flex flex-row gap-6 max-w-60\">\n                <div class=\"basis-1/5 flex border-black border-t\">\n                    <div class=\"w-20\">\n                        <span class=\"px-2 py-1 flex flex-col items-center\">\n                            <span class=\"text-4xl font-bold font-sans text-kblue\">11</span>\n                            <span class=\"text-4xl font-bold font-sans  text-kblue\">08</span>\n                        </span>\n                    </div>\n                </div>\n                <div class=\"basis-4/5 border-black border-t\">\n                        \n                    <span @click=\"fetchPokemon2\" class=\"mb-4 block\">\n                        <p class=\"tracking-widedate uppercase font-bold text-lg font-sans text-kred\">Tinje</p>\n                        <p class=\"font-serif text-black font-serif\" x-text=\"event.title_sl\"></p>\n                    </span>\n                    \n                </div>\n            </div>\n        </template>\n\n\n    </template>\n</div>\n\n";
+var code = "\n<div x-data=\"eventCal\" id=\"stuhudicev\">\n    <!-- rest of HTML -->\n    <div x-init=\"fetchEventList\"></div>\n    <div><img @click=\"hideDetail()\" src=\"https://www.slogled.at/wp-content/themes/Slogled/js/dist/images/logo.webp\"></div>\n    <template x-if=\"events\">\n        \n        <template x-for=\"event in events.items\">\n            <div class=\"flex flex-row gap-6 max-w-60\"  @click=\"showDetail($data.event)\">\n                <div class=\"basis-1/5 flex border-black border-t\">\n                    <div class=\"w-20\">\n                        <span class=\"px-2 py-1 flex flex-col items-center\">\n                            <span class=\"text-4xl font-bold font-sans text-kblue\">11</span>\n                            <span class=\"text-4xl font-bold font-sans  text-kblue\">08</span>\n                        </span>\n                    </div>\n                </div>\n                <div class=\"basis-4/5 border-black border-t\">\n                        \n                    <span class=\"mb-4 block\">\n                        <p class=\"tracking-widedate uppercase font-bold text-lg font-sans text-kred\">Tinje</p>\n                        <p class=\"text-black font-sans\" x-text=\"event.title_sl\"></p>\n                    </span>\n                    \n                </div>\n            </div>\n        </template>\n\n\n    </template>\n    <template x-if=\"actevent\">\n        \n        <p class=\"text-black font-sans\" x-text=\"actevent.title_sl\"></p>\n\n    </template>\n</div>\n\n";
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (code);
 

@@ -21,12 +21,13 @@ const initAlpine = () => {
      */
 
     
-    Alpine.data('pokeSearch', () => {
+    Alpine.data('eventCal', () => {
         return {
             // other default properties
             isLoading: false,
             events: null,
-            fetchPokemon() {
+            actevent: null,
+            fetchEventList() {
                 this.isLoading = true;
                 fetch('https://koledar.ntoljic.com/v1/events?limit=20&offset=0')
                 .then(res => res.json())
@@ -37,15 +38,14 @@ const initAlpine = () => {
                     
                 });
             },
-
-            fetchPokemon2() {
-                this.isLoading = true;
-                fetch('https://koledar.ntoljic.com/v1/events?limit=20&offset=0')
-                .then(res => res.json())
-                .then(data => {
-                    this.isLoading = false;
-                    this.events = data;
-                });
+            showDetail(ev) {
+                console.log(ev);
+                console.log(JSON.stringify(ev));
+                console.log(ev.title_sl);
+                this.actevent = ev;
+            },
+            hideDetail() {
+                this.actevent = null;
             }
         }
     });
