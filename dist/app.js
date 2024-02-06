@@ -3406,7 +3406,23 @@ var initAlpine = function initAlpine() {
    *  Alpine.data('widget', widget); 
    */
 
-  window.Alpine = alpinejs__WEBPACK_IMPORTED_MODULE_0__["default"];
+  alpinejs__WEBPACK_IMPORTED_MODULE_0__["default"].data('pokeSearch', function () {
+    return {
+      // other default properties
+      isLoading: false,
+      events: null,
+      fetchPokemon: function fetchPokemon() {
+        var _this = this;
+        this.isLoading = true;
+        fetch('https://koledar.ntoljic.com/v1/events?limit=20&offset=0').then(function (res) {
+          return res.json();
+        }).then(function (data) {
+          _this.isLoading = false;
+          _this.events = data;
+        });
+      }
+    };
+  });
   alpinejs__WEBPACK_IMPORTED_MODULE_0__["default"].start();
 
   // #app is a div that we're going to inject our markup into
@@ -3427,7 +3443,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 // Module
-var code = "<div x-data=\"pokeSearch()\">\n    <!-- rest of HTML -->\n    <button\n      type=\"submit\"\n      @click=\"fetchPokemon()\"\n      :disabled=\"isLoading\"\n    >\n      Search\n    </button>\n    <template x-if=\"pokemon\">\n        <img\n          :src=\"pokemon.sprites.front_default\"\n          :alt=\"pokemon.name\"\n        />\n        <h3 x-text=\"pokemon.name\"></h3>\n        <template\n          x-for=\"abilityObj in pokemon.abilities\"\n          :key=\"abilityObj.ability.url\"\n        >\n          <span x-text=\"abilityObj.ability.name\"></span>\n        </template>\n      </template>\n  </div>\n\n\n  <" + "script>\n    function pokeSearch() {\n      return {\n        // other default properties\n        isLoading: false,\n        pokemon: null,\n        fetchPokemon() {\n          this.isLoading = true;\n          fetch('https://pokeapi.co/api/v2/pokemon/${this.pokemonSearch}')\n            .then(res => res.json())\n            .then(data => {\n              this.isLoading = false;\n              this.pokemon = data;\n            });\n        }\n      }\n    }\n  <" + "/script>";
+var code = "\n<div x-data=\"pokeSearch\" id=\"stuhudicev\">\n    <!-- rest of HTML -->\n    <button\n      type=\"submit\"\n      @click=\"fetchPokemon\"\n      :disabled=\"isLoading\"\n    >\n      Search\n    </button>\n    <div x-if=\"events\">\n        <template x-for=\"event in events.items\">\n            <div class=\"flex flex-row gap-6 max-w-60\">\n                <div class=\"basis-1/5 flex border-t\">\n                    <div class=\"w-20\">\n                        <span class=\"px-2 py-1 flex flex-col items-center\">\n                            <span class=\"text-4xl font-bold\">11</span>\n                            <span class=\"text-4xl font-bold\">08</span>\n                        </span>\n                    </div>\n                </div>\n                <div class=\"basis-4/5 border-t\">\n                    \n                    \n                        \n                        <a href=\"/prireditev/tinje-koncert-musica-latinoamericana\" class=\"mb-4 block\">\n                            <p class=\"tracking-widedate uppercase font-bold text-lg\">Tinje</p>\n                            <p class=\"font-serif\" x-text=\"event.title_sl\"></p>\n                        </a>\n                    \n\n                </div>\n            </div>\n        </template>\n\n\n    </div>\n</div>\n\n";
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (code);
 

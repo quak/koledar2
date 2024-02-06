@@ -1,43 +1,39 @@
-<div x-data="pokeSearch()">
+
+<div x-data="pokeSearch" id="stuhudicev">
     <!-- rest of HTML -->
     <button
       type="submit"
-      @click="fetchPokemon()"
+      @click="fetchPokemon"
       :disabled="isLoading"
     >
       Search
     </button>
-    <template x-if="pokemon">
-        <img
-          :src="pokemon.sprites.front_default"
-          :alt="pokemon.name"
-        />
-        <h3 x-text="pokemon.name"></h3>
-        <template
-          x-for="abilityObj in pokemon.abilities"
-          :key="abilityObj.ability.url"
-        >
-          <span x-text="abilityObj.ability.name"></span>
+    <div x-if="events">
+        <template x-for="event in events.items">
+            <div class="flex flex-row gap-6 max-w-60">
+                <div class="basis-1/5 flex border-t">
+                    <div class="w-20">
+                        <span class="px-2 py-1 flex flex-col items-center">
+                            <span class="text-4xl font-bold">11</span>
+                            <span class="text-4xl font-bold">08</span>
+                        </span>
+                    </div>
+                </div>
+                <div class="basis-4/5 border-t">
+                    
+                    
+                        
+                        <a href="/prireditev/tinje-koncert-musica-latinoamericana" class="mb-4 block">
+                            <p class="tracking-widedate uppercase font-bold text-lg">Tinje</p>
+                            <p class="font-serif" x-text="event.title_sl"></p>
+                        </a>
+                    
+
+                </div>
+            </div>
         </template>
-      </template>
-  </div>
 
 
-  <script>
-    function pokeSearch() {
-      return {
-        // other default properties
-        isLoading: false,
-        pokemon: null,
-        fetchPokemon() {
-          this.isLoading = true;
-          fetch('https://pokeapi.co/api/v2/pokemon/${this.pokemonSearch}')
-            .then(res => res.json())
-            .then(data => {
-              this.isLoading = false;
-              this.pokemon = data;
-            });
-        }
-      }
-    }
-  </script>
+    </div>
+</div>
+

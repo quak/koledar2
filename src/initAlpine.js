@@ -20,7 +20,24 @@ const initAlpine = () => {
      *  Alpine.data('widget', widget); 
      */
 
-    window.Alpine = Alpine
+    
+    Alpine.data('pokeSearch', () => {
+        return {
+            // other default properties
+            isLoading: false,
+            events: null,
+            fetchPokemon() {
+                this.isLoading = true;
+                fetch('https://koledar.ntoljic.com/v1/events?limit=20&offset=0')
+                .then(res => res.json())
+                .then(data => {
+                    this.isLoading = false;
+                    this.events = data;
+                });
+            }
+        }
+    });
+
     Alpine.start();
 
     // #app is a div that we're going to inject our markup into
