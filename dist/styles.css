@@ -584,6 +584,10 @@ video {
   align-items: center;
 }
 
+.justify-end {
+  justify-content: flex-end;
+}
+
 .gap-6 {
   gap: 1.5rem;
 }
