@@ -41,9 +41,6 @@ const initAlpine = () => {
                 });
             },
             showDetail(ev) {
-                console.log(ev);
-                console.log(JSON.stringify(ev));
-                console.log(ev.title_sl);
                 this.listview=false;
                 this.detailview=true;
                 this.actevent = ev;
