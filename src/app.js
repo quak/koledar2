@@ -1,4 +1,4 @@
 // app.js
 import initAlpine from './initAlpine';
-import injectCSS from './inejctCSS';
+import injectCSS from './injectCSS';
 initAlpine();

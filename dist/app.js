@@ -3343,36 +3343,6 @@ var module_default = src_default;
 
 /***/ }),
 
-/***/ "./src/inejctCSS.js":
-/*!**************************!*\
-  !*** ./src/inejctCSS.js ***!
-  \**************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-var injectCSS = function injectCSS() {
-  // Create a <link> element
-  var link = document.createElement("link");
-
-  // Set the link type to and rel attributes
-  link.type = "text/css";
-  link.rel = "stylesheet";
-  if (false) {} else {
-    // Your local CSS for local development
-    link.href = "./../dist/styles.css";
-  }
-
-  // Append the stylesheet to the <head> of the DOM
-  var head = document.head;
-  head.appendChild(link);
-};
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (injectCSS);
-
-/***/ }),
-
 /***/ "./src/initAlpine.js":
 /*!***************************!*\
   !*** ./src/initAlpine.js ***!
@@ -3429,6 +3399,36 @@ var initAlpine = function initAlpine() {
   document.getElementById("app").innerHTML = _widget_html__WEBPACK_IMPORTED_MODULE_1__["default"];
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (initAlpine);
+
+/***/ }),
+
+/***/ "./src/injectCSS.js":
+/*!**************************!*\
+  !*** ./src/injectCSS.js ***!
+  \**************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+var injectCSS = function injectCSS() {
+  // Create a <link> element
+  var link = document.createElement("link");
+
+  // Set the link type to and rel attributes
+  link.type = "text/css";
+  link.rel = "stylesheet";
+  if (false) {} else {
+    // Your local CSS for local development
+    link.href = "./../dist/styles.css";
+  }
+
+  // Append the stylesheet to the <head> of the DOM
+  var head = document.head;
+  head.appendChild(link);
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (injectCSS);
 
 /***/ }),
 
@@ -3513,7 +3513,7 @@ var __webpack_exports__ = {};
   \********************/
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _initAlpine__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./initAlpine */ "./src/initAlpine.js");
-/* harmony import */ var _inejctCSS__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./inejctCSS */ "./src/inejctCSS.js");
+/* harmony import */ var _injectCSS__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./injectCSS */ "./src/injectCSS.js");
 // app.js
 
 
