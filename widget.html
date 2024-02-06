@@ -4,29 +4,29 @@
     <div x-init="fetchEventList"></div>
     <div><img @click="hideDetail()" src="https://www.slogled.at/wp-content/themes/Slogled/js/dist/images/logo.webp"></div>
     <template x-if="events">
-        
-        <template x-for="event in events.items">
-            <div class="flex flex-row gap-6 max-w-60"  @click="showDetail($data.event)">
-                <div class="basis-1/5 flex border-black border-t">
-                    <div class="w-20">
-                        <span class="px-2 py-1 flex flex-col items-center">
-                            <span class="text-4xl font-bold font-sans text-kblue">11</span>
-                            <span class="text-4xl font-bold font-sans  text-kblue">08</span>
+        <div x-show="open" x-transition></div>
+            <template x-for="event in events.items">
+                <div class="flex flex-row gap-6 max-w-60"  @click="showDetail($data.event)">
+                    <div class="basis-1/5 flex border-black border-t">
+                        <div class="w-20">
+                            <span class="px-2 py-1 flex flex-col items-center">
+                                <span class="text-4xl font-bold font-sans text-kblue">11</span>
+                                <span class="text-4xl font-bold font-sans  text-kblue">08</span>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="basis-4/5 border-black border-t">
+                            
+                        <span class="mb-4 block">
+                            <p class="tracking-widedate uppercase font-bold text-lg font-sans text-kred">Tinje</p>
+                            <p class="text-black font-sans" x-text="event.title_sl"></p>
                         </span>
+                        
                     </div>
                 </div>
-                <div class="basis-4/5 border-black border-t">
-                        
-                    <span class="mb-4 block">
-                        <p class="tracking-widedate uppercase font-bold text-lg font-sans text-kred">Tinje</p>
-                        <p class="text-black font-sans" x-text="event.title_sl"></p>
-                    </span>
-                    
-                </div>
-            </div>
-        </template>
+            </template>
 
-
+        </div>
     </template>
     <template x-if="actevent">
         

@@ -27,6 +27,7 @@ const initAlpine = () => {
             isLoading: false,
             events: null,
             actevent: null,
+            open: false,
             fetchEventList() {
                 this.isLoading = true;
                 fetch('https://koledar.ntoljic.com/v1/events?limit=20&offset=0')
@@ -42,10 +43,12 @@ const initAlpine = () => {
                 console.log(ev);
                 console.log(JSON.stringify(ev));
                 console.log(ev.title_sl);
+                this.open=true;
                 this.actevent = ev;
             },
             hideDetail() {
                 this.actevent = null;
+                this.open=false;
             }
         }
     });

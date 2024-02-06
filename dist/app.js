@@ -3382,6 +3382,7 @@ var initAlpine = function initAlpine() {
       isLoading: false,
       events: null,
       actevent: null,
+      open: false,
       fetchEventList: function fetchEventList() {
         var _this = this;
         this.isLoading = true;
@@ -3392,11 +3393,16 @@ var initAlpine = function initAlpine() {
           _this.events = data;
         });
       },
-      fetchPokemon2: function fetchPokemon2(ev) {
+      showDetail: function showDetail(ev) {
         console.log(ev);
         console.log(JSON.stringify(ev));
         console.log(ev.title_sl);
+        this.open = true;
         this.actevent = ev;
+      },
+      hideDetail: function hideDetail() {
+        this.actevent = null;
+        this.open = false;
       }
     };
   });
