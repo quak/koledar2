@@ -33,6 +33,18 @@ const initAlpine = () => {
                 .then(data => {
                     this.isLoading = false;
                     this.events = data;
+
+                    
+                });
+            },
+
+            fetchPokemon2() {
+                this.isLoading = true;
+                fetch('https://koledar.ntoljic.com/v1/events?limit=20&offset=0')
+                .then(res => res.json())
+                .then(data => {
+                    this.isLoading = false;
+                    this.events = data;
                 });
             }
         }

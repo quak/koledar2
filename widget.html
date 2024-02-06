@@ -1,15 +1,10 @@
 
 <div x-data="pokeSearch" id="stuhudicev">
     <!-- rest of HTML -->
-    <button
-      type="submit"
-      @click="fetchPokemon"
-      :disabled="isLoading"
-    >
-      Search
-    </button>
+    <div x-init="fetchPokemon"></div>
+    <div><img src="https://www.slogled.at/wp-content/themes/Slogled/js/dist/images/logo.webp"></div>
     <template x-if="events">
-        <div><img src="https://www.slogled.at/wp-content/themes/Slogled/js/dist/images/logo.webp"></div>
+        
         <template x-for="event in events.items">
             <div class="flex flex-row gap-6 max-w-60">
                 <div class="basis-1/5 flex border-black border-t">
@@ -21,15 +16,12 @@
                     </div>
                 </div>
                 <div class="basis-4/5 border-black border-t">
-                    
-                    
                         
-                        <a href="/prireditev/tinje-koncert-musica-latinoamericana" class="mb-4 block">
-                            <p class="tracking-widedate uppercase font-bold text-lg font-sans text-kred">Tinje</p>
-                            <p class="font-serif text-black font-serif" x-text="event.title_sl"></p>
-                        </a>
+                    <span @click="fetchPokemon2" class="mb-4 block">
+                        <p class="tracking-widedate uppercase font-bold text-lg font-sans text-kred">Tinje</p>
+                        <p class="font-serif text-black font-sans" x-text="event.title_sl"></p>
+                    </span>
                     
-
                 </div>
             </div>
         </template>
