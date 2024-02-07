@@ -29,14 +29,14 @@
     </template>
     <template x-if="actevent">
         <div class="flex flex-col max-w-60">
-            <div class="flex justify-end items-center " @click="hideDetail()">
-                <span class="text-black font-sans text-xl my-4 gap-4">nazaj</span>
-                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
-                    <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z"/>
-                  </svg>
-            </div>
-            <div class="flex gap-4">
+            <div class="flex justify-between">
                 <span class="text-kblue font-sans text-2xl">11.08</span>
+                <svg xmlns="http://www.w3.org/2000/svg" @click="hideDetail()" width="32" height="32" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+                    <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z"/>
+                </svg>
+                
+            </div>
+            <div class="flex">
                 <h2 class="text-black font-sans font-bold text-4xl" x-text="actevent.title_sl"></h2>
             </div>
             <div class="flex justify-center items-center my-4 flex-col">
