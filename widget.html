@@ -1,5 +1,5 @@
 
-<div x-data="eventCal" id="stuhudicev">
+<div x-data="eventCal" id="stuhudicev" class="p-4">
     <!-- rest of HTML -->
     <div x-init="fetchEventList"></div>
     <div><img @click="hideDetail()" src="https://www.slogled.at/wp-content/themes/Slogled/js/dist/images/logo.webp"></div>
@@ -35,7 +35,7 @@
                     <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z"/>
                   </svg>
             </div>
-            <div class="flex">
+            <div class="flex gap-4">
                 <span class="text-kblue font-sans text-2xl">11.08</span>
                 <h2 class="text-black font-sans font-bold text-4xl" x-text="actevent.title_sl"></h2>
             </div>
