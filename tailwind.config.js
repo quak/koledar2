@@ -9,6 +9,7 @@ module.exports = {
       colors: {
         "kred": "#952A5A",
         "kblue": "#007A91",
+        "kgrey": "#bababa",
         
       },
     },

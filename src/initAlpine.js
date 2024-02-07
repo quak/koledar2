@@ -35,7 +35,34 @@ const initAlpine = () => {
                 .then(res => res.json())
                 .then(data => {
                     this.isLoading = false;
-                    this.events = data;
+                    let actdate = new Date(data.starting_on);
+
+                    let ev = new Array()
+
+                    data.items.forEach((event,index) => {
+                        let actdate = new Date(event.starting_on);
+
+                        let daynumber = actdate.getDate();
+                        
+                        if(daynumber.toString().length==1){
+                            daynumber = "0"+daynumber;
+                        }
+                        event.day = daynumber
+
+
+
+                        const months = ["Jan", "Feb", "Mar", "Apr", "Maj", "Jun", "Jul", "Avg", "Sep", "Okt", "Nov", "Dec"];
+                        event.month = months[actdate.getMonth()];
+                        
+
+                        ev.push(event);
+
+                    });
+
+                    
+
+                    
+                    this.events = ev;
 
                     
                 });

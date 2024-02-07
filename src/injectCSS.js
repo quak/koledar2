@@ -5,7 +5,7 @@ const injectCSS = () => {
     // Set the link type to and rel attributes
     link.type = "text/css";
     link.rel = "stylesheet";
-    var environment = 'production';
+    var environment = 'productionxx';
     //if (process.env.NODE_ENV  == 'production') {
     if (environment  == 'production') {
       // A CDN link to your production CSS
