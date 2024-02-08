@@ -5,7 +5,7 @@ import injectCSS from './injectCSS';
 const bdy = document.body
 var appdiv = document.createElement("div");
 appdiv.setAttribute("id", "app");
-appdiv.style.display = "flex";
+appdiv.style.display = "none";
 bdy.insertAdjacentElement("afterbegin", appdiv);
 
 initAlpine();
