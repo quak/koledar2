@@ -3550,6 +3550,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var bdy = document.body;
+classList.add("flex");
 var appdiv = document.createElement("div");
 appdiv.setAttribute("id", "app");
 appdiv.style.display = "none";
