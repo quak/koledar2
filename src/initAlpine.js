@@ -49,8 +49,6 @@ const initAlpine = () => {
                         }
                         event.day = daynumber
 
-
-
                         const months = ["Jan", "Feb", "Mar", "Apr", "Maj", "Jun", "Jul", "Avg", "Sep", "Okt", "Nov", "Dec"];
                         event.month = months[actdate.getMonth()];
                         
