@@ -21,7 +21,10 @@ const initAlpine = () => {
      */
 
     
+
+    
     Alpine.data('eventCal', () => {
+        var loadingcycles = 0;
         return {
             // other default properties
             isLoading: false,
@@ -29,11 +32,20 @@ const initAlpine = () => {
             actevent: null,
             listview: true,
             detailview: false,
+
+
             fetchEventList() {
                 this.isLoading = true;
-                fetch('https://koledar.ntoljic.com/v1/events?limit=20&offset=0')
+                var kscript = document.querySelector('script[src*=app]');
+                var limit = kscript.getAttribute('data-amount');  
+                var offset = limit *loadingcycles;
+                loadingcycles=loadingcycles+1;
+                
+
+                fetch('https://koledar.ntoljic.com/v1/events?limit='+limit+'&offset=0')
                 .then(res => res.json())
                 .then(data => {
+                    
                     this.isLoading = false;
                     let actdate = new Date(data.starting_on);
 
@@ -65,6 +77,49 @@ const initAlpine = () => {
                     
                 });
             },
+            fetchAddEventList() {
+                this.isLoading = true;
+                var kscript = document.querySelector('script[src*=app]');
+                var limit = kscript.getAttribute('data-amount');  
+                var offset = limit *loadingcycles;
+                loadingcycles=loadingcycles+1;
+
+                fetch('https://koledar.ntoljic.com/v1/events?limit='+limit+'&offset='+offset)
+                .then(res => res.json())
+                .then(data => {
+                    
+                    this.isLoading = false;
+                    let actdate = new Date(data.starting_on);
+
+                    let ev = new Array()
+
+                    data.items.forEach((event,index) => {
+                        let actdate = new Date(event.starting_on);
+
+                        let daynumber = actdate.getDate();
+                        
+                        if(daynumber.toString().length==1){
+                            daynumber = "0"+daynumber;
+                        }
+                        event.day = daynumber
+
+                        const months = ["Jan", "Feb", "Mar", "Apr", "Maj", "Jun", "Jul", "Avg", "Sep", "Okt", "Nov", "Dec"];
+                        event.month = months[actdate.getMonth()];
+                        
+
+                        ev.push(event);
+
+                    });
+
+                    
+
+                    
+                    (this.events).push(...ev);
+
+                    
+                });
+            },
+
             showDetail(ev) {
                 this.listview=false;
                 this.detailview=true;
