@@ -12,6 +12,7 @@ bdy.classList.add("flex");
 
 var appdiv = document.createElement("div");
 appdiv.setAttribute("id", "slogkoldearapp");
+
 bdy.insertAdjacentElement("afterbegin", appdiv);
 
 initAlpine();
