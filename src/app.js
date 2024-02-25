@@ -12,10 +12,6 @@ bdy.classList.add("flex");
 
 var appdiv = document.createElement("div");
 appdiv.setAttribute("id", "slogkoldearapp");
-appdiv.classList.add("sloghideme");
-appdiv.classList.add("hover:w-80");
-appdiv.classList.add("w-60");
-appdiv.classList.add("duration-500");
 bdy.insertAdjacentElement("afterbegin", appdiv);
 
 initAlpine();
