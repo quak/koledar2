@@ -35,11 +35,11 @@ var styles = `
         -ms-overflow-style:none;
         scrollbar-width: none;
     }
-`
+`;
 
-var styleSheet = document.createElement("style")
-styleSheet.innerText = styles
-document.head.appendChild(styleSheet)
+var styleSheet = document.createElement("style");
+styleSheet.innerText = styles;
+document.head.appendChild(styleSheet);
 
 
 injectCSS();
