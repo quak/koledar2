@@ -25,10 +25,10 @@ var styles = `
   }
   
     
-    #stuhudicev::-webkit-scrollbar{
+    #slogkoldearapp::-webkit-scrollbar{
         display:none;
     }
-    #stuhudicev{
+    #slogkoldearapp{
         height: 100vh;
         overflow-y: scroll;
         position: fixed;

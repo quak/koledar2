@@ -3589,7 +3589,7 @@ var appdiv = document.createElement("div");
 appdiv.setAttribute("id", "slogkoldearapp");
 bdy.insertAdjacentElement("afterbegin", appdiv);
 (0,_initAlpine__WEBPACK_IMPORTED_MODULE_0__["default"])();
-var styles = "\n    \n  .overw{\n    /*all: initial;*/\n  }\n  \n    \n    #stuhudicev::-webkit-scrollbar{\n        display:none;\n    }\n    #stuhudicev{\n        height: 100vh;\n        overflow-y: scroll;\n        position: fixed;\n        -ms-overflow-style:none;\n        scrollbar-width: none;\n    }\n";
+var styles = "\n    \n  .overw{\n    /*all: initial;*/\n  }\n  \n    \n    #slogkoldearapp::-webkit-scrollbar{\n        display:none;\n    }\n    #slogkoldearapp{\n        height: 100vh;\n        overflow-y: scroll;\n        position: fixed;\n        -ms-overflow-style:none;\n        scrollbar-width: none;\n    }\n";
 var styleSheet = document.createElement("style");
 styleSheet.innerText = styles;
 document.head.appendChild(styleSheet);
