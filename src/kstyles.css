@@ -1,0 +1,226 @@
+
+
+.slogkoledar-col-span-1 {
+  grid-column: span 1 / span 1;
+}
+
+.slogkoledar-col-span-3 {
+  grid-column: span 3 / span 3;
+}
+
+.slogkoledar-my-8 {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+.slogkoledar--ml-14 {
+  margin-left: -3.5rem;
+}
+
+.slogkoledar-mb-4 {
+  margin-bottom: 1rem;
+}
+
+.slogkoledar-mr-2 {
+  margin-right: 0.5rem;
+}
+
+.slogkoledar-mt-8 {
+  margin-top: 2rem;
+}
+
+.slogkoledar-block {
+  display: block;
+}
+
+.slogkoledar-flex {
+  display: flex;
+}
+
+.slogkoledar-grid {
+  display: grid;
+}
+
+.slogkoledar-hidden {
+  display: none;
+}
+
+.slogkoledar-w-60 {
+  width: 15rem;
+}
+
+.slogkoledar-max-w-60 {
+  max-width: 15rem;
+}
+
+.slogkoledar-basis-1\/6 {
+  flex-basis: 16.666667%;
+}
+
+.slogkoledar-basis-5\/6 {
+  flex-basis: 83.333333%;
+}
+
+.slogkoledar-grid-cols-4 {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.slogkoledar-flex-row {
+  flex-direction: row;
+}
+
+.slogkoledar-flex-col {
+  flex-direction: column;
+}
+
+.slogkoledar-items-center {
+  align-items: center;
+}
+
+.slogkoledar-justify-end {
+  justify-content: flex-end;
+}
+
+.slogkoledar-justify-center {
+  justify-content: center;
+}
+
+.slogkoledar-justify-between {
+  justify-content: space-between;
+}
+
+.slogkoledar-gap-4 {
+  gap: 1rem;
+}
+
+.slogkoledar-rounded-lg {
+  border-radius: 0.5rem;
+}
+
+.slogkoledar-border-b {
+  border-bottom-width: 1px;
+}
+
+.slogkoledar-border-kgrey {
+  --tw-border-opacity: 1;
+  border-color: rgb(186 186 186 / var(--tw-border-opacity));
+}
+
+.slogkoledar-bg-kred {
+  --tw-bg-opacity: 1;
+  background-color: rgb(149 42 90 / var(--tw-bg-opacity));
+}
+
+.slogkoledar-fill-kblue {
+  fill: #007A91;
+}
+
+.slogkoledar-p-2 {
+  padding: 0.5rem;
+}
+
+.slogkoledar-px-4 {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.slogkoledar-px-8 {
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
+.slogkoledar-py-1 {
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+}
+
+.slogkoledar-py-2 {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
+.slogkoledar-py-3 {
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+}
+
+.slogkoledar-py-4 {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.slogkoledar-text-right {
+  text-align: right;
+}
+
+.slogkoledar-font-sans {
+  font-family: sans-serif;
+}
+
+.slogkoledar-text-2xl {
+  font-size: 1.5rem;
+  line-height: 2rem;
+}
+
+.slogkoledar-text-4xl {
+  font-size: 2.25rem;
+  line-height: 2.5rem;
+}
+
+.slogkoledar-text-lg {
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+}
+
+.slogkoledar-text-sm {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
+.slogkoledar-font-bold {
+  font-weight: 700;
+}
+
+.slogkoledar-uppercase {
+  text-transform: uppercase;
+}
+
+.slogkoledar-tracking-widest {
+  letter-spacing: 0.1em;
+}
+
+.slogkoledar-text-black {
+  --tw-text-opacity: 1;
+  color: rgb(0 0 0 / var(--tw-text-opacity));
+}
+
+.slogkoledar-text-kblue {
+  --tw-text-opacity: 1;
+  color: rgb(0 122 145 / var(--tw-text-opacity));
+}
+
+.slogkoledar-text-kred {
+  --tw-text-opacity: 1;
+  color: rgb(149 42 90 / var(--tw-text-opacity));
+}
+
+.slogkoledar-text-white {
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+
+.slogkoledar-duration-500 {
+  transition-duration: 500ms;
+}
+
+.slogkoledar-hover\:ml-0:hover {
+  margin-left: 0px;
+}
+
+.slogkoledar-hover\:w-80:hover {
+  width: 20rem;
+}
+
+.slogkoledar-bg-white{
+    background-color: white;
+  }

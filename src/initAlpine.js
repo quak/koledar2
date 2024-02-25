@@ -137,7 +137,7 @@ const initAlpine = () => {
     Alpine.start();
 
     // #app is a div that we're going to inject our markup into
-    document.getElementById("app").innerHTML = widgetHTML;
+    document.getElementById("slogkoldearapp").innerHTML = widgetHTML;
 
 }
 

@@ -1,0 +1,257 @@
+/*****/
+
+#slogkoledar-loadmorebutton{
+  text-decoration: inherit;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  border-radius: 0.5rem;
+  --tw-bg-opacity: 1;
+  background-color: rgb(149 42 90 / var(--tw-bg-opacity));
+  padding-left: 2rem;
+  padding-right: 2rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  text-align: right;
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity));
+  font-family: sans-serif;
+}
+
+.slogkoledar-eventitem{
+  cursor: pointer;
+  display: flex;
+  max-width: 15rem;
+  flex-direction: row;
+  gap: 1rem;
+}
+
+.slogkoledar-datewrapper{
+  cursor: pointer;
+  display: flex;
+  flex-basis: 16.666667%;
+  border-bottom-width: 1px;
+  --tw-border-opacity: 1;
+  border-color: rgb(186 186 186 / var(--tw-border-opacity));
+  align-items: center;
+}
+
+
+.slogkoledar-datewrapper2{
+  cursor: pointer;
+  --tw-border-opacity: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+}
+
+
+.slogkoledar-date{    
+  cursor: pointer;
+  --tw-border-opacity: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+}
+
+
+
+.slogkoledar-dateday{    
+  cursor: pointer;
+  --tw-border-opacity: 1;
+  font-family: sans-serif;
+  font-size: 1.5rem;
+  line-height: 2rem;
+  font-weight: 700;
+  --tw-text-opacity: 1;
+  color: rgb(0 122 145 / var(--tw-text-opacity));
+}
+
+.slogkoledar-datemonth{    
+  cursor: pointer;
+  --tw-border-opacity: 1;
+  font-family: sans-serif;
+  font-size: 1.5rem;
+  line-height: 2rem;
+  font-weight: 700;
+  --tw-text-opacity: 1;
+  color: rgb(0 122 145 / var(--tw-text-opacity));
+}
+
+
+.slogkoledar-eventwrapper{    
+  cursor: pointer;
+  display: flex;
+  flex-basis: 83.333333%;
+  align-items: center;
+  border-bottom-width: 1px;
+  --tw-border-opacity: 1;
+  border-color: rgb(186 186 186 / var(--tw-border-opacity));
+}
+
+.slogkoledar-eventinfo{    
+  cursor: pointer;
+  --tw-border-opacity: 1;
+  display: block;
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+}
+
+.slogkoledar-eventinfoplace{    
+  cursor: pointer;
+  --tw-border-opacity: 1;
+  font-family: sans-serif;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  --tw-text-opacity: 1;
+  color: rgb(149 42 90 / var(--tw-text-opacity));
+  margin:0 0 0.5rem 0 ;
+  padding:0;
+}
+
+.slogkoledar-eventinfotitle{    
+  cursor: pointer;
+  --tw-border-opacity: 1;
+  font-family: sans-serif;
+  font-weight: 700;
+  --tw-text-opacity: 1;
+  color: rgb(0 0 0 / var(--tw-text-opacity));
+  margin:0 ;
+  padding:0;
+}
+
+#slogkoldear{
+  margin-left: -3.5rem;
+  max-width: 15rem;
+  padding: 0.5rem;
+  transition-duration: 500ms;
+  background-color: white;
+  height: 100vh;
+  overflow-y: scroll;
+  position: fixed;
+  scrollbar-width: none;
+}
+
+#slogkoldear:hover{
+  margin-left: 0rem;
+}
+
+
+
+/*******************/
+#slogkoledardesc{
+  padding: 0;
+  line-height: 24px;
+  font-family: sans-serif;
+  --tw-text-opacity: 1;
+  color: rgb(0 0 0 / var(--tw-text-opacity));
+}
+
+.slogkoledard-title{
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  font-family: sans-serif;
+  font-size: 2.25rem;
+  line-height: 2.5rem;
+  font-weight: 700;
+  --tw-text-opacity: 1;
+  color: rgb(0 0 0 / var(--tw-text-opacity));
+  margin: 0px;
+}
+
+.slogkoledard-datewrapper{
+  display: flex;
+  justify-content: space-between;
+}
+
+.slogkoledard-date{
+  font-family: sans-serif;
+  font-size: 1.5rem;
+  line-height: 2rem;
+  --tw-text-opacity: 1;
+  color: rgb(0 122 145 / var(--tw-text-opacity));
+}
+
+.slogkoledard-info-wrapper{
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.slogkoledard-info{
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  align-items: center;
+}
+
+.slogkoledard-info-icon{
+  width: 16;
+  height: 16;
+  fill: currentcolor;
+  grid-column: span 1 / span 1;
+  fill: #007A91;
+}
+
+.slogkoledard-infotext{
+  grid-column: span 3 / span 3;
+  font-family: sans-serif;
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+  font-weight: 700;
+  --tw-text-opacity: 1;
+  color: rgb(149 42 90 / var(--tw-text-opacity));
+}
+
+.slogkoledard-image{    
+  margin-bottom: 1rem;
+}
+
+.slogkoledard-linkwrapper{
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+
+.slogkoledard-linkw{
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  align-items: center;
+}
+
+.slogkoledard-exiticon{
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.slogkoledard-wrapper{
+  display: flex;
+  max-width: 15rem;
+  flex-direction: column;
+}
+
+
+.slogkoledard-logo{
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: center;
+}

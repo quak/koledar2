@@ -764,3 +764,7 @@ video {
 .hover\:w-80:hover {
   width: 20rem;
 }
+
+.slogkoledar-bg-white{
+  background-color: white;
+}
