@@ -12,6 +12,7 @@ bdy.classList.add("flex");
 
 var appdiv = document.createElement("div");
 appdiv.setAttribute("id", "slogkoldearapp");
+appdiv.classList.add("sloghideme");
 
 bdy.insertAdjacentElement("afterbegin", appdiv);
 
@@ -34,6 +35,14 @@ var styles = `
         position: fixed;
         -ms-overflow-style:none;
         scrollbar-width: none;
+        eight: 100vh;
+        /* overflow-y: scroll; */
+        /* position: fixed; */
+        -ms-overflow-style: none;
+        /* scrollbar-width: none; */
+        display: block;
+        width: 240px;
+        position: relative;
     }
 `;
 
