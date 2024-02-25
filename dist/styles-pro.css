@@ -255,3 +255,16 @@
   display: flex;
   justify-content: center;
 }
+
+
+.sloghideme{
+  display: none;
+}
+
+#slogkoldearapp{
+  width: 15rem;
+}
+
+#slogkoldearapp:hover{
+  width: 20rem;
+}

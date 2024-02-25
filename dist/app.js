@@ -3483,8 +3483,8 @@ var injectCSS = function injectCSS() {
   //if (process.env.NODE_ENV  == 'production') {
   if (environment == 'production') {
     // A CDN link to your production CSS
-    //link.href = "https://cdn.jsdelivr.net/gh/quak/koledar2@main/dist/styles-pro.css";
-    link.href = "https://cdn.jsdelivr.net/gh/quak/koledar2/dist/styles-pro.css";
+    link.href = "https://cdn.jsdelivr.net/gh/quak/koledar2@main/dist/styles-pro.css";
+    //link.href = "https://cdn.jsdelivr.net/gh/quak/koledar2/dist/styles-pro.css";
   } else {
     // Your local CSS for local development
     link.href = "./../dist/styles-pro.css";
@@ -3587,6 +3587,10 @@ var bdy = document.body;
 bdy.classList.add("flex");
 var appdiv = document.createElement("div");
 appdiv.setAttribute("id", "slogkoldearapp");
+appdiv.classList.add("overw");
+appdiv.classList.add("hover:w-80");
+appdiv.classList.add("w-60");
+appdiv.classList.add("duration-500");
 bdy.insertAdjacentElement("afterbegin", appdiv);
 (0,_initAlpine__WEBPACK_IMPORTED_MODULE_0__["default"])();
 var styles = "\n    \n  .overw{\n    /*all: initial;*/\n  }\n  \n    \n    #stuhudicev::-webkit-scrollbar{\n        display:none;\n    }\n    #stuhudicev{\n        height: 100vh;\n        overflow-y: scroll;\n        position: fixed;\n        -ms-overflow-style:none;\n        scrollbar-width: none;\n    }\n";
