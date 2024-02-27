@@ -62,8 +62,19 @@
                     
     
                 </div>
-                <img class="slogkoledard-image" src="https://slovenia.info/imagine_cache/og/uploads/vodilne_destinacije/koroska/00_uvod_-f000001-tomo_jesenicnik_koroska_at_ojstrica_3987_orig_jpg-photo-l.jpg">
-                <div id="slogkoledardesc" x-html="actevent.desc_sl"></div>
+                
+                <img class="slogkoledard-image" :src="`${actevent.image_landscape.url}`">
+                <div x-data="{ opendesc: false }"></div>
+                <div x-data="{ opendescmargin: true }"></div>
+                <div id="slogkoledardesc" x-html="actevent.desc_sl" x-bind:class="opendesc ? 'skdmaxheight' : ''"></div>
+                
+                
+                    <div id="slogkoledardescmore" x-on:click="opendescmargin = !opendescmargin" x-bind:class="opendescmargin ? 'opendescmargin' : ''">
+                        <span class="bg"></span>
+                        <span class="morelink" x-on:click="opendesc = !opendesc">več</span>
+                    </div>
+                
+                
                 
                 <div class="slogkoledard-linkwrapper ">
                     
@@ -96,11 +107,13 @@
             </div>
     
         </template>
-        <a href="#" id="slogkoledar-loadmorebutton" class="" x-on:click="fetchAddEventList('append')">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" style="margin-right: 1rem;" viewBox="0 0 16 16">
-            <path fill-rule="evenodd" d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5"></path>
-            <path fill-rule="evenodd" d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0z"></path>
-          </svg>več terminov</a>
+        <template x-if="showbutton">
+            <a href="#" id="slogkoledar-loadmorebutton" class="" x-on:click="fetchAddEventList('append')" >
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" style="margin-right: 1rem;" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5"></path>
+                <path fill-rule="evenodd" d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0z"></path>
+                </svg>več terminov</a>
+        </template>
     </div>
     
     

@@ -32,6 +32,9 @@ const initAlpine = () => {
             actevent: null,
             listview: true,
             detailview: false,
+            showbutton: true,
+            opendesc: true,
+            opendescmargin: false,
 
 
             fetchEventList() {
@@ -95,7 +98,7 @@ const initAlpine = () => {
 
                     data.items.forEach((event,index) => {
                         let actdate = new Date(event.starting_on);
-
+                        
                         let daynumber = actdate.getDate();
                         
                         if(daynumber.toString().length==1){
@@ -124,13 +127,26 @@ const initAlpine = () => {
                 this.listview=false;
                 this.detailview=true;
                 this.actevent = ev;
+                this.showbutton = false;
+                
             },
             hideDetail() {
                 this.actevent = null;
                 this.open=false;
                 this.listview=true;
                 this.detailview=false;
-            }
+                this.showbutton = true;
+                
+            },
+
+
+            showAllText(ev) {
+                this.sat=false;
+            },
+
+            hastStateSat(ev) {
+                return this.sat;
+            },
         }
     });
 
@@ -138,6 +154,8 @@ const initAlpine = () => {
 
     // #app is a div that we're going to inject our markup into
     document.getElementById("slogkoldearapp").innerHTML = widgetHTML;
+    
+    
 
 }
 
