@@ -35,6 +35,8 @@ const initAlpine = () => {
             showbutton: true,
             opendesc: true,
             opendescmargin: false,
+            
+            lngorg: false,
 
 
             fetchEventList() {
@@ -107,7 +109,9 @@ const initAlpine = () => {
                         event.day = daynumber
 
                         const months = ["Jan", "Feb", "Mar", "Apr", "Maj", "Jun", "Jul", "Avg", "Sep", "Okt", "Nov", "Dec"];
+                        const monthsde = ["Jan", "Feb", "Mar", "Apr", "Mai", "Jun", "Jul", "Aug", "Sep", "Okt", "Nov", "Dez"];
                         event.month = months[actdate.getMonth()];
+                        event.monthde = monthsde[actdate.getMonth()];
                         
 
                         ev.push(event);

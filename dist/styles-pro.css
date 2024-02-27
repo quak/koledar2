@@ -86,6 +86,12 @@
   font-weight: 700;
   --tw-text-opacity: 1;
   color: rgb(0 122 145 / var(--tw-text-opacity));
+  display: none;
+}
+
+
+.slogkoledar-datemonth{    
+  display: block;
 }
 
 
@@ -134,6 +140,10 @@
   margin:0 ;
   padding:0;
   font-size: 18px;
+  display: none;
+}
+.slogkoledar-eventinfotitle.active{    
+  display: block;
 }
 
 #slogkoldear{
@@ -272,7 +282,7 @@
 
 #slogkoldearapp{
   width: 12.5rem;
-  display:none!important;
+  /*display:none!important;*/
   transition-duration: 500ms;
   flex:none;
 }
@@ -350,10 +360,34 @@ body{
 
 .skdmaxheight{
   
-  max-height: 600px;
+  max-height: 595px;
 }
 
 
 .opendescmargin{
   margin-top: 0!important;
+}
+
+.lng-menu{
+  width: 100%;
+  text-align: right;
+}
+.lng-menu-item{
+  cursor: pointer;
+  font-family: sans-serif;
+  font-size: 14px;
+  font-weight: bold;
+  display: none;
+}
+
+.lng-menu-item.active{
+  display: block;
+}
+
+.buttontext{
+  display: none;
+}
+
+.buttontext.active{
+  display: block;
 }
