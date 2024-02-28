@@ -292,7 +292,6 @@
 
 #slogkoldearapp{
   width: 12.5rem;
-  display:none!important;
   transition-duration: 500ms;
   flex:none;
   z-index: 1000;
