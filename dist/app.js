@@ -3553,7 +3553,7 @@ var injectCSS = function injectCSS() {
   // Set the link type to and rel attributes
   link.type = "text/css";
   link.rel = "stylesheet";
-  var environment = 'productiXon';
+  var environment = 'production';
   //if (process.env.NODE_ENV  == 'production') {
   if (environment == 'production') {
     // A CDN link to your production CSS
