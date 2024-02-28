@@ -10,7 +10,7 @@ const injectCSS = () => {
     if (environment  == 'production') {
       // A CDN link to your production CSS
       link.href = "https://cdn.jsdelivr.net/gh/quak/koledar2@main/dist/styles-pro.css";
-      link.href = "https://cdn.jsdelivr.net/gh/quak/koledar2/dist/styles-pro.css";
+      //link.href = "https://cdn.jsdelivr.net/gh/quak/koledar2/dist/styles-pro.css";
     } else {
       // Your local CSS for local development
       link.href = "./../dist/styles-pro.css";
