@@ -292,7 +292,7 @@
 
 #slogkoldearapp{
   width: 12.5rem;
-  /*display:none!important;*/
+  display:none!important;
   transition-duration: 500ms;
   flex:none;
 }
