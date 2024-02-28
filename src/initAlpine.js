@@ -67,6 +67,12 @@ const initAlpine = () => {
                             event.enddate = event.enddate.replaceAll("/", ".");
                         }
 
+                        let enddaynumber = enddate.getDate();
+                        if(enddaynumber.toString().length==1){
+                            enddaynumber = "0"+enddaynumber;
+                        }
+                        event.endday = enddaynumber
+
                         let daynumber = actdate.getDate();
                         
                         if(daynumber.toString().length==1){
@@ -74,6 +80,12 @@ const initAlpine = () => {
                         }
                         event.day = daynumber
 
+                        let ddetail = daynumber+"."+(actdate.getMonth()+1)
+                        
+                        if(enddaynumber){
+                            ddetail= ddetail +" - "+ enddaynumber+"."+(enddate.getMonth()+1)
+                        }
+                        event.datedetail = ddetail;
                         
                         const months = ["Jan", "Feb", "Mar", "Apr", "Maj", "Jun", "Jul", "Avg", "Sep", "Okt", "Nov", "Dec"];
                         const monthsde = ["Jan", "Feb", "Mar", "Apr", "Mai", "Jun", "Jul", "Aug", "Sep", "Okt", "Nov", "Dez"];
@@ -122,6 +134,12 @@ const initAlpine = () => {
 
                     data.items.forEach((event,index) => {
                         let actdate = new Date(event.starting_on);
+                        let enddate = new Date(event.ending_on);
+
+                        if(enddate!="Invalid Date"){
+                            event.enddate = enddate.toLocaleDateString();
+                            event.enddate = event.enddate.replaceAll("/", ".");
+                        }
                         
                         let daynumber = actdate.getDate();
                         
@@ -175,6 +193,21 @@ const initAlpine = () => {
                 this.showbutton = true;
                 this.opendesc = true;
                 this.opendescmargin = false;
+                
+            },
+            handleScroll(theEl){
+                console.log(theEl);
+                console.log("scrollevent");
+                let sk = document.getElementById("slogkoldear");
+                console.log(sk.clientHeight);
+                console.log(sk.scrollTop);
+                console.log(sk.scrollHeight);
+                
+                
+                if (Math.abs(sk.scrollHeight - sk.clientHeight - sk.scrollTop) < 300) {
+                    console.log('scrolledtobottom');
+                    this.fetchAddEventList();
+                }
                 
             },
 
