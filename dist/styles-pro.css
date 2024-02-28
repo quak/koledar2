@@ -295,6 +295,7 @@
   display:none!important;
   transition-duration: 500ms;
   flex:none;
+  z-index: 1000;
 }
 
 #slogkoldearapp:hover{
