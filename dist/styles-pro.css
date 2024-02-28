@@ -90,7 +90,7 @@
 }
 
 
-.slogkoledar-datemonth{    
+.slogkoledar-datemonth.active{    
   display: block;
 }
 
@@ -187,6 +187,12 @@
   --tw-text-opacity: 1;
   color: rgb(0 0 0 / var(--tw-text-opacity));
   margin: 0px;
+  display: none;
+  word-break: break-word;
+}
+
+.slogkoledard-title.active{
+  display: block;
 }
 
 .slogkoledard-datewrapper{
@@ -211,8 +217,10 @@
 }
 
 .slogkoledard-info{
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  
   align-items: center;
 }
 
@@ -249,9 +257,11 @@
 
 
 .slogkoledard-linkw{
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
   align-items: center;
+  justify-content: center;
 }
 
 .slogkoledard-exiticon{
@@ -339,7 +349,7 @@ body{
   
   position: absolute;
   
-  display: flex;
+  display: none;
   justify-content: center;
   align-items: center;
   font-size: 16px;
@@ -353,13 +363,17 @@ body{
   border-radius: 10px;
 }
 
+#slogkoledardescmore .morelink.active{
+  display: flex;
+}
+
 #slogkoledardesc{
   
   overflow: hidden;
 }
 
 .skdmaxheight{
-  
+  overflow: hidden;
   max-height: 595px;
 }
 
@@ -390,4 +404,68 @@ body{
 
 .buttontext.active{
   display: block;
+}
+
+.flexme{
+  display: flex;
+  gap: 0.5rem;
+  width: 100%;
+  justify-content: left;
+  align-items: center;
+}
+
+
+.descdetail{
+  display: none;
+}
+
+.descdetail.active{
+  display: block;
+}
+
+
+.mobbutton{
+  display: none;
+  
+  position: fixed;
+  bottom: 5px;
+  left: 5px;
+  opacity: 0;
+  
+}
+.mobbutton img{
+  height: auto;
+  width: 50px;
+}
+
+@media (max-width: 1024px) {
+  
+  .mobbutton{
+    display: block;
+    opacity: 0.85;
+  }
+
+  #slogkoldearapp:hover {
+    width: unset;
+  }
+  #slogkoldear:hover{
+    margin-left: -16rem;
+  }
+
+  #slogkoldearapp {
+    width: 0rem;
+  }
+
+  #slogkoldear{
+    margin-left: -16rem;
+  }
+
+  #slogkoldear.moboc{
+    margin-left: 0rem!important;
+  }
+
+  #slogkoldear.mobcc{
+    margin-left: -16rem!important;
+  }
+  
 }

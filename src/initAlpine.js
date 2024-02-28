@@ -35,6 +35,7 @@ const initAlpine = () => {
             showbutton: true,
             opendesc: true,
             opendescmargin: false,
+            mobopen: false,
             
             lngorg: false,
 
@@ -52,12 +53,19 @@ const initAlpine = () => {
                 .then(data => {
                     
                     this.isLoading = false;
-                    let actdate = new Date(data.starting_on);
+                    
+                
 
                     let ev = new Array()
 
                     data.items.forEach((event,index) => {
                         let actdate = new Date(event.starting_on);
+                        let enddate = new Date(event.ending_on);
+                        
+                        if(enddate!="Invalid Date"){
+                            event.enddate = enddate.toLocaleDateString();
+                            event.enddate = event.enddate.replaceAll("/", ".");
+                        }
 
                         let daynumber = actdate.getDate();
                         
@@ -66,9 +74,23 @@ const initAlpine = () => {
                         }
                         event.day = daynumber
 
-                        const months = ["Jan", "Feb", "Mar", "Apr", "Maj", "Jun", "Jul", "Avg", "Sep", "Okt", "Nov", "Dec"];
-                        event.month = months[actdate.getMonth()];
                         
+                        const months = ["Jan", "Feb", "Mar", "Apr", "Maj", "Jun", "Jul", "Avg", "Sep", "Okt", "Nov", "Dec"];
+                        const monthsde = ["Jan", "Feb", "Mar", "Apr", "Mai", "Jun", "Jul", "Aug", "Sep", "Okt", "Nov", "Dez"];
+                        event.month = months[actdate.getMonth()];
+                        event.monthde = monthsde[actdate.getMonth()];
+                        
+                        if(event.attachments == null){
+                            event.attachments = [];
+                        };
+                        
+                        if(event.links == null){
+                            event.links = [];
+                        };
+                        
+                        if(event.organizers == null){
+                            event.organizers = [];
+                        };
 
                         ev.push(event);
 
@@ -113,6 +135,17 @@ const initAlpine = () => {
                         event.month = months[actdate.getMonth()];
                         event.monthde = monthsde[actdate.getMonth()];
                         
+                        if(event.attachments == null){
+                            event.attachments = [];
+                        };
+                        
+                        if(event.links == null){
+                            event.links = [];
+                        };
+                        
+                        if(event.organizers == null){
+                            event.organizers = [];
+                        };
 
                         ev.push(event);
 
@@ -140,6 +173,8 @@ const initAlpine = () => {
                 this.listview=true;
                 this.detailview=false;
                 this.showbutton = true;
+                this.opendesc = true;
+                this.opendescmargin = false;
                 
             },
 
