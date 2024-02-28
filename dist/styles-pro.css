@@ -304,7 +304,11 @@
 
 
 #slogkoldear p{
-  line-height: 1.5!important;
+  line-height: 1.5;
+}
+
+#slogkoledardesc{
+  line-height: 1.35 !important;
 }
 
 
