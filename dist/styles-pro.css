@@ -240,6 +240,7 @@
   font-weight: 700;
   --tw-text-opacity: 1;
   color: rgb(149 42 90 / var(--tw-text-opacity));
+  text-transform: capitalize;
 }
 
 .slogkoledard-image{    
@@ -528,9 +529,10 @@ body{
     color: white;
     padding: 6px 12px;
     border-radius: 30px;
-
+    font-family: sans-serif;
   }
 
   .flexmetags{
     justify-content: center;
+    flex-wrap: wrap;
   }
