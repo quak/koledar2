@@ -1,18 +1,35 @@
 const injectCSS = () => {
     // Create a <link> element
     var link = document.createElement("link");
-  
+
+    var kscript = document.querySelector('script[src*=app]');
+    var kkstyle = kscript.getAttribute('kk-style'); 
+    
     // Set the link type to and rel attributes
     link.type = "text/css";
     link.rel = "stylesheet";
     var environment = 'production';
-    //if (process.env.NODE_ENV  == 'production') {
-    if (environment  == 'production') {
-      // A CDN link to your production CSS
+    
+
+    if (environment  == 'production' && kkstyle == "list") {
+      link.href = "https://cdn.jsdelivr.net/gh/quak/koledar2@main/dist/styles-list.css";
+      link.href = "https://cdn.jsdelivr.net/gh/quak/koledar2/dist/styles-list.css";
+    } else {
+      link.href = "./../dist/styles-pro.css";
+    }
+
+
+    if (environment  == 'production' && kkstyle == "carousel") {
+      link.href = "https://cdn.jsdelivr.net/gh/quak/koledar2@main/dist/styles-carusel.css";
+      link.href = "https://cdn.jsdelivr.net/gh/quak/koledar2/dist/styles-carusel.css";
+    } else {
+      link.href = "./../dist/styles-pro.css";
+    }
+
+    if (environment  == 'production' && kkstyle == "pro") {
       link.href = "https://cdn.jsdelivr.net/gh/quak/koledar2@main/dist/styles-pro.css";
       link.href = "https://cdn.jsdelivr.net/gh/quak/koledar2/dist/styles-pro.css";
     } else {
-      // Your local CSS for local development
       link.href = "./../dist/styles-pro.css";
     }
   
@@ -23,4 +40,8 @@ const injectCSS = () => {
     
   }
   
-  export default injectCSS;
+  export default injectCSS;;
+
+
+
+ 

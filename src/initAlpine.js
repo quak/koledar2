@@ -8,6 +8,9 @@ import Alpine from 'alpinejs'
 // import widget template
 import widgetHTML from './../widget.html';
 
+
+import widgetHTMLlist from './../widget-list.html';
+
 ///////////////////////
 ///////////////////////  initAlpine.js continued
 ///////////////////////
@@ -20,6 +23,21 @@ const initAlpine = () => {
      *  Alpine.data('widget', widget); 
      */
 
+
+    const kapp = document.getElementById("slogkoledarapp");
+    console.log(document);
+                                        
+    if(!kapp){
+
+        const bdy = document.body
+        var appdiv = document.createElement("div");
+        appdiv.setAttribute("id", "slogkoledarapp");
+        //appdiv.classList.add("sloghideme");
+        
+        bdy.insertAdjacentElement("afterbegin", appdiv);
+    }
+
+    
     
 
     
@@ -42,8 +60,9 @@ const initAlpine = () => {
 
             fetchEventList() {
                 this.isLoading = true;
-                var kscript = document.querySelector('script[src*=app]');
-                var limit = kscript.getAttribute('data-amount');  
+                kscript = document.querySelector('script[src*=app]');
+                var limit = kscript.getAttribute('kk-data-amount');  
+                
                 var offset = limit *loadingcycles;
                 loadingcycles=loadingcycles+1;
                 
@@ -196,12 +215,9 @@ const initAlpine = () => {
                 
             },
             handleScroll(theEl){
-                console.log(theEl);
-                console.log("scrollevent");
+               
                 let sk = document.getElementById("slogkoldear");
-                console.log(sk.clientHeight);
-                console.log(sk.scrollTop);
-                console.log(sk.scrollHeight);
+              
                 
                 
                 if (Math.abs(sk.scrollHeight - sk.clientHeight - sk.scrollTop) < 300) {
@@ -224,8 +240,20 @@ const initAlpine = () => {
 
     Alpine.start();
 
+    var kscript = document.querySelector('script[src*=app]');
+    var kkstyle = kscript.getAttribute('kk-style');  
+                console.log(kkstyle);
+
     // #app is a div that we're going to inject our markup into
-    document.getElementById("slogkoledarapp").innerHTML = widgetHTML;
+    if(kkstyle=="list"){
+        document.getElementById("slogkoledarapp").innerHTML = widgetHTMLlist;
+    }else if(kkstyle=="carusel"){
+        document.getElementById("slogkoledarapp").innerHTML = widgetHTML;
+    }else{
+        document.getElementById("slogkoledarapp").innerHTML = widgetHTML;
+    }
+    
+    
     
     
 

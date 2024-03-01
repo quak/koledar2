@@ -2,7 +2,7 @@
 let mix = require('laravel-mix');
 
 // Process our app.js file and output it to /dist/app.js
-mix.js('src/app.js', 'dist/app.js').setPublicPath('dist');
+mix.js('src/kkapp.js', 'dist/kkapp.js').setPublicPath('dist');
 
 mix.copy('src/images', 'dist/images');
 

@@ -3355,6 +3355,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var alpinejs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! alpinejs */ "./node_modules/alpinejs/dist/module.esm.js");
 /* harmony import */ var _widget_html__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../widget.html */ "./widget.html");
+/* harmony import */ var _widget_list_html__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./../widget-list.html */ "./widget-list.html");
 // initAlpine.js
 // Import the Alpine JS framework
 
@@ -3363,6 +3364,7 @@ __webpack_require__.r(__webpack_exports__);
 //import widget from './widget.js'
 
 // import widget template
+
 
 
 ///////////////////////
@@ -3376,6 +3378,16 @@ var initAlpine = function initAlpine() {
    *  Alpine.data('widget', widget); 
    */
 
+  var kapp = document.getElementById("slogkoledarapp");
+  console.log(document);
+  if (!kapp) {
+    var bdy = document.body;
+    var appdiv = document.createElement("div");
+    appdiv.setAttribute("id", "slogkoledarapp");
+    //appdiv.classList.add("sloghideme");
+
+    bdy.insertAdjacentElement("afterbegin", appdiv);
+  }
   alpinejs__WEBPACK_IMPORTED_MODULE_0__["default"].data('eventCal', function () {
     var loadingcycles = 0;
     return {
@@ -3393,8 +3405,8 @@ var initAlpine = function initAlpine() {
       fetchEventList: function fetchEventList() {
         var _this = this;
         this.isLoading = true;
-        var kscript = document.querySelector('script[src*=app]');
-        var limit = kscript.getAttribute('data-amount');
+        kscript = document.querySelector('script[src*=app]');
+        var limit = kscript.getAttribute('kk-data-amount');
         var offset = limit * loadingcycles;
         loadingcycles = loadingcycles + 1;
         fetch('https://koledar.ntoljic.com/v1/events?limit=' + limit + '&offset=0').then(function (res) {
@@ -3508,12 +3520,7 @@ var initAlpine = function initAlpine() {
         this.opendescmargin = false;
       },
       handleScroll: function handleScroll(theEl) {
-        console.log(theEl);
-        console.log("scrollevent");
         var sk = document.getElementById("slogkoldear");
-        console.log(sk.clientHeight);
-        console.log(sk.scrollTop);
-        console.log(sk.scrollHeight);
         if (Math.abs(sk.scrollHeight - sk.clientHeight - sk.scrollTop) < 300) {
           console.log('scrolledtobottom');
           this.fetchAddEventList();
@@ -3528,9 +3535,18 @@ var initAlpine = function initAlpine() {
     };
   });
   alpinejs__WEBPACK_IMPORTED_MODULE_0__["default"].start();
+  var kscript = document.querySelector('script[src*=app]');
+  var kkstyle = kscript.getAttribute('kk-style');
+  console.log(kkstyle);
 
   // #app is a div that we're going to inject our markup into
-  document.getElementById("slogkoledarapp").innerHTML = _widget_html__WEBPACK_IMPORTED_MODULE_1__["default"];
+  if (kkstyle == "list") {
+    document.getElementById("slogkoledarapp").innerHTML = _widget_list_html__WEBPACK_IMPORTED_MODULE_2__["default"];
+  } else if (kkstyle == "carusel") {
+    document.getElementById("slogkoledarapp").innerHTML = _widget_html__WEBPACK_IMPORTED_MODULE_1__["default"];
+  } else {
+    document.getElementById("slogkoledarapp").innerHTML = _widget_html__WEBPACK_IMPORTED_MODULE_1__["default"];
+  }
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (initAlpine);
 
@@ -3549,18 +3565,29 @@ __webpack_require__.r(__webpack_exports__);
 var injectCSS = function injectCSS() {
   // Create a <link> element
   var link = document.createElement("link");
+  var kscript = document.querySelector('script[src*=app]');
+  var kkstyle = kscript.getAttribute('kk-style');
 
   // Set the link type to and rel attributes
   link.type = "text/css";
   link.rel = "stylesheet";
   var environment = 'production';
-  //if (process.env.NODE_ENV  == 'production') {
-  if (environment == 'production') {
-    // A CDN link to your production CSS
+  if (environment == 'production' && kkstyle == "list") {
+    link.href = "https://cdn.jsdelivr.net/gh/quak/koledar2@main/dist/styles-list.css";
+    link.href = "https://cdn.jsdelivr.net/gh/quak/koledar2/dist/styles-list.css";
+  } else {
+    link.href = "./../dist/styles-pro.css";
+  }
+  if (environment == 'production' && kkstyle == "carousel") {
+    link.href = "https://cdn.jsdelivr.net/gh/quak/koledar2@main/dist/styles-carusel.css";
+    link.href = "https://cdn.jsdelivr.net/gh/quak/koledar2/dist/styles-carusel.css";
+  } else {
+    link.href = "./../dist/styles-pro.css";
+  }
+  if (environment == 'production' && kkstyle == "pro") {
     link.href = "https://cdn.jsdelivr.net/gh/quak/koledar2@main/dist/styles-pro.css";
     link.href = "https://cdn.jsdelivr.net/gh/quak/koledar2/dist/styles-pro.css";
   } else {
-    // Your local CSS for local development
     link.href = "./../dist/styles-pro.css";
   }
 
@@ -3569,6 +3596,24 @@ var injectCSS = function injectCSS() {
   head.appendChild(link);
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (injectCSS);
+;
+
+/***/ }),
+
+/***/ "./widget-list.html":
+/*!**************************!*\
+  !*** ./widget-list.html ***!
+  \**************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+// Module
+var code = "    <div x-data=\"eventCal\" id=\"slogkoldear\" x-bind:class=\"mobopen ? 'moboc' : 'mobcc'\" x-ref=\"theEl\" @scroll.theEl.throttle=\"handleScroll(this)\">\n\n        <p>completley different template crazy</p>\n        \n    </div>\n    \n    \n    ";
+// Exports
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (code);
 
 /***/ }),
 
@@ -3648,30 +3693,16 @@ var code = "    <div x-data=\"eventCal\" id=\"slogkoldear\" x-bind:class=\"mobop
 var __webpack_exports__ = {};
 // This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
 (() => {
-/*!********************!*\
-  !*** ./src/app.js ***!
-  \********************/
+/*!**********************!*\
+  !*** ./src/kkapp.js ***!
+  \**********************/
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _initAlpine__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./initAlpine */ "./src/initAlpine.js");
 /* harmony import */ var _injectCSS__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./injectCSS */ "./src/injectCSS.js");
 // app.js
 
 
-var bdy = document.body;
-bdy.classList.add("flex");
-var kapp = document.getElementById("slogkoledarapp");
-console.log(document);
-if (!kapp) {
-  var appdiv = document.createElement("div");
-  appdiv.setAttribute("id", "slogkoledarapp");
-  appdiv.classList.add("sloghideme");
-  bdy.insertAdjacentElement("afterbegin", appdiv);
-}
 (0,_initAlpine__WEBPACK_IMPORTED_MODULE_0__["default"])();
-var styles = "\n    \n  .overw{\n    /*all: initial;*/\n  }\n  \n    \n    #slogkoledarapp::-webkit-scrollbar{\n        display:none;\n    }\n    #slogkoledarapp{\n        height: 100vh;\n        overflow-y: scroll;\n        position: fixed;\n        -ms-overflow-style:none;\n        scrollbar-width: none;\n        eight: 100vh;\n        /* overflow-y: scroll; */\n        /* position: fixed; */\n        -ms-overflow-style: none;\n        /* scrollbar-width: none; */\n        display: block;\n        width: 240px;\n        position: relative;\n    }\n";
-var styleSheet = document.createElement("style");
-styleSheet.innerText = styles;
-document.head.appendChild(styleSheet);
 (0,_injectCSS__WEBPACK_IMPORTED_MODULE_1__["default"])();
 })();
 
