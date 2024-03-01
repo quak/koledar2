@@ -10,6 +10,7 @@ const bdy = document.body
 bdy.classList.add("flex");
 
 const kapp = document.getElementById("slogkoledarapp");
+console.log(document);
                                       
 if(!kapp){
   var appdiv = document.createElement("div");

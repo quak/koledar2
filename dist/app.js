@@ -3660,6 +3660,7 @@ __webpack_require__.r(__webpack_exports__);
 var bdy = document.body;
 bdy.classList.add("flex");
 var kapp = document.getElementById("slogkoledarapp");
+console.log(document);
 if (!kapp) {
   var appdiv = document.createElement("div");
   appdiv.setAttribute("id", "slogkoledarapp");
