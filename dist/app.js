@@ -3530,7 +3530,7 @@ var initAlpine = function initAlpine() {
   alpinejs__WEBPACK_IMPORTED_MODULE_0__["default"].start();
 
   // #app is a div that we're going to inject our markup into
-  document.getElementById("slogkoldearapp").innerHTML = _widget_html__WEBPACK_IMPORTED_MODULE_1__["default"];
+  document.getElementById("slogkoledarapp").innerHTML = _widget_html__WEBPACK_IMPORTED_MODULE_1__["default"];
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (initAlpine);
 
@@ -3662,12 +3662,12 @@ bdy.classList.add("flex");
 var kapp = document.getElementById("slogkoledarapp");
 if (!kapp) {
   var appdiv = document.createElement("div");
-  appdiv.setAttribute("id", "slogkoldearapp");
+  appdiv.setAttribute("id", "slogkoledarapp");
   appdiv.classList.add("sloghideme");
   bdy.insertAdjacentElement("afterbegin", appdiv);
 }
 (0,_initAlpine__WEBPACK_IMPORTED_MODULE_0__["default"])();
-var styles = "\n    \n  .overw{\n    /*all: initial;*/\n  }\n  \n    \n    #slogkoldearapp::-webkit-scrollbar{\n        display:none;\n    }\n    #slogkoldearapp{\n        height: 100vh;\n        overflow-y: scroll;\n        position: fixed;\n        -ms-overflow-style:none;\n        scrollbar-width: none;\n        eight: 100vh;\n        /* overflow-y: scroll; */\n        /* position: fixed; */\n        -ms-overflow-style: none;\n        /* scrollbar-width: none; */\n        display: block;\n        width: 240px;\n        position: relative;\n    }\n";
+var styles = "\n    \n  .overw{\n    /*all: initial;*/\n  }\n  \n    \n    #slogkoledarapp::-webkit-scrollbar{\n        display:none;\n    }\n    #slogkoledarapp{\n        height: 100vh;\n        overflow-y: scroll;\n        position: fixed;\n        -ms-overflow-style:none;\n        scrollbar-width: none;\n        eight: 100vh;\n        /* overflow-y: scroll; */\n        /* position: fixed; */\n        -ms-overflow-style: none;\n        /* scrollbar-width: none; */\n        display: block;\n        width: 240px;\n        position: relative;\n    }\n";
 var styleSheet = document.createElement("style");
 styleSheet.innerText = styles;
 document.head.appendChild(styleSheet);

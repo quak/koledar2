@@ -10,9 +10,10 @@ const bdy = document.body
 bdy.classList.add("flex");
 
 const kapp = document.getElementById("slogkoledarapp");
+                                      
 if(!kapp){
   var appdiv = document.createElement("div");
-  appdiv.setAttribute("id", "slogkoldearapp");
+  appdiv.setAttribute("id", "slogkoledarapp");
   appdiv.classList.add("sloghideme");
   
   bdy.insertAdjacentElement("afterbegin", appdiv);
@@ -29,10 +30,10 @@ var styles = `
   }
   
     
-    #slogkoldearapp::-webkit-scrollbar{
+    #slogkoledarapp::-webkit-scrollbar{
         display:none;
     }
-    #slogkoldearapp{
+    #slogkoledarapp{
         height: 100vh;
         overflow-y: scroll;
         position: fixed;

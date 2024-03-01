@@ -291,7 +291,7 @@
   display: none;
 }
 
-#slogkoldearapp{
+#slogkoledarapp{
   display: none!important;
   width: 12.5rem;
   transition-duration: 500ms;
@@ -299,7 +299,7 @@
   z-index: 1000;
 }
 
-#slogkoldearapp:hover{
+#slogkoledarapp:hover{
   width: 16rem;;
 }
 
@@ -476,14 +476,14 @@ body{
     gap: 1rem;
   }
 
-  #slogkoldearapp:hover {
+  #slogkoledarapp:hover {
     width: unset;
   }
   #slogkoldear:hover{
     margin-left: -16rem;
   }
 
-  #slogkoldearapp {
+  #slogkoledarapp {
     width: 0rem;
   }
 
