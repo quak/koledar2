@@ -9,12 +9,15 @@ const bdy = document.body
 
 bdy.classList.add("flex");
 
+const kapp = document.getElementById("slogkoledarapp");
+if(!kapp){
+  var appdiv = document.createElement("div");
+  appdiv.setAttribute("id", "slogkoldearapp");
+  appdiv.classList.add("sloghideme");
+  
+  bdy.insertAdjacentElement("afterbegin", appdiv);
+}
 
-var appdiv = document.createElement("div");
-appdiv.setAttribute("id", "slogkoldearapp");
-appdiv.classList.add("sloghideme");
-
-bdy.insertAdjacentElement("afterbegin", appdiv);
 
 initAlpine();
 

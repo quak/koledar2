@@ -3659,10 +3659,13 @@ __webpack_require__.r(__webpack_exports__);
 
 var bdy = document.body;
 bdy.classList.add("flex");
-var appdiv = document.createElement("div");
-appdiv.setAttribute("id", "slogkoldearapp");
-appdiv.classList.add("sloghideme");
-bdy.insertAdjacentElement("afterbegin", appdiv);
+var kapp = document.getElementById("slogkoledarapp");
+if (!kapp) {
+  var appdiv = document.createElement("div");
+  appdiv.setAttribute("id", "slogkoldearapp");
+  appdiv.classList.add("sloghideme");
+  bdy.insertAdjacentElement("afterbegin", appdiv);
+}
 (0,_initAlpine__WEBPACK_IMPORTED_MODULE_0__["default"])();
 var styles = "\n    \n  .overw{\n    /*all: initial;*/\n  }\n  \n    \n    #slogkoldearapp::-webkit-scrollbar{\n        display:none;\n    }\n    #slogkoldearapp{\n        height: 100vh;\n        overflow-y: scroll;\n        position: fixed;\n        -ms-overflow-style:none;\n        scrollbar-width: none;\n        eight: 100vh;\n        /* overflow-y: scroll; */\n        /* position: fixed; */\n        -ms-overflow-style: none;\n        /* scrollbar-width: none; */\n        display: block;\n        width: 240px;\n        position: relative;\n    }\n";
 var styleSheet = document.createElement("style");
