@@ -6,10 +6,9 @@ import Alpine from 'alpinejs'
 //import widget from './widget.js'
 
 // import widget template
-import widgetHTML from './../widget.html';
-
-
+import widgetHTMLpro from './../widget.html';
 import widgetHTMLlist from './../widget-list.html';
+import widgetHTMLcarousel from './../widget-carousel.html';
 
 ///////////////////////
 ///////////////////////  initAlpine.js continued
@@ -247,10 +246,10 @@ const initAlpine = () => {
     // #app is a div that we're going to inject our markup into
     if(kkstyle=="list"){
         document.getElementById("slogkoledarapp").innerHTML = widgetHTMLlist;
-    }else if(kkstyle=="carusel"){
-        document.getElementById("slogkoledarapp").innerHTML = widgetHTML;
+    }else if(kkstyle=="carousel"){
+        document.getElementById("slogkoledarapp").innerHTML = widgetHTMLcarousel;
     }else{
-        document.getElementById("slogkoledarapp").innerHTML = widgetHTML;
+        document.getElementById("slogkoledarapp").innerHTML = widgetHTMLpro;
     }
     
     

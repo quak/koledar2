@@ -14,22 +14,25 @@ const injectCSS = () => {
     if (environment  == 'production' && kkstyle == "list") {
       link.href = "https://cdn.jsdelivr.net/gh/quak/koledar2@main/dist/styles-list.css";
       link.href = "https://cdn.jsdelivr.net/gh/quak/koledar2/dist/styles-list.css";
-    } else {
-      link.href = "./../dist/styles-pro.css";
+    } 
+    if (environment  != 'production' && kkstyle == "list") {
+      link.href = "./../dist/styles-list.css";
     }
 
-
+                                                    
     if (environment  == 'production' && kkstyle == "carousel") {
-      link.href = "https://cdn.jsdelivr.net/gh/quak/koledar2@main/dist/styles-carusel.css";
-      link.href = "https://cdn.jsdelivr.net/gh/quak/koledar2/dist/styles-carusel.css";
-    } else {
-      link.href = "./../dist/styles-pro.css";
+      link.href = "https://cdn.jsdelivr.net/gh/quak/koledar2@main/dist/styles-carousel.css";
+      link.href = "https://cdn.jsdelivr.net/gh/quak/koledar2/dist/styles-carousel.css";
+    } 
+    if (environment  != 'production' && kkstyle == "carousel") {
+      link.href = "./../dist/styles-carousel.css";
     }
 
     if (environment  == 'production' && kkstyle == "pro") {
       link.href = "https://cdn.jsdelivr.net/gh/quak/koledar2@main/dist/styles-pro.css";
       link.href = "https://cdn.jsdelivr.net/gh/quak/koledar2/dist/styles-pro.css";
-    } else {
+    } 
+    if (environment  != 'production' && kkstyle == "pro") {
       link.href = "./../dist/styles-pro.css";
     }
   
