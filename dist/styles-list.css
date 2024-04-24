@@ -1,38 +1,47 @@
-/*****/
 
-#slogkoledar-loadmorebutton{
-  text-decoration: inherit;
-  margin-top: 2rem;
-  margin-bottom: 2rem;
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  border-radius: 0.5rem;
-  --tw-bg-opacity: 1;
-  background-color: rgb(149 42 90 / var(--tw-bg-opacity));
-  padding-left: 2rem;
-  padding-right: 2rem;
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
+
+
+/**LNG MENU* START*/
+#slogkoledarapp .lng-menu {
   text-align: right;
-  font-size: 1.125rem;
-  line-height: 1.75rem;
-  --tw-text-opacity: 1;
-  color: rgb(255 255 255 / var(--tw-text-opacity));
-  font-family: sans-serif;
-  font-size: 18px;;
 }
-
-.slogkoledar-eventitem{
+#slogkoledarapp .lng-menu-item.active {
+  display: block;
+}
+#slogkoledarapp .lng-menu-item {
   cursor: pointer;
-  display: flex;
-  max-width: 15rem;
-  flex-direction: row;
-  gap: 1rem;
-  padding: 0.5rem 0;
+  font-family: sans-serif;
+  font-size: 14px;
+  font-weight: bold;
+  display: none;
+}
+/***LNG MENU* END*/
+
+#koledarlink {
+    background-color: #952a5b;
+    color: white;
+    padding: 3px 12px;
+    display: block;
+    text-align: center;
+    text-decoration: none;
+    font-family: sans-serif;
+    font-size: 12px;
 }
 
-.slogkoledar-datewrapper{
+#koledarheader{
+  display: flex;
+  justify-content: space-between;
+}
+
+#slides-container .slideitem{
+ border-radius: 6px;
+ background-color: #fff;
+ border-bottom: 1px solid #aab2bd;
+ padding: 0.5rem 1rem;
+ width: 100%;
+}
+
+#slogkoledarapp .slogkoledar-datewrapper{
   cursor: pointer;
   display: flex;
   flex-basis: 16.666667%;
@@ -42,8 +51,7 @@
   align-items: center;
 }
 
-
-.slogkoledar-datewrapper2{
+#slogkoledarapp .slogkoledar-datewrapper2{
   cursor: pointer;
   --tw-border-opacity: 1;
   display: flex;
@@ -51,51 +59,70 @@
   align-items: center;
   padding-top: 0.25rem;
   padding-bottom: 0.25rem;
+  background-color: #B0C2A7;
+  width: 60px;
+  border-radius: 20px;
 }
 
 
-.slogkoledar-date{    
+#slogkoledarapp .slogkoledar-date{    
   cursor: pointer;
   --tw-border-opacity: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-top: 0.25rem;
-  padding-bottom: 0.25rem;
+  height: 50px;
+  width: 50px;
+  align-items: center;
+  justify-content: center;
 }
 
 
 
-.slogkoledar-dateday{    
+#slogkoledarapp .slogkoledar-dateday{    
   cursor: pointer;
   --tw-border-opacity: 1;
   font-family: sans-serif;
-  font-size: 22px;
+  font-size: 12px;
   line-height: 2rem;
-  font-weight: 700;
   --tw-text-opacity: 1;
-  color: rgb(0 122 145 / var(--tw-text-opacity));
-}
-
-.slogkoledar-datemonth{    
-  cursor: pointer;
-  --tw-border-opacity: 1;
-  font-family: sans-serif;
-  font-size: 22px;
-  line-height: 2rem;
-  font-weight: 700;
-  --tw-text-opacity: 1;
-  color: rgb(0 122 145 / var(--tw-text-opacity));
+  color: #fff;
+  text-transform: uppercase;
   display: none;
 }
 
-
-.slogkoledar-datemonth.active{    
+#slogkoledarapp .slogkoledar-dateday.active{    
   display: block;
 }
 
 
-.slogkoledar-eventwrapper{    
+#slogkoledarapp .slogkoledar-datemonth{    
+  cursor: pointer;
+  --tw-border-opacity: 1;
+  font-family: sans-serif;
+  font-size: 18px;
+  line-height: 2rem;
+  font-weight: 700;
+  --tw-text-opacity: 1;
+  color: #fff;
+  display: none;
+}
+
+
+#slogkoledarapp .slogkoledar-datemonth.active{    
+  display: block;
+}
+
+
+#slogkoledarapp .slide {
+  cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 1rem;  
+}
+
+#slogkoledarapp .slogkoledar-eventwrapper{    
   cursor: pointer;
   display: flex;
   flex-basis: 83.333333%;
@@ -105,14 +132,14 @@
   border-color: rgb(186 186 186 / var(--tw-border-opacity));
 }
 
-.slogkoledar-eventinfo{    
+#slogkoledarapp .slogkoledar-eventinfo{    
   cursor: pointer;
   --tw-border-opacity: 1;
   display: block;
   padding: 0.5rem 0!important;
 }
 
-.slogkoledar-eventinfoplace{    
+#slogkoledarapp .slogkoledar-eventinfoplace{    
   cursor: pointer;
   --tw-border-opacity: 1;
   font-family: sans-serif;
@@ -123,14 +150,18 @@
   letter-spacing: 0.1em;
   --tw-text-opacity: 1;
   color: rgb(149 42 90 / var(--tw-text-opacity));
- 
+ display: none;
   padding:0;
   margin-top: 0!important;
   margin-bottom: 0!important;
   font-size: 14px!important
 }
+#slogkoledarapp .slogkoledar-eventinfoplace.active{    
+  display: block;
+  display: -webkit-box;
+}
 
-.slogkoledar-eventinfotitle{    
+#slogkoledarapp .slogkoledar-eventinfotitle{    
   cursor: pointer;
   --tw-border-opacity: 1;
   font-family: sans-serif;
@@ -141,90 +172,19 @@
   padding:0;
   font-size: 18px;
   display: none;
+  overflow: hidden;
+   -webkit-line-clamp: 2; /* number of lines to show */
+           line-clamp: 2; 
+   -webkit-box-orient: vertical;
 }
-.slogkoledar-eventinfotitle.active{    
+
+#slogkoledarapp .slogkoledar-eventinfotitle.active{    
   display: block;
-}
-
-#slogkoldear{
-  margin-left: -3.5rem;
-  
-  padding: 0.5rem;
-  transition-duration: 500ms;
-  background-color: white;
-  height: 100vh;
-  overflow-y: scroll;
-  position: fixed;
-  scrollbar-width: none;
-}
-
-#slogkoldear:hover{
-  margin-left: 0rem;
+  display: -webkit-box;
 }
 
 
-
-/*******************/
-#slogkoledardesc{
-  padding: 0;
-  
-  font-family: sans-serif;
-  --tw-text-opacity: 1;
-  color: rgb(0 0 0 / var(--tw-text-opacity));
-  
-  font-size:18px;
-  line-height: 28px!important;
-  padding: 0 1rem!important;
-}
-
-.slogkoledard-title{
-  padding-top: 1rem;
-  padding-bottom: 1rem;
-  font-family: sans-serif;
-  font-size: 2.25rem;
-  line-height: 2.5rem;
-  font-weight: 700;
-  --tw-text-opacity: 1;
-  color: rgb(0 0 0 / var(--tw-text-opacity));
-  margin: 0px;
-  display: none;
-  word-break: break-word;
-}
-
-.slogkoledard-title.active{
-  display: block;
-}
-
-.slogkoledard-datewrapper{
-  display: flex;
-  justify-content: space-between;
-}
-
-.slogkoledard-date{
-  font-family: sans-serif;
-  font-size: 1.5rem;
-  line-height: 2rem;
-  --tw-text-opacity: 1;
-  color: rgb(0 122 145 / var(--tw-text-opacity));
-}
-
-.slogkoledard-info-wrapper{
-  margin-bottom: 1rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
-.slogkoledard-info{
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  
-  align-items: center;
-}
-
-.slogkoledard-info-icon{
+#slogkoledarapp .slogkoledard-info-icon {
   width: 16;
   height: 16;
   fill: currentcolor;
@@ -232,22 +192,467 @@
   fill: #007A91;
 }
 
+#slogkoledarapp .slogkoledard-info-icon-bottom {
+  width: 16;
+  height: 16;
+  fill: currentcolor;
+  grid-column: span 1 / span 1;
+  fill: #E8A273;
+}
+
+#slogkoledarapp .flexme{
+  display: flex;
+  gap: 0.5rem;
+  width: 100%;
+  justify-content: left;
+  align-items: center;
+}
+
+#slogkoledarapp .flexme-bottom{
+  display: flex;
+  gap: 0.5rem;
+  width: 100%;
+  justify-content: left;
+  align-items: center;
+}
+
+#slogkoldear span {
+  line-height: 1.2 !important;
+}
+
+#slogkoledarapp .slogkoledar-date {
+  cursor: pointer;
+  --tw-border-opacity: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+}
+
+/*SLIDER CSS START*/
+
+
+#slogkoledarapp .slider-wrapper {
+  margin: 1rem 0;
+  position: relative;
+  overflow: hidden;
+}
+#slogkoledarapp .slides-container {
+  
+  width: 100%;
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  overflow: scroll;
+  scroll-behavior: smooth;
+
+}
+#slogkoledarapp .slide {
+  flex: 1 0 100%;
+  width: 100%;
+  height: 100%;
+}
+#slogkoledarapp .slides-container {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;  /* Internet Explorer 10+ */
+}
+/* WebKit */
+#slogkoledarapp .slides-container::-webkit-scrollbar { 
+  width: 0;
+  height: 0;
+}
+#slogkoledarapp .slide-arrow {
+  position: absolute;
+  display: flex;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  height: 4rem;
+  background-color: white;
+  border: none;
+  width: 2rem;
+  font-size: 3rem;
+  padding: 0;
+  cursor: pointer;
+  opacity: 0.5;
+  transition: opacity 100ms;
+}
+#slogkoledarapp .slide-arrow:hover,
+#slogkoledarapp .slide-arrow:focus {
+  opacity: 1;
+}
+#slogkoledarapp #slide-arrow-prev {
+  left: 0;
+  padding-left: 0.25rem;
+  border-radius: 0 2rem 2rem 0;
+}
+#slogkoledarapp #slide-arrow-next {
+  right: 0;
+  padding-left: 0.75rem;
+  border-radius: 2rem 0 0 2rem;
+}
+
+#slogkoledarapp .slogkoledar-eventitem{
+  width: 100%;
+  display: flex;
+  gap: 0.75rem;
+}
+/*SLIDER CSS END*/
+
+
+
+
+
+/**DIALOGSTYLES MENU* START*/
+
+#slogkoledarapp .kkcatwrapper{
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+#slogkoledarapp .kkcatwrapper .kkorganizer{
+  display: none;
+  text-transform: uppercase;
+  color: #007A91;
+  font-family: sans-serif;
+  font-size: 12px;
+}
+
+#slogkoledarapp .kkcatwrapper .kkorganizer.active{
+  display: block;
+}
+
+#slogkoledarapp .kkcatwrapper .kkorganizername{
+  color: #000;
+  padding: 6px 24px;
+  font-family: sans-serif;
+  font-weight: bold;
+}
+
+
+#slogkoledarapp .kkcatwrapper .kkcategory{
+  display: none;
+  text-transform: uppercase;
+  color: #007A91;
+  font-family: sans-serif;
+  font-size: 12px;
+}
+
+#slogkoledarapp .kkcatwrapper .kkcategory.active{
+  display: block;
+}
+
+#slogkoledarapp .kkcatwrapper .kkcatname{
+  background-color: #B0C2A7;
+  color: #ffffff;
+  padding: 6px 24px;
+
+  font-family: sans-serif;
+}
+
+#slogkoledarapp .kkdialog-header-wrapper{
+  display: grid;
+  margin-bottom: -2rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  justify-items: center;
+}
+@media screen and (min-width: 600px) {
+  #slogkoledarapp .kkdialog-header-wrapper{
+    display: grid;
+    margin-bottom: -2rem;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    justify-items: center;
+  }
+
+}
+
+#slogkoledarapp .kkdialog-header-dummy{
+  display: none;
+}
+@media screen and (min-width: 600px) {
+  #slogkoledarapp .kkdialog-header-dummy{
+    display: block;
+  }
+
+}
+
+#slogkoledarapp .slogkoledard-wrapper{
+  display: flex;
+  max-width: 850px;
+  flex-direction: column;
+  background-color: #fff;
+  padding: 0.5rem;
+  border-radius: 12px;
+}
+
+@media screen and (min-width: 600px) {
+  #slogkoledarapp .slogkoledard-wrapper{
+    display: flex;
+    max-width: 850px;
+    flex-direction: column;
+    background-color: #fff;
+    padding: 3rem;
+    border-radius: 12px;
+  }
+}
+
+
+#slogkoledardesc{
+  padding: 0;
+  
+  font-family: sans-serif;
+  --tw-text-opacity: 1;
+  color: rgb(0 0 0 / var(--tw-text-opacity));
+  
+  font-size:22px;
+  line-height: 32px!important;
+  padding: 0 1rem!important;
+}
+@media screen and (min-width: 600px) {
+  #slogkoledardesc{
+    padding: 0 4rem!important;
+  }
+
+}
+
+#slogkoledarapp .slogkoledard-title{
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  font-family: sans-serif;
+  font-size: 2rem;
+  line-height: 2rem;
+  font-weight: 700;
+  --tw-text-opacity: 1;
+  color: rgb(0 0 0 / var(--tw-text-opacity));
+  margin: 0px;
+  display: none;
+  word-break: break-word;
+  text-align: center;
+}
+@media screen and (min-width: 600px) {
+  #slogkoledarapp .slogkoledard-title{
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    font-family: sans-serif;
+    font-size: 3rem;
+    line-height: 3rem;
+    font-weight: 700;
+    --tw-text-opacity: 1;
+    color: rgb(0 0 0 / var(--tw-text-opacity));
+    margin: 0px;
+    display: none;
+    word-break: break-word;
+    text-align: center;
+  }
+}
+
+#slogkoledarapp .slogkoledard-image{
+  margin-bottom: 2rem;
+}
+
+#slogkoledarapp .slogkoledard-title.active{
+  display: block;
+}
+
+#slogkoledarapp .slogkoledard-datewrapper{
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+#slogkoledarapp .slogkoledard-datewrapper a:focus { 
+  outline: none; 
+}
+
+#slogkoledarapp .slogkoledard-exiticon svg{
+  background-color: #952a5b;
+  transform: rotate(5deg);
+  padding: 5px;
+  color: white;
+}
+
+#slogkoledarapp .slogkoledard-datewrapper svg{
+  background-color: #952a5b;
+  transform: rotate(5deg);
+  padding: 5px;
+  color: white;
+}
+
+#slogkoledarapp .slogkoledard-date{
+  font-family: sans-serif;
+  font-size: 1.5rem;
+  line-height: 2rem;
+  --tw-text-opacity: 1;
+  color: #96264C;
+  font-weight: bold;
+}
+
+@media screen and (min-width: 600px) {
+  #slogkoledarapp .slogkoledard-date{
+    font-family: sans-serif;
+    font-size: 2.5rem;
+    line-height: 2rem;
+    --tw-text-opacity: 1;
+    color: #96264C;
+    font-weight: bold;
+  }
+}
+
+#slogkoledarapp .slogkoledard-info-wrapper{
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+#slogkoledarapp .slogkoledard-info{
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+}
+@media screen and (min-width: 600px) {
+  #slogkoledarapp .slogkoledard-info{
+    flex-direction: row;
+  }
+}
+
+#slogkoledarapp .kkdialogback{
+  display: none;
+}
+
+#slogkoledarapp .kkdialogback.active{
+  display: block;
+}
+
+#slogkoledarapp .kkdialog-header-wrapper .kkbackwrapper{
+  align-self: self-end;
+}
+
+#slogkoledarapp .kkdialog-header-wrapper .kkbackwrapper .kkbacklink{
+  display: flex;
+  align-items: center;
+  margin-top: -5rem;
+  font-size: 20px;
+  text-decoration: none;
+  text-transform: uppercase;
+  color: #cbcbcb;
+  gap: 0.5rem;
+  outline: none; 
+}
+@media screen and (min-width: 600px) {
+  #slogkoledarapp .kkdialog-header-wrapper .kkbackwrapper .kkbacklink{
+    font-size: 30px;
+  }
+
+}
+
+#slogkoledarapp .slogkoledard-info-icon{
+  width: 16;
+  height: 16;
+  fill: currentcolor;
+  grid-column: span 1 / span 1;
+  fill: #007A91;
+}
+
+#slogkoledarapp .slogkoledard-info-icondialog{
+  width: 22px;
+  height: 22px;
+  grid-column: span 1 / span 1;
+  fill: #000;
+}
+
+.kkuppercase{
+  text-transform: uppercase;
+}
+
 .slogkoledard-infotext{
   grid-column: span 3 / span 3;
   font-family: sans-serif;
-  font-size: 1.125rem;
+  font-size: 1.5rem;
   line-height: 1.75rem;
   font-weight: 700;
   --tw-text-opacity: 1;
-  color: rgb(149 42 90 / var(--tw-text-opacity));
+  color: #E8A273;
+  text-decoration: none;
+}
+
+.langme{
+  display: none;
+}
+.langme.active{
+  display: block;
+}
+
+
+.slogkoledard-infotext-bottom{
+  font-family: sans-serif;
+  font-size: 14px;
+  line-height: 1.75rem;
+  --tw-text-opacity: 1;
+  color: #000;
+  background-color: #F0DCCD;
   text-transform: capitalize;
+  text-decoration: none;
+  min-width: 200px;
+  text-align: center;
+
 }
 
-.slogkoledard-image{    
-  margin-bottom: 1rem;
+#slogkoledarapp .slogkoledard-info .flexme {
+  
+  width: unset;
 }
 
-.slogkoledard-linkwrapper{
+#slogkoledarapp .flexme-bottom-description{
+  color: #007A91;
+  text-transform: uppercase;
+  font-size: 12px;
+  font-family: sans-serif;
+  padding-bottom: 4px;
+  display: block;
+}
+
+#slogkoledarapp .tagg{
+
+
+  background-color: #952a5b;
+  color: wi;
+  color: white;
+  padding: 6px 12px;
+  border-radius: 30px;
+  font-family: sans-serif;
+}
+
+#slogkoledarapp .flexmetags{
+  justify-content: center!important;
+  flex-wrap: wrap;
+  margin: 1rem 0;
+}
+
+#slogkoledarapp dialog{
+  border-color: transparent;
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+  padding: 0rem;
+  max-height: 85%;
+  max-width: 800px;
+  background-color: transparent;
+}
+
+#slogkoledarapp dialog::-webkit-scrollbar {
+  display: none;
+}
+
+
+#slogkoledarapp .slogkoledard-linkwrapper{
   margin-top: 2rem;
   margin-bottom: 2rem;
   display: flex;
@@ -257,7 +662,16 @@
 }
 
 
-.slogkoledard-linkw{
+#slogkoledarapp .slogkoledard-linkw{
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+}
+
+#slogkoledarapp .slogkoledard-exiticon{
   margin-bottom: 1rem;
   display: flex;
   flex-direction: column;
@@ -265,295 +679,40 @@
   justify-content: center;
 }
 
-.slogkoledard-exiticon{
-  margin-bottom: 1rem;
+dialog::backdrop {
+  opacity: 0.75;
+  background-color: rgb(39, 39, 39);
+}
+
+.kkinfowrapper{
   display: flex;
+  gap: 1rem;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  margin-bottom: 2rem;
 }
 
-.slogkoledard-wrapper{
+#slogkoledarapp .kkgcallink{
+  background-color: #F0DCCD;
   display: flex;
-  max-width: 15rem;
-  flex-direction: column;
-}
-
-
-.slogkoledard-logo{
-  margin-bottom: 1rem;
+  gap: 1rem;;
+  width: 120px;
+  padding: 1rem;
+  border-radius: 10px;
+  font-family: sans-serif;
   display: flex;
-  justify-content: center;
-}
-
-
-.sloghideme{
-  display: none;
-}
-
-#slogkoledarapp{
-  display: none!important;
-  width: 12.5rem;
-  transition-duration: 500ms;
-  flex:none;
-  z-index: 1000;
-}
-
-#slogkoledarapp:hover{
-  width: 16rem;;
-}
-
-
-
-#slogkoldear p{
-  line-height: 1.5;
-}
-
-#slogkoledardesc{
-  line-height: 1.35 !important;
-}
-
-
-#slogkoldear span{
-  line-height: 1.5!important;
-}
-
-
-/*****/
-
-
-body{
-  display:flex;
-}
-
-#header{
-  margin-left: 273px!important;
-  margin-left: unset;  
-}
-
-.hidebutton{
-  visibility: hidden;
-}
-
-.slogkoledard-wrapper{
-  padding-bottom: 2rem;
-}
-
-#slogkoledardescmore{
-  position: relative;
-  width: 100%;
-  height: 100px;
-  margin-top: -100px;
-  display: flex;
-    justify-content: center;
     align-items: center;
 }
 
-#slogkoledardescmore .bg{
-  width: 100%;
-  height: 100%;
-  
-  background-color: white;
-  filter: blur(8px);
-  -webkit-filter: blur(8px);
-  opacity: 0.8;
-  position: absolute;
-}
-
-
-#slogkoledardescmore .morelink{
-  
-  position: absolute;
-  
-  display: none;
-  justify-content: center;
-  align-items: center;
-  font-size: 16px;
+#slogkoledarapp .kkgcallink a{
   text-transform: uppercase;
-  font-family: sans-serif;
-  font-weight: bold;
-  cursor: pointer;
-  background-color: #952a5b;
-  color: white;
-  padding: 0.5rem 1rem;
-  border-radius: 10px;
-}
-
-#slogkoledardescmore .morelink.active{
-  display: flex;
-}
-
-#slogkoledardesc{
-  
-  overflow: hidden;
-}
-
-.skdmaxheight{
-  overflow: hidden;
-  max-height: 595px;
-}
-
-
-.opendescmargin{
-  margin-top: 0!important;
-}
-
-.lng-menu{
-  width: 100%;
-  text-align: right;
-}
-.lng-menu-item{
-  cursor: pointer;
-  font-family: sans-serif;
-  font-size: 14px;
-  font-weight: bold;
-  display: none;
-}
-
-.lng-menu-item.active{
-  display: block;
-}
-
-.buttontext{
-  display: none;
-}
-
-.buttontext.active{
-  display: block;
-}
-
-.flexme{
-  display: flex;
-  gap: 0.5rem;
-  width: 100%;
-  justify-content: left;
-  align-items: center;
-}
-
-
-.descdetail{
-  display: none;
-}
-
-.descdetail.active{
-  display: block;
-}
-
-
-.mobbutton{
-  display: none;
-  cursor: pointer;
-  position: fixed;
-  bottom: 5px;
-  left: -230px;
-  opacity: 1;
-  background: rgb(236, 236, 236);
-  border-radius: 5px;
-  transition: all 0.5s ease;
-}
-.mobbutton .buttontext{
-  display: block;
-  text-transform: uppercase;
-  font-family: sans-serif;
-  font-weight: bold;
-  font-size: 30px;
-  padding-left: 20px;
-}
-
-.mobbutton:hover{
-  left: 5px;
-}
-
-.mobbutton img{
-  height: auto;
-  width: 50px;
-}
-
-@media (max-width: 1024px) {
-  
-  .mobbutton{
-    display: flex;
-    gap: 1rem;
-  }
-
-  #slogkoledarapp:hover {
-    width: unset;
-  }
-  #slogkoldear:hover{
-    margin-left: -16rem;
-  }
-
-  #slogkoledarapp {
-    width: 0rem;
-  }
-
-  #slogkoldear{
-    margin-left: -16rem;
-  }
-
-  #slogkoldear.moboc{
-    margin-left: 0rem!important;
-  }
-
-  #slogkoldear.mobcc{
-    margin-left: -16rem!important;
-  }
-  
-}
-
-.moboc .buttontext{
-  display: none;
-}
-.moboc .mobbutton{
-  left: 16rem;
-}
-
-#koledarlink{
-  width: 100%;
-  background-color: #952a5b;
-  color: white;
-  padding: 6px 12px;
-  display: block;
-  margin-left: -8px;
-  margin-top: -8px;
-  text-align: center;
   text-decoration: none;
-  font-family: sans-serif;
+  color: #000;
 }
 
-.tagg{
 
-
-    background-color: #952a5b;
-    color: wi;
-    color: white;
-    padding: 6px 12px;
-    border-radius: 30px;
-    font-family: sans-serif;
-  }
-
-  .flexmetags{
-    justify-content: center;
-    flex-wrap: wrap;
-  }
-
-
-
-  #slogkoledarapp::-webkit-scrollbar{
-    display:none;
+#slogkoledarapp .kkgcallink svg{
+  flex: none;
 }
-#slogkoledarapp{
-    height: 100vh;
-    overflow-y: scroll;
-    position: fixed;
-    -ms-overflow-style:none;
-    scrollbar-width: none;
-    eight: 100vh;
-    /* overflow-y: scroll; */
-    /* position: fixed; */
-    -ms-overflow-style: none;
-    /* scrollbar-width: none; */
-    display: block;
-    width: 240px;
-    position: relative;
-}
+
+/**DIALOGSTYLES MENU* END*/

@@ -1,10 +1,210 @@
-.slider-wrapper {
-  margin: 1rem;
+
+
+
+/**LNG MENU* START*/
+#slogkoledarapp .lng-menu {
+  text-align: right;
+}
+#slogkoledarapp .lng-menu-item.active {
+  display: block;
+}
+#slogkoledarapp .lng-menu-item {
+  cursor: pointer;
+  font-family: sans-serif;
+  font-size: 14px;
+  font-weight: bold;
+  display: none;
+}
+/***LNG MENU* END*/
+
+#koledarlink {
+    background-color: #952a5b;
+    color: white;
+    padding: 3px 12px;
+    display: block;
+    text-align: center;
+    text-decoration: none;
+    font-family: sans-serif;
+    font-size: 12px;
+} 
+
+#koledarheader{
+  display: flex;
+  justify-content: space-between;
+}
+
+#slides-container .slide{
+ border-radius: 6px;
+ background-color: #fff;
+ border-bottom: 1px solid #aab2bd;
+}
+
+#slogkoledarapp .slogkoledar-datewrapper{
+  cursor: pointer;
+  display: flex;
+  flex-basis: 16.666667%;
+  border-bottom-width: 1px;
+  --tw-border-opacity: 1;
+  border-color: rgb(186 186 186 / var(--tw-border-opacity));
+  align-items: center;
+}
+
+.slogkoledar-datewrapper2{
+  cursor: pointer;
+  --tw-border-opacity: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+  background-color: #B0C2A7;
+  width: 60px;
+  border-radius: 20px;
+}
+
+
+.slogkoledar-date{    
+  cursor: pointer;
+  --tw-border-opacity: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 50px;
+  width: 50px;
+  align-items: center;
+  justify-content: center;
+}
+
+
+
+.slogkoledar-dateday{    
+  cursor: pointer;
+  --tw-border-opacity: 1;
+  font-family: sans-serif;
+  font-size: 12px;
+  line-height: 2rem;
+  --tw-text-opacity: 1;
+  color: #fff;
+  text-transform: uppercase;
+}
+
+
+
+.slogkoledar-datemonth{    
+  cursor: pointer;
+  --tw-border-opacity: 1;
+  font-family: sans-serif;
+  font-size: 18px;
+  line-height: 2rem;
+  font-weight: 700;
+  --tw-text-opacity: 1;
+  color: #fff;
+}
+
+
+
+
+#slogkoledarapp .slide {
+  cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  padding: 0.5rem 0;
+  padding: 0rem 1rem;
+}
+
+#slogkoledarapp .slogkoledar-eventwrapper{    
+  cursor: pointer;
+  display: flex;
+  flex-basis: 83.333333%;
+  align-items: center;
+  border-bottom-width: 1px;
+  --tw-border-opacity: 1;
+  border-color: rgb(186 186 186 / var(--tw-border-opacity));
+}
+
+#slogkoledarapp .slogkoledar-eventinfo{    
+  cursor: pointer;
+  --tw-border-opacity: 1;
+  display: block;
+  padding: 0.5rem 0!important;
+}
+
+#slogkoledarapp .slogkoledar-eventinfoplace{    
+  cursor: pointer;
+  --tw-border-opacity: 1;
+  font-family: sans-serif;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  --tw-text-opacity: 1;
+  color: rgb(149 42 90 / var(--tw-text-opacity));
+ 
+  padding:0;
+  margin-top: 0!important;
+  margin-bottom: 0!important;
+  font-size: 14px!important
+}
+
+#slogkoledarapp .slogkoledar-eventinfotitle{    
+  cursor: pointer;
+  --tw-border-opacity: 1;
+  font-family: sans-serif;
+  font-weight: 700;
+  --tw-text-opacity: 1;
+  color: rgb(0 0 0 / var(--tw-text-opacity));
+  margin:0 ;
+  padding:0;
+  font-size: 18px;
+  overflow: hidden;
+   -webkit-line-clamp: 2; /* number of lines to show */
+           line-clamp: 2; 
+   -webkit-box-orient: vertical;
+}
+
+
+#slogkoledarapp .slogkoledard-info-icon {
+  width: 16;
+  height: 16;
+  fill: currentcolor;
+  grid-column: span 1 / span 1;
+  fill: #007A91;
+}
+
+#slogkoledarapp .flexme{
+  display: flex;
+  gap: 0.5rem;
+  width: 100%;
+  justify-content: left;
+  align-items: center;
+}
+
+#slogkoldear span {
+  line-height: 1.2 !important;
+}
+
+#slogkoledarapp .slogkoledar-date {
+  cursor: pointer;
+  --tw-border-opacity: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+}
+
+/*SLIDER CSS START*/
+
+
+#slogkoledarapp .slider-wrapper {
+  margin: 1rem 0;
   position: relative;
   overflow: hidden;
 }
-.slides-container {
-  height: calc(100vh - 2rem);
+#slogkoledarapp .slides-container {
+  
   width: 100%;
   display: flex;
   list-style: none;
@@ -12,22 +212,24 @@
   padding: 0;
   overflow: scroll;
   scroll-behavior: smooth;
+
+  gap:1rem;
 }
-.slide {
-  width: 100%;
-  height: 100%;
+#slogkoledarapp .slide {
   flex: 1 0 100%;
+  width: 260px;
+  height: 100%;
 }
-.slides-container {
+#slogkoledarapp .slides-container {
   scrollbar-width: none; /* Firefox */
   -ms-overflow-style: none;  /* Internet Explorer 10+ */
 }
 /* WebKit */
-.slides-container::-webkit-scrollbar { 
+#slogkoledarapp .slides-container::-webkit-scrollbar { 
   width: 0;
   height: 0;
 }
-.slide-arrow {
+#slogkoledarapp .slide-arrow {
   position: absolute;
   display: flex;
   top: 0;
@@ -43,17 +245,415 @@
   opacity: 0.5;
   transition: opacity 100ms;
 }
-.slide-arrow:hover,
-.slide-arrow:focus {
+#slogkoledarapp .slide-arrow:hover,
+#slogkoledarapp .slide-arrow:focus {
   opacity: 1;
 }
-#slide-arrow-prev {
+#slogkoledarapp #slide-arrow-prev {
   left: 0;
   padding-left: 0.25rem;
   border-radius: 0 2rem 2rem 0;
 }
-#slide-arrow-next {
+#slogkoledarapp #slide-arrow-next {
   right: 0;
   padding-left: 0.75rem;
   border-radius: 2rem 0 0 2rem;
 }
+/*SLIDER CSS END*/
+
+
+
+
+/**DIALOGSTYLES MENU* START*/
+
+#slogkoledarapp .kkcatwrapper{
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+#slogkoledarapp .kkcatwrapper .kkorganizer{
+
+  text-transform: uppercase;
+  color: #007A91;
+  font-family: sans-serif;
+  font-size: 12px;
+}
+
+
+#slogkoledarapp .kkcatwrapper .kkorganizername{
+  color: #000;
+  padding: 6px 24px;
+  font-family: sans-serif;
+  font-weight: bold;
+}
+
+
+#slogkoledarapp .kkcatwrapper .kkcategory{
+
+  text-transform: uppercase;
+  color: #007A91;
+  font-family: sans-serif;
+  font-size: 12px;
+}
+
+
+#slogkoledarapp .kkcatwrapper .kkcatname{
+  background-color: #B0C2A7;
+  color: #ffffff;
+  padding: 6px 24px;
+
+  font-family: sans-serif;
+}
+
+#slogkoledarapp .kkdialog-header-wrapper{
+  display: grid;
+  margin-bottom: -2rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  justify-items: center;
+}
+@media screen and (min-width: 600px) {
+  #slogkoledarapp .kkdialog-header-wrapper{
+    display: grid;
+    margin-bottom: -2rem;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    justify-items: center;
+  }
+
+}
+
+#slogkoledarapp .kkdialog-header-dummy{
+  display: none;
+}
+@media screen and (min-width: 600px) {
+  #slogkoledarapp .kkdialog-header-dummy{
+    display: block;
+  }
+
+}
+
+#slogkoledarapp .slogkoledard-wrapper{
+  display: flex;
+  max-width: 850px;
+  flex-direction: column;
+  background-color: #fff;
+  padding: 0.5rem;
+  border-radius: 12px;
+}
+
+@media screen and (min-width: 600px) {
+  #slogkoledarapp .slogkoledard-wrapper{
+    display: flex;
+    max-width: 850px;
+    flex-direction: column;
+    background-color: #fff;
+    padding: 3rem;
+    border-radius: 12px;
+  }
+}
+
+
+#slogkoledardesc{
+  padding: 0;
+  
+  font-family: sans-serif;
+  --tw-text-opacity: 1;
+  color: rgb(0 0 0 / var(--tw-text-opacity));
+  
+  font-size:22px;
+  line-height: 32px!important;
+  padding: 0 1rem!important;
+}
+@media screen and (min-width: 600px) {
+  #slogkoledardesc{
+    padding: 0 4rem!important;
+  }
+
+}
+
+#slogkoledarapp .slogkoledard-title{
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  font-family: sans-serif;
+  font-size: 2rem;
+  line-height: 2rem;
+  font-weight: 700;
+  --tw-text-opacity: 1;
+  color: rgb(0 0 0 / var(--tw-text-opacity));
+  margin: 0px;
+  word-break: break-word;
+  text-align: center;
+}
+@media screen and (min-width: 600px) {
+  #slogkoledarapp .slogkoledard-title{
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    font-family: sans-serif;
+    font-size: 3rem;
+    line-height: 3rem;
+    font-weight: 700;
+    --tw-text-opacity: 1;
+    color: rgb(0 0 0 / var(--tw-text-opacity));
+    margin: 0px;
+    word-break: break-word;
+    text-align: center;
+  }
+}
+
+#slogkoledarapp .slogkoledard-image{
+  margin-bottom: 2rem;
+}
+
+
+#slogkoledarapp .slogkoledard-datewrapper{
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+#slogkoledarapp .slogkoledard-datewrapper a:focus { 
+  outline: none; 
+}
+
+#slogkoledarapp .slogkoledard-exiticon svg{
+  background-color: #952a5b;
+  transform: rotate(5deg);
+  padding: 5px;
+  color: white;
+}
+
+#slogkoledarapp .slogkoledard-datewrapper svg{
+  background-color: #952a5b;
+  transform: rotate(5deg);
+  padding: 5px;
+  color: white;
+}
+
+#slogkoledarapp .slogkoledard-date{
+  font-family: sans-serif;
+  font-size: 1.5rem;
+  line-height: 2rem;
+  --tw-text-opacity: 1;
+  color: #96264C;
+  font-weight: bold;
+}
+
+@media screen and (min-width: 600px) {
+  #slogkoledarapp .slogkoledard-date{
+    font-family: sans-serif;
+    font-size: 2.5rem;
+    line-height: 2rem;
+    --tw-text-opacity: 1;
+    color: #96264C;
+    font-weight: bold;
+  }
+}
+
+#slogkoledarapp .slogkoledard-info-wrapper{
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+#slogkoledarapp .slogkoledard-info{
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+}
+@media screen and (min-width: 600px) {
+  #slogkoledarapp .slogkoledard-info{
+    flex-direction: row;
+  }
+}
+
+#slogkoledarapp .kkdialogback{
+  display: none;
+}
+
+#slogkoledarapp .kkdialogback.active{
+  display: block;
+}
+
+#slogkoledarapp .kkdialog-header-wrapper .kkbackwrapper{
+  align-self: self-end;
+}
+
+#slogkoledarapp .kkdialog-header-wrapper .kkbackwrapper a{
+  display: flex;
+  align-items: center;
+  margin-top: -5rem;
+  font-size: 20px;
+  text-decoration: none;
+  text-transform: uppercase;
+  color: #cbcbcb;
+  gap: 0.5rem;
+  outline: none; 
+}
+@media screen and (min-width: 600px) {
+  #slogkoledarapp .kkdialog-header-wrapper .kkbackwrapper a{
+    font-size: 30px;
+  }
+
+}
+
+#slogkoledarapp .slogkoledard-info-icon{
+  width: 16;
+  height: 16;
+  fill: currentcolor;
+  grid-column: span 1 / span 1;
+  fill: #007A91;
+}
+
+#slogkoledarapp .slogkoledard-info-icondialog{
+  width: 22px;
+  height: 22px;
+  grid-column: span 1 / span 1;
+  fill: #000;
+}
+
+.kkuppercase{
+  text-transform: uppercase;
+}
+
+.slogkoledard-infotext{
+  grid-column: span 3 / span 3;
+  font-family: sans-serif;
+  font-size: 1.5rem;
+  line-height: 1.75rem;
+  font-weight: 700;
+  --tw-text-opacity: 1;
+  color: #E8A273;
+  text-transform: capitalize;
+  text-decoration: none;
+}
+
+
+.slogkoledard-infotext-bottom{
+  font-family: sans-serif;
+  font-size: 14px;
+  line-height: 1.75rem;
+  --tw-text-opacity: 1;
+  color: #000;
+  background-color: #F0DCCD;
+  text-transform: capitalize;
+  text-decoration: none;
+  min-width: 200px;
+  text-align: center;
+
+}
+
+#slogkoledarapp .slogkoledard-info .flexme {
+  
+  width: unset;
+}
+
+#slogkoledarapp .flexme-bottom-description{
+  color: #007A91;
+  text-transform: uppercase;
+  font-size: 12px;
+  font-family: sans-serif;
+  padding-bottom: 4px;
+  display: block;
+}
+
+#slogkoledarapp .tagg{
+
+
+  background-color: #952a5b;
+  color: wi;
+  color: white;
+  padding: 6px 12px;
+  border-radius: 30px;
+  font-family: sans-serif;
+}
+
+#slogkoledarapp .flexmetags{
+  justify-content: center!important;
+  flex-wrap: wrap;
+  margin: 1rem 0;
+}
+
+#slogkoledarapp dialog{
+  border-color: transparent;
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+  padding: 0rem;
+  max-height: 85%;
+  max-width: 800px;
+  background-color: transparent;
+}
+
+#slogkoledarapp dialog::-webkit-scrollbar {
+  display: none;
+}
+
+
+#slogkoledarapp .slogkoledard-linkwrapper{
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+
+#slogkoledarapp .slogkoledard-linkw{
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+}
+
+#slogkoledarapp .slogkoledard-exiticon{
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+dialog::backdrop {
+  opacity: 0.75;
+  background-color: rgb(39, 39, 39);
+}
+
+.kkinfowrapper{
+  display: flex;
+  gap: 1rem;
+  flex-direction: column;
+  align-items: center;
+}
+
+#slogkoledarapp .kkgcallink{
+  background-color: #F0DCCD;
+  display: flex;
+  gap: 1rem;;
+  width: 120px;
+  padding: 1rem;
+  border-radius: 10px;
+  font-family: sans-serif;
+  display: flex;
+    align-items: center;
+}
+
+#slogkoledarapp .kkgcallink a{
+  text-transform: uppercase;
+  text-decoration: none;
+  color: #000;
+}
+
+
+#slogkoledarapp .kkgcallink svg{
+  flex: none;
+}
+
+/**DIALOGSTYLES MENU* END*/

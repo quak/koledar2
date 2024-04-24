@@ -8,7 +8,7 @@ const injectCSS = () => {
     // Set the link type to and rel attributes
     link.type = "text/css";
     link.rel = "stylesheet";
-    var environment = 'production';
+    var environment = 'productXion';
     
 
     if (environment  == 'production' && kkstyle == "list") {
@@ -22,7 +22,7 @@ const injectCSS = () => {
                                                     
     if (environment  == 'production' && kkstyle == "carousel") {
       link.href = "https://cdn.jsdelivr.net/gh/quak/koledar2@main/dist/styles-carousel.css";
-      link.href = "https://cdn.jsdelivr.net/gh/quak/koledar2/dist/styles-carousel.css";
+      /*link.href = "https://cdn.jsdelivr.net/gh/quak/koledar2/dist/styles-carousel.css";*/
     } 
     if (environment  != 'production' && kkstyle == "carousel") {
       link.href = "./../dist/styles-carousel.css";
