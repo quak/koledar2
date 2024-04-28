@@ -2,9 +2,6 @@
 // Import the Alpine JS framework
 import Alpine from 'alpinejs'
 
-// If you abstracted your Alpine component logic, you'd import that here
-//import widget from './widget.js'
-
 // import widget template
 import widgetHTMLpro from './../widget.html';
 import widgetHTMLlist from './../widget-list.html';
@@ -16,13 +13,6 @@ import widgetHTMLcarousel from './../widget-carousel.html';
 
 const initAlpine = () => {
   
-    /**
-     *  If you're abstracting your component logic into a JS file (imported above), 
-     * you would register your component with Alpine like this:
-     *  Alpine.data('widget', widget); 
-     */
-
-
     const kapp = document.getElementById("slogkoledarapp");
                                         
     if(!kapp){
@@ -30,17 +20,16 @@ const initAlpine = () => {
         const bdy = document.body
         var appdiv = document.createElement("div");
         appdiv.setAttribute("id", "slogkoledarapp");
-        //appdiv.classList.add("sloghideme");
         
         bdy.insertAdjacentElement("afterbegin", appdiv);
     }
     
     Alpine.data('eventCal', () => {
         var loadingcycles = 0;
+       
         return {
             // other default properties
-            isLoading: false,
-            events: null,
+            isLoading: true,
             eventssplitted: null,
             actevent: null,
             listview: true,
@@ -56,149 +45,185 @@ const initAlpine = () => {
             locations: false,
             orgas: false,
 
+             kklocations: false,
+             kkevents: false,
+             kkorganizers: false,
 
-            fetchEventList() {
-                this.isLoading = true;
+
+            // EVENT DATA SL & AT(DE) 
+            /*
+             *  we need two different dataset because of the not necessarilly existing translation
+             *  there for we cannot gurantee that the same events are shown on the language switch
+             *  therefor we need to scroll the sliderjs to the first slide on langswitch 
+             */
+                       
+            events: null,   // we get all Events but then split it here because it is like it is
+            eventssl: null,
+            eventsat: null,
+
+            async getAllLocations() {
+                let response = await fetch('https://www.koledar.at/v1/locations?includeChildren=true')
+                return await response.json();
+            },
+            async getAllOrganizers() {
+                let response = await fetch('https://www.koledar.at/v1/organizers?offset=0&limit=200')
+                return await response.json();
+            },
+            async getEvents(limit) {
+                let response = await fetch('https://www.koledar.at/v1/events?limit='+limit+'&offset=0')
+                return await response.json();
+            },
+
+            async fetchEventList() {
+                
+                
                 kscript = document.querySelector('script[src*=app]');
                 var limit = kscript.getAttribute('kk-data-amount');  
                 
-                var offset = limit *loadingcycles;
                 loadingcycles=loadingcycles+1;
                 
                 if(kscript.getAttribute('kk-style') == "list" && (kscript.getAttribute('kk-chunksize')*2 >= kscript.getAttribute('kk-data-amount'))){
                     limit=kscript.getAttribute('kk-chunksize')*2+1;
                 }
 
-
-                fetch('https://www.koledar.at/v1/locations?includeChildren=true')
-                .then(res => res.json())
-                .then(data => {
-                    this.locations = data.items;
-
-                    fetch('https://www.koledar.at/v1/organizers?offset=0&limit=200')
-                    .then(res => res.json())
-                    .then(data => {
-                        this.organizers = data.items;
-
-                        fetch('https://www.koledar.at/v1/events?limit='+limit+'&offset=0')
-                        .then(res => res.json())
-                        .then(data => {
-                            
-                            this.isLoading = false;
-                            
-                            let ev = new Array();
-    
-                            data.items.forEach((event,index) => {
-                                event.index = index
-                                let actdate = new Date(event.starting_on);
-                                let enddate = new Date(event.ending_on);
-                                
-                                if(enddate!="Invalid Date"){
-                                    event.enddate = enddate.toLocaleDateString();
-                                    event.enddate = event.enddate.replaceAll("/", ".");
-                                }
-    
-                                let enddaynumber = enddate.getDate();
-                                if(enddaynumber.toString().length==1){
-                                    enddaynumber = "0"+enddaynumber;
-                                }
-                                event.endday = enddaynumber
-    
-                                let daynumber = actdate.getDate();
-                                
-                                if(daynumber.toString().length==1){
-                                    daynumber = "0"+daynumber;
-                                }
-                                event.day = daynumber
-    
-                                let endyear = enddate.getFullYear();
-                                let year = actdate.getFullYear();
-                                let ddetail = daynumber+"."+(actdate.getMonth()+1)+"."+year;
-                                
-                                if(enddaynumber){
-                                    ddetail= ddetail +" - "+ enddaynumber+"."+(enddate.getMonth()+1)+"."+endyear
-                                }
-                                event.datedetail = ddetail;
-                                
-                                const months = ["Jan", "Feb", "Mar", "Apr", "Maj", "Jun", "Jul", "Avg", "Sep", "Okt", "Nov", "Dec"];
-                                const monthsde = ["Jan", "Feb", "Mar", "Apr", "Mai", "Jun", "Jul", "Aug", "Sep", "Okt", "Nov", "Dez"];
-                                event.month = months[actdate.getMonth()];
-                                event.monthde = monthsde[actdate.getMonth()];
-    
-                                const day = ["Ned","Pon", "Tor", "Sre", "Čet", "Pet", "Sob" ];
-                                const dayde = [ "Son","Mon", "Die", "Mit", "Don", "Fre", "Sam"];
-                                
-                                event.daytext = day[actdate.getDay()];
-                                event.daytextde = dayde[actdate.getDay()];
-                                
-                                event.datedm = actdate.getDate()+"."+(actdate.getMonth()+1)+".";
-                            
-                                
-                                if(event.attachments == null){
-                                    event.attachments = [];
-                                };
-                                
-                                if(event.links == null){
-                                    event.links = [];
-                                };
-                                
-                                if(event.organizers == null){
-                                    event.organizers = [];
-                                };
-    
-                                let gdate = actdate.getFullYear()+actdate.getMonth()+actdate.getDay();
-                                
-                                var startdategcal;
-                                var enddategcal;
-                                if(event.starting_at){
-                                    startdategcal = actdate.getFullYear()+""+(actdate.getMonth()+1)+""+actdate.getDate()+"T"+(event.starting_at).replace(":","")+"00";
-                                }
-    
-                                if(typeof enddate !== "undefined"){
-                                    enddategcal = enddate.getFullYear()+""+(enddate.getMonth()+1)+""+enddate.getDate()+"T"+enddate.getHours()+""+enddate.getMinutes()+"00";
-                                }
-    
-                                if(startdategcal){
-                                    if(!enddategcal){
-                                        enddategcal="";
-                                    }else{
-                                        enddategcal = "/"+enddategcal
-                                    }
-                                    event.gcallink = "https://calendar.google.com/calendar/render?action=TEMPLATE&text="+event.title_sl+"&dates="+startdategcal+enddategcal;
-                                }
-    
-                                event.loc = this.getLocationforSlug(event.location,event.venue);
-                                event.orga = this.getOrgas(event.organizers);
-                                
-                                
-                                ev.push(event);
-                            });
-                            
+                
+                this.kklocations  = (await this.getAllLocations()).items;
+                this.kkorganizers = (await this.getAllOrganizers()).items;
+                this.kkevents     = (await this.getEvents(limit)).items;
+             
+                
+                this.isLoading = false;
                         
-                            const chunkSize = parseInt(kscript.getAttribute('kk-chunksize'));
-                            var chunk = new Array;
-                            for (let i = 0; i < ev.length; i += chunkSize) {
-                                chunk.push(ev.slice(i, i + chunkSize));
-                            }
-                            this.eventssplitted = chunk;
-                            this.events = ev;
-                            console.log(ev);
-                            
-                        });
-                    });
+                let evsl = new Array();
+                let evat = new Array();
+                
+                this.kkevents.forEach((event,index) => {
+                    event.index = index
+                    let actdate = new Date(event.starting_on);
+                    let enddate = new Date(event.ending_on);
+                    
+                    if(enddate!="Invalid Date"){
+                        event.enddate = enddate.toLocaleDateString();
+                        event.enddate = event.enddate.replaceAll("/", ".");
+                    }
 
+                    let enddaynumber = enddate.getDate();
+                    if(enddaynumber.toString().length==1){
+                        enddaynumber = "0"+enddaynumber;
+                    }
+                    event.endday = enddaynumber
+
+                    let daynumber = actdate.getDate();
+                    
+                    if(daynumber.toString().length==1){
+                        daynumber = "0"+daynumber;
+                    }
+                    event.day = daynumber
+
+                    let endyear = enddate.getFullYear();
+                    let year = actdate.getFullYear();
+                    let ddetail = daynumber+"."+(actdate.getMonth()+1)+"."+year;
+                    
+                    if(enddaynumber){
+                        ddetail= ddetail +" - "+ enddaynumber+"."+(enddate.getMonth()+1)+"."+endyear
+                    }
+                    event.datedetail = ddetail;
+                    
+                    const months = ["Jan", "Feb", "Mar", "Apr", "Maj", "Jun", "Jul", "Avg", "Sep", "Okt", "Nov", "Dec"];
+                    const monthsde = ["Jan", "Feb", "Mar", "Apr", "Mai", "Jun", "Jul", "Aug", "Sep", "Okt", "Nov", "Dez"];
+                    event.month = months[actdate.getMonth()];
+                    event.monthde = monthsde[actdate.getMonth()];
+
+                    const day = ["Ned","Pon", "Tor", "Sre", "Čet", "Pet", "Sob" ];
+                    const dayde = [ "Son","Mon", "Die", "Mit", "Don", "Fre", "Sam"];
+                    
+                    event.daytext = day[actdate.getDay()];
+                    event.daytextde = dayde[actdate.getDay()];
+                    
+                    event.datedm = actdate.getDate()+"."+(actdate.getMonth()+1)+".";
+                
+                    
+                    if(event.attachments == null){
+                        event.attachments = [];
+                    };
+                    
+                    if(event.links == null){
+                        event.links = [];
+                    };
+                    
+                    if(event.organizers == null){
+                        event.organizers = [];
+                    };
+
+                    let gdate = actdate.getFullYear()+actdate.getMonth()+actdate.getDay();
+                    
+                    var startdategcal;
+                    var enddategcal;
+                    if(event.starting_at){
+                        startdategcal = actdate.getFullYear()+""+(actdate.getMonth()+1)+""+actdate.getDate()+"T"+(event.starting_at).replace(":","")+"00";
+                    }
+
+                    if(typeof enddate !== "undefined"){
+                        enddategcal = enddate.getFullYear()+""+(enddate.getMonth()+1)+""+enddate.getDate()+"T"+enddate.getHours()+""+enddate.getMinutes()+"00";
+                    }
+
+                    if(startdategcal){
+                        if(!enddategcal){
+                            enddategcal="";
+                        }else{
+                            enddategcal = "/"+enddategcal
+                        }
+                        event.gcallink = "https://calendar.google.com/calendar/render?action=TEMPLATE&text="+event.title_sl+"&dates="+startdategcal+enddategcal;
+                    }
+
+                    event.loc = this.getLocationforSlug(event.location,event.venue);
+                    event.orga = this.getOrgas(event.organizers);
+                    
+
+                    if(event.title_sl!=""){
+                        evsl.push(event);
+                    }
+                    if(event.title_de!=""){
+                        evat.push(event);
+
+                        if(event.day == 24){
+                            
+                        }
+                    }
+
+                    if(event.day == 24){
+                    }
                     
                 });
-
+                
+            
+                const chunkSize = parseInt(kscript.getAttribute('kk-chunksize'));
+                var chunksl = new Array;
+                var chunkat = new Array;
+                for (let i = 0; i < evsl.length; i += chunkSize) {
+                    chunksl.push(evsl.slice(i, i + chunkSize));
+                }
+                for (let j = 0; j < evat.length; j += chunkSize) {
+                    chunkat.push(evat.slice(j, j + chunkSize));
+                }
+               
+                this.eventssl = chunksl;
+                this.eventsat = chunkat;
+                    console.log(chunkat);
+           
                 
             },
             fetchAddEventList() {
+                console.log("reloadstuff")
                 this.isLoading = true;
                 var kscript = document.querySelector('script[src*=app]');
                 var limit = kscript.getAttribute('kk-data-amount');
                 var offset = limit *loadingcycles;
                 loadingcycles=loadingcycles+1;
 
+
+                let evsl = new Array();
+                let evat = new Array();
 
                 fetch('https://www.koledar.at/v1/events?limit='+limit+'&offset='+offset)
                 .then(res => res.json())
@@ -210,59 +235,120 @@ const initAlpine = () => {
                     let ev = new Array()
 
                     data.items.forEach((event,index) => {
-                        let actdate = new Date(event.starting_on);
-                        let enddate = new Date(event.ending_on);
+                        event.index = index
+                    let actdate = new Date(event.starting_on);
+                    let enddate = new Date(event.ending_on);
+                    
+                    if(enddate!="Invalid Date"){
+                        event.enddate = enddate.toLocaleDateString();
+                        event.enddate = event.enddate.replaceAll("/", ".");
+                    }
 
-                        if(enddate!="Invalid Date"){
-                            event.enddate = enddate.toLocaleDateString();
-                            event.enddate = event.enddate.replaceAll("/", ".");
+                    let enddaynumber = enddate.getDate();
+                    if(enddaynumber.toString().length==1){
+                        enddaynumber = "0"+enddaynumber;
+                    }
+                    event.endday = enddaynumber
+
+                    let daynumber = actdate.getDate();
+                    
+                    if(daynumber.toString().length==1){
+                        daynumber = "0"+daynumber;
+                    }
+                    event.day = daynumber
+
+                    let endyear = enddate.getFullYear();
+                    let year = actdate.getFullYear();
+                    let ddetail = daynumber+"."+(actdate.getMonth()+1)+"."+year;
+                    
+                    if(enddaynumber){
+                        ddetail= ddetail +" - "+ enddaynumber+"."+(enddate.getMonth()+1)+"."+endyear
+                    }
+                    event.datedetail = ddetail;
+                    
+                    const months = ["Jan", "Feb", "Mar", "Apr", "Maj", "Jun", "Jul", "Avg", "Sep", "Okt", "Nov", "Dec"];
+                    const monthsde = ["Jan", "Feb", "Mar", "Apr", "Mai", "Jun", "Jul", "Aug", "Sep", "Okt", "Nov", "Dez"];
+                    event.month = months[actdate.getMonth()];
+                    event.monthde = monthsde[actdate.getMonth()];
+
+                    const day = ["Ned","Pon", "Tor", "Sre", "Čet", "Pet", "Sob" ];
+                    const dayde = [ "Son","Mon", "Die", "Mit", "Don", "Fre", "Sam"];
+                    
+                    event.daytext = day[actdate.getDay()];
+                    event.daytextde = dayde[actdate.getDay()];
+                    
+                    event.datedm = actdate.getDate()+"."+(actdate.getMonth()+1)+".";
+                
+                    
+                    if(event.attachments == null){
+                        event.attachments = [];
+                    };
+                    
+                    if(event.links == null){
+                        event.links = [];
+                    };
+                    
+                    if(event.organizers == null){
+                        event.organizers = [];
+                    };
+
+                    let gdate = actdate.getFullYear()+actdate.getMonth()+actdate.getDay();
+                    
+                    var startdategcal;
+                    var enddategcal;
+                    if(event.starting_at){
+                        startdategcal = actdate.getFullYear()+""+(actdate.getMonth()+1)+""+actdate.getDate()+"T"+(event.starting_at).replace(":","")+"00";
+                    }
+
+                    if(typeof enddate !== "undefined"){
+                        enddategcal = enddate.getFullYear()+""+(enddate.getMonth()+1)+""+enddate.getDate()+"T"+enddate.getHours()+""+enddate.getMinutes()+"00";
+                    }
+
+                    if(startdategcal){
+                        if(!enddategcal){
+                            enddategcal="";
+                        }else{
+                            enddategcal = "/"+enddategcal
                         }
-                        
-                        let daynumber = actdate.getDate();
-                        
-                        if(daynumber.toString().length==1){
-                            daynumber = "0"+daynumber;
+                        event.gcallink = "https://calendar.google.com/calendar/render?action=TEMPLATE&text="+event.title_sl+"&dates="+startdategcal+enddategcal;
+                    }
+
+                    event.loc = this.getLocationforSlug(event.location,event.venue);
+                    event.orga = this.getOrgas(event.organizers);
+                    
+
+                    if(event.title_sl!=""){
+                        evsl.push(event);
+                    }
+                    if(event.title_de!=""){
+                        evat.push(event);
+
+                        if(event.day == 24){
+                            
                         }
-                        event.day = daynumber
+                    }
 
-                        const months = ["Jan", "Feb", "Mar", "Apr", "Maj", "Jun", "Jul", "Avg", "Sep", "Okt", "Nov", "Dec"];
-                        const monthsde = ["Jan", "Feb", "Mar", "Apr", "Mai", "Jun", "Jul", "Aug", "Sep", "Okt", "Nov", "Dez"];
-                        event.month = months[actdate.getMonth()];
-                        event.monthde = monthsde[actdate.getMonth()];
-
-                        const day = ["Ned","Pon", "Tor", "Sre", "Čet", "Pet", "Sob" ];
-                        const dayde = [ "Son","Mon", "Die", "Mit", "Don", "Fre", "Sam"];
-                        event.daytext = day[actdate.getDate()];
-                        event.daytextde = dayde[actdate.getDate()];
-                        
-                        if(event.attachments == null){
-                            event.attachments = [];
-                        };
-                        
-                        if(event.links == null){
-                            event.links = [];
-                        };
-                        
-                        if(event.organizers == null){
-                            event.organizers = [];
-                        };
-
-                        event.gcallink = "https://calendar.google.com/calendar/render?action=TEMPLATE&text="+event.title_sl+"&dates="+event.starting_on+" "+event.starting_at;
-
-                        ev.push(event);
+                    if(event.day == 24){
+                    }
 
 
                     });
 
                     
-                    (this.events).push(...ev);
+                    (this.kkevents).push(...ev);
                     
                     const chunkSize = parseInt(kscript.getAttribute('kk-chunksize'));
-                    var chunk = new Array;
-                    for (let i = 0; i < this.events.length; i += chunkSize) {
-                        chunk.push(this.events.slice(i, i + chunkSize));
+                    var chunksl = new Array;
+                    var chunkat = new Array;
+                    for (let i = 0; i < evsl.length; i += chunkSize) {
+                        chunksl.push(evsl.slice(i, i + chunkSize));
                     }
-                    this.eventssplitted = chunk;
+                    for (let j = 0; j < evat.length; j += chunkSize) {
+                        chunkat.push(evat.slice(j, j + chunkSize));
+                    }
+                   
+                    this.eventssl.push(...chunksl); 
+                    this.eventsat.push(...chunkat); 
 
 
                     
@@ -270,8 +356,9 @@ const initAlpine = () => {
             },
             getLocationforSlug(locationslug,venueslug) {
                 let ret = false;
-                
-                this.locations.forEach((locobj,index) => {
+               
+                 
+                this.kklocations.forEach((locobj,index) => {
                     
                     if(locationslug===locobj.location_key){
                        
@@ -291,26 +378,44 @@ const initAlpine = () => {
             getOrgas(orgs) {
                
                 let ret = new Array();
-                orgs.forEach((orgaslug,i)=>{
-                    this.organizers.forEach((orga,index) => {
-                        console.log()
+             
+                this.kkorganizers.forEach((orgaslug,i)=>{
+                    this.kkorganizers.forEach((orga,index) => {
+                       
                         if(orgaslug===orga.organizer_key){
                             ret.push(orga);
                         }
                     });
                 });
-                console.log(ret);
                 
                 return ret;
             },
             showDialog(ev) {
                 
                 const dialog = document.getElementById("kkdialog"+ev);
+                
+                
                 dialog.showModal();
+                
+                dialog.scrollTop=0;
             },
             hideDialog(ev) {
-                console.log(ev);
                 const dialog = document.getElementById("kkdialog"+ev);
+                dialog.close();
+                
+            },
+
+            showDialogat(ev) {
+                
+                const dialog = document.getElementById("kkdialogat"+ev);
+                
+                
+                dialog.showModal();
+                
+                dialog.scrollTop=0;
+            },
+            hideDialogat(ev) {
+                const dialog = document.getElementById("kkdialogat"+ev);
                 dialog.close();
                 
             },
@@ -366,7 +471,7 @@ const initAlpine = () => {
                 
                 this.nxtslides++;
                 if(kscript.getAttribute('kk-style') == "list"){
-                    if((this.events.length - (this.nxtslides*parseInt(kscript.getAttribute('kk-chunksize'))))<parseInt(kscript.getAttribute('kk-chunksize'))+2){
+                    if((this.kkevents.length - (this.nxtslides*parseInt(kscript.getAttribute('kk-chunksize'))))<parseInt(kscript.getAttribute('kk-chunksize'))+2){
                         this.fetchAddEventList();
                     };
                 }
@@ -375,6 +480,34 @@ const initAlpine = () => {
             showPrev() {
                 const slide = document.querySelector(".slide");
                 const slidesContainer = document.getElementById("slides-container");
+
+                const slideWidth = slide.clientWidth;
+                slidesContainer.scrollLeft -= slideWidth;
+            },
+
+
+            showNextat() {
+                const slide = document.querySelector(".slideat");
+                const slidesContainer = document.getElementById("slides-containerat");
+                
+                const slideWidth = slide.clientWidth;
+                slidesContainer.scrollLeft += slideWidth;
+
+                if((kscript.getAttribute('kk-style') != "list") && (slidesContainer.clientWidth - 300 < slidesContainer.scrollLeft)){
+                    this.fetchAddEventList();
+                }
+                
+                this.nxtslides++;
+                if(kscript.getAttribute('kk-style') == "list"){
+                    if((this.kkevents.length - (this.nxtslides*parseInt(kscript.getAttribute('kk-chunksize'))))<parseInt(kscript.getAttribute('kk-chunksize'))+2){
+                        this.fetchAddEventList();
+                    };
+                }
+            },
+
+            showPrevat() {
+                const slide = document.querySelector(".slideat");
+                const slidesContainer = document.getElementById("slides-containerat");
 
                 const slideWidth = slide.clientWidth;
                 slidesContainer.scrollLeft -= slideWidth;
