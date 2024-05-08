@@ -3377,10 +3377,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 var initAlpine = function initAlpine() {
   var kapp = document.getElementById("slogkoledarapp");
   if (!kapp) {
-    var bdy = document.body;
-    var appdiv = document.createElement("div");
-    appdiv.setAttribute("id", "slogkoledarapp");
-    bdy.insertAdjacentElement("afterbegin", appdiv);
+
+    //const bdy = document.body
+    //var appdiv = document.createElement("div");
+    //appdiv.setAttribute("id", "slogkoledarapp");
+
+    //bdy.insertAdjacentElement("afterbegin", appdiv);
   }
   alpinejs__WEBPACK_IMPORTED_MODULE_0__["default"].data('eventCal', function () {
     var loadingcycles = 0;
@@ -3455,21 +3457,25 @@ var initAlpine = function initAlpine() {
           }, _callee2);
         }))();
       },
-      getEvents: function getEvents(limit) {
+      getEvents: function getEvents(limit, datestr, kkcat) {
         return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3() {
-          var response;
+          var catquery, response;
           return _regeneratorRuntime().wrap(function _callee3$(_context3) {
             while (1) switch (_context3.prev = _context3.next) {
               case 0:
-                _context3.next = 2;
-                return fetch('https://www.koledar.at/v1/events?limit=' + limit + '&offset=0');
-              case 2:
+                catquery = "";
+                if (kkcat != "") {
+                  catquery = "&subcategories=" + kkcat;
+                }
+                _context3.next = 4;
+                return fetch('https://www.koledar.at/v1/events?limit=' + limit + '&offset=0&from=' + datestr + catquery);
+              case 4:
                 response = _context3.sent;
-                _context3.next = 5;
+                _context3.next = 7;
                 return response.json();
-              case 5:
+              case 7:
                 return _context3.abrupt("return", _context3.sent);
-              case 6:
+              case 8:
               case "end":
                 return _context3.stop();
             }
@@ -3479,28 +3485,43 @@ var initAlpine = function initAlpine() {
       fetchEventList: function fetchEventList() {
         var _this = this;
         return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee4() {
-          var limit, evsl, evat, chunkSize, chunksl, chunkat, i, j;
+          var actdateforq, qday, qmonth, qyear, datestr, limit, kkcat, evsl, evat, chunkSize, chunksl, chunkat, i, j;
           return _regeneratorRuntime().wrap(function _callee4$(_context4) {
             while (1) switch (_context4.prev = _context4.next) {
               case 0:
+                actdateforq = new Date();
+                qday = actdateforq.getDate().toString();
+                qmonth = (actdateforq.getMonth() + 1).toString();
+                ;
+                qyear = actdateforq.getFullYear();
+                if (qday.length == 1) {
+                  qday = "0" + qday;
+                }
+                console.log(qday.length);
+                if (qmonth.length == 1) {
+                  qmonth = "0" + qmonth;
+                }
+                datestr = qyear + "-" + qmonth + "-" + qday;
                 kscript = document.querySelector('script[src*=app]');
                 limit = kscript.getAttribute('kk-data-amount');
+                kkcat = kscript.getAttribute('kk-cat');
                 loadingcycles = loadingcycles + 1;
                 if (kscript.getAttribute('kk-style') == "list" && kscript.getAttribute('kk-chunksize') * 2 >= kscript.getAttribute('kk-data-amount')) {
                   limit = kscript.getAttribute('kk-chunksize') * 2 + 1;
                 }
-                _context4.next = 6;
+                _context4.next = 16;
                 return _this.getAllLocations();
-              case 6:
+              case 16:
                 _this.kklocations = _context4.sent.items;
-                _context4.next = 9;
+                _context4.next = 19;
                 return _this.getAllOrganizers();
-              case 9:
+              case 19:
                 _this.kkorganizers = _context4.sent.items;
-                _context4.next = 12;
-                return _this.getEvents(limit);
-              case 12:
+                _context4.next = 22;
+                return _this.getEvents(limit, datestr, kkcat);
+              case 22:
                 _this.kkevents = _context4.sent.items;
+                console.log(_this.kkevents);
                 _this.isLoading = false;
                 evsl = new Array();
                 evat = new Array();
@@ -3589,8 +3610,7 @@ var initAlpine = function initAlpine() {
                 }
                 _this.eventssl = chunksl;
                 _this.eventsat = chunkat;
-                console.log(chunkat);
-              case 25:
+              case 35:
               case "end":
                 return _context4.stop();
             }
@@ -3599,7 +3619,18 @@ var initAlpine = function initAlpine() {
       },
       fetchAddEventList: function fetchAddEventList() {
         var _this2 = this;
-        console.log("reloadstuff");
+        var actdateforq = new Date();
+        var qday = actdateforq.getDate().toString();
+        var qmonth = (actdateforq.getMonth() + 1).toString();
+        ;
+        var qyear = actdateforq.getFullYear();
+        if (qday.length == 1) {
+          qday = "0" + qday;
+        }
+        if (qmonth.length == 1) {
+          qmonth = "0" + qmonth;
+        }
+        var datestr = qyear + "-" + qmonth + "-" + qday;
         this.isLoading = true;
         var kscript = document.querySelector('script[src*=app]');
         var limit = kscript.getAttribute('kk-data-amount');
@@ -3607,7 +3638,7 @@ var initAlpine = function initAlpine() {
         loadingcycles = loadingcycles + 1;
         var evsl = new Array();
         var evat = new Array();
-        fetch('https://www.koledar.at/v1/events?limit=' + limit + '&offset=' + offset).then(function (res) {
+        fetch('https://www.koledar.at/v1/events?limit=' + limit + '&offset=' + offset + '&from=' + datestr).then(function (res) {
           return res.json();
         }).then(function (data) {
           var _this2$kkevents, _this2$eventssl, _this2$eventsat;

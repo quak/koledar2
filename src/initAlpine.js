@@ -17,11 +17,11 @@ const initAlpine = () => {
                                         
     if(!kapp){
 
-        const bdy = document.body
-        var appdiv = document.createElement("div");
-        appdiv.setAttribute("id", "slogkoledarapp");
+        //const bdy = document.body
+        //var appdiv = document.createElement("div");
+        //appdiv.setAttribute("id", "slogkoledarapp");
         
-        bdy.insertAdjacentElement("afterbegin", appdiv);
+        //bdy.insertAdjacentElement("afterbegin", appdiv);
     }
     
     Alpine.data('eventCal', () => {
@@ -69,16 +69,37 @@ const initAlpine = () => {
                 let response = await fetch('https://www.koledar.at/v1/organizers?offset=0&limit=200')
                 return await response.json();
             },
-            async getEvents(limit) {
-                let response = await fetch('https://www.koledar.at/v1/events?limit='+limit+'&offset=0')
+            async getEvents(limit,datestr,kkcat) {
+
+                let catquery="";
+                if(kkcat!=""){
+                    catquery="&subcategories="+kkcat;
+                }
+                let response = await fetch('https://www.koledar.at/v1/events?limit='+limit+'&offset=0&from='+datestr+catquery)
+
                 return await response.json();
             },
 
             async fetchEventList() {
+
+                let actdateforq = new Date();
+                let qday = (actdateforq.getDate()).toString();
+                let qmonth = (actdateforq.getMonth()+1).toString();;
+                let qyear = actdateforq.getFullYear();
+                if(qday.length==1){
+                    qday = "0"+qday;
+                }
+                console.log(qday.length);
+                if(qmonth.length==1){
+                    qmonth = "0"+qmonth;
+                }
+                let datestr = qyear + "-" + qmonth + "-"+ qday;
+           
                 
                 
                 kscript = document.querySelector('script[src*=app]');
                 var limit = kscript.getAttribute('kk-data-amount');  
+                var kkcat = kscript.getAttribute('kk-cat');  
                 
                 loadingcycles=loadingcycles+1;
                 
@@ -89,9 +110,9 @@ const initAlpine = () => {
                 
                 this.kklocations  = (await this.getAllLocations()).items;
                 this.kkorganizers = (await this.getAllOrganizers()).items;
-                this.kkevents     = (await this.getEvents(limit)).items;
+                this.kkevents     = (await this.getEvents(limit,datestr,kkcat)).items;
              
-                
+                console.log(this.kkevents);
                 this.isLoading = false;
                         
                 let evsl = new Array();
@@ -209,12 +230,25 @@ const initAlpine = () => {
                
                 this.eventssl = chunksl;
                 this.eventsat = chunkat;
-                    console.log(chunkat);
            
                 
             },
             fetchAddEventList() {
-                console.log("reloadstuff")
+
+
+                let actdateforq = new Date();
+                let qday = (actdateforq.getDate()).toString();
+                let qmonth = (actdateforq.getMonth()+1).toString();;
+                let qyear = actdateforq.getFullYear();
+                if(qday.length==1){
+                    qday = "0"+qday;
+                }
+                
+                if(qmonth.length==1){
+                    qmonth = "0"+qmonth;
+                }
+                let datestr = qyear + "-" + qmonth + "-"+ qday;
+                
                 this.isLoading = true;
                 var kscript = document.querySelector('script[src*=app]');
                 var limit = kscript.getAttribute('kk-data-amount');
@@ -225,7 +259,7 @@ const initAlpine = () => {
                 let evsl = new Array();
                 let evat = new Array();
 
-                fetch('https://www.koledar.at/v1/events?limit='+limit+'&offset='+offset)
+                fetch('https://www.koledar.at/v1/events?limit='+limit+'&offset='+offset+'&from='+datestr)
                 .then(res => res.json())
                 .then(data => {
                     
