@@ -62,20 +62,20 @@ const initAlpine = () => {
             eventsat: null,
 
             async getAllLocations() {
-                let response = await fetch('https://www.koledar.at/v1/locations?includeChildren=true')
+                let response = await fetch('https://admin.koledar.at/v1/locations?includeChildren=true')
                 return await response.json();
             },
             async getAllOrganizers() {
-                let response = await fetch('https://www.koledar.at/v1/organizers?offset=0&limit=200')
+                let response = await fetch('https://admin.koledar.at/v1/organizers?offset=0&limit=200')
                 return await response.json();
             },
             async getEvents(limit,datestr,kkcat) {
 
                 let catquery="";
-                if(kkcat!=""){
+                if(kkcat!="" && kkcat != null){
                     catquery="&subcategories="+kkcat;
                 }
-                let response = await fetch('https://www.koledar.at/v1/events?limit='+limit+'&offset=0&from='+datestr+catquery)
+                let response = await fetch('https://admin.koledar.at/v1/events?limit='+limit+'&offset=0&from='+datestr+catquery)
 
                 return await response.json();
             },
@@ -89,7 +89,7 @@ const initAlpine = () => {
                 if(qday.length==1){
                     qday = "0"+qday;
                 }
-                console.log(qday.length);
+                
                 if(qmonth.length==1){
                     qmonth = "0"+qmonth;
                 }
@@ -100,6 +100,7 @@ const initAlpine = () => {
                 kscript = document.querySelector('script[src*=app]');
                 var limit = kscript.getAttribute('kk-data-amount');  
                 var kkcat = kscript.getAttribute('kk-cat');  
+                
                 
                 loadingcycles=loadingcycles+1;
                 
@@ -217,19 +218,26 @@ const initAlpine = () => {
                     
                 });
                 
-            
-                const chunkSize = parseInt(kscript.getAttribute('kk-chunksize'));
-                var chunksl = new Array;
-                var chunkat = new Array;
-                for (let i = 0; i < evsl.length; i += chunkSize) {
-                    chunksl.push(evsl.slice(i, i + chunkSize));
+             
+                if(kscript.getAttribute('kk-style')=="list"){
+                    const chunkSize = parseInt(kscript.getAttribute('kk-chunksize'));
+                    var chunksl = new Array;
+                    var chunkat = new Array;
+                    for (let i = 0; i < evsl.length; i += chunkSize) {
+                        chunksl.push(evsl.slice(i, i + chunkSize));
+                    }
+                    for (let j = 0; j < evsl.length; j += chunkSize) {
+                        chunkat.push(evat.slice(j, j + chunkSize));
+                    }
+                   
+                    this.eventssl = chunksl;
+                    this.eventsat = chunkat;
+                }else{
+                    this.eventssl = evsl;
+                    this.eventsat = evsl;
                 }
-                for (let j = 0; j < evat.length; j += chunkSize) {
-                    chunkat.push(evat.slice(j, j + chunkSize));
-                }
-               
-                this.eventssl = chunksl;
-                this.eventsat = chunkat;
+
+                
            
                 
             },
@@ -259,7 +267,7 @@ const initAlpine = () => {
                 let evsl = new Array();
                 let evat = new Array();
 
-                fetch('https://www.koledar.at/v1/events?limit='+limit+'&offset='+offset+'&from='+datestr)
+                fetch('https://admin.koledar.at/v1/events?limit='+limit+'&offset='+offset+'&from='+datestr)
                 .then(res => res.json())
                 .then(data => {
                     
@@ -561,8 +569,6 @@ const initAlpine = () => {
         document.getElementById("slogkoledarapp").innerHTML = widgetHTMLlist;
     }else if(kkstyle=="carousel"){
         document.getElementById("slogkoledarapp").innerHTML = widgetHTMLcarousel;
-
-
     }else{
         document.getElementById("slogkoledarapp").innerHTML = widgetHTMLpro;
     }

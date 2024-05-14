@@ -1,4 +1,9 @@
-
+.langme{
+  display: none;
+}
+.langme.active{
+  display: block; 
+}
 
 
 /**LNG MENU* START*/

@@ -8,7 +8,7 @@ const injectCSS = () => {
     // Set the link type to and rel attributes
     link.type = "text/css";
     link.rel = "stylesheet";
-    var environment = 'productXion';
+    var environment = 'production';
     
 
     if (environment  == 'production' && kkstyle == "list") {

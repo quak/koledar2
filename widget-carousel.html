@@ -11,7 +11,7 @@
             
         </div>
 
-        <section class="slider-wrapper">
+        <section class="slider-wrapper langme"  x-bind:class="lngorg ? '' : 'active'">
             <button class="slide-arrow" id="slide-arrow-prev" @click="showPrev()">
               &#8249;
             </button>
@@ -22,18 +22,16 @@
             
             
             
-                <template x-if="events">
+                <template x-if="eventssl">
                     <ul class="slides-container" id="slides-container">
-                        <template x-for="(event, index) in events">
+                        <template x-for="(event, index) in eventssl">
                             <div>
                                 <li class="slide slogkoledar-eventitem" @click="showDialog(''+index)">
                                     <div class="slogkoledar-datewrapper">
                                         <div class="slogkoledar-datewrapper2 slogkoledar-flex slogkoledar-items-center">
                                             <span class="slogkoledar-date">
-                                                <span class="slogkoledar-dateday" x-text="event.daytext" x-bind:class="lngorg ? '' : 'active'"></span>
-                                                <span class="slogkoledar-dateday" x-text="event.daytextde" x-bind:class="lngorg ? 'active' : ''"></span>
-                                                <span class="slogkoledar-datemonth " x-text="event.datedm" x-bind:class="lngorg ? '' : 'active'"></span>
-                                                <span class="slogkoledar-datemonth " x-text="event.datedm" x-bind:class="lngorg ? 'active' : ''"></span>
+                                                <span class="slogkoledar-dateday" x-text="event.daytext" ></span>
+                                                <span class="slogkoledar-datemonth " x-text="event.datedm" ></span>
                                             </span>
                                         </div>
                                     </div>
@@ -44,10 +42,9 @@
                                                     <path d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A32 32 0 0 1 8 14.58a32 32 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10"></path>
                                                     <path d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4m0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6"></path>
                                                 </svg>
-                                                <p class="slogkoledar-eventinfoplace" x-text="event.location"></p>
+                                                <p class="slogkoledar-eventinfoplace" x-text="event.loc.name_sl" ></p>
                                             </span>
-                                            <p class="slogkoledar-eventinfotitle" x-text="event.title_sl" x-bind:class="lngorg ? '' : 'active'"></p>
-                                            <p class="slogkoledar-eventinfotitle" x-text="event.title_de" x-bind:class="lngorg ? 'active' : ''"></p>
+                                            <p class="slogkoledar-eventinfotitle" x-text="event.title_sl" ></p>
                                         </span>
                                         
                                     </div>
@@ -59,15 +56,14 @@
                                         <span class="kkdialog-header-dummy"></span>
                                         <img src="https://slogled.at/wp-content/uploads/2024/03/kklogo.png">
                                         <span class="kkbackwrapper">
-                                            <a href="" @click="hideDialog(''+index)">
+                                            <span class="kkbacklink" @click="hideDialog(''+`${event.index}`)">
                                                 
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="slogkoledar-bi slogkoledar-bi-x-lg" viewBox="0 0 16 16">
                                                     <path fill-rule="evenodd" d="M3.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L9.293 8 3.646 2.354a.5.5 0 0 1 0-.708"/>
                                                     <path fill-rule="evenodd" d="M7.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L13.293 8 7.646 2.354a.5.5 0 0 1 0-.708"/>
                                                   </svg>
-                                                <span class="kkdialogback" x-bind:class="lngorg ? '' : 'active'">Nazaj</span>
-                                                <span class="kkdialogback" x-bind:class="lngorg ? 'active' : ''">Zurück</span>
-                                            </a>
+                                                <span class="kkdialogback" >Nazaj</span>
+                                            </span>
                                         </span>
                                     </div>
                                     <div class="slogkoledard-wrapper">
@@ -75,8 +71,7 @@
                                             <span class="slogkoledard-date" x-text="event.datedetail"></span>
                                         </div>
                                         <div class="">
-                                            <h2 class="slogkoledard-title" x-text="event.title_sl" x-bind:class="lngorg ? '' : 'active'"></h2>
-                                            <h2 class="slogkoledard-title" x-text="event.title_de" x-bind:class="lngorg ? 'active' : ''"></h2>
+                                            <h2 class="slogkoledard-title" x-text="event.title_sl" ></h2>
                                         </div>
 
                                         
@@ -102,7 +97,7 @@
                                                             <path d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A32 32 0 0 1 8 14.58a32 32 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10"></path>
                                                             <path d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4m0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6"></path>
                                                         </svg>
-                                                        <span class="slogkoledard-infotext kkuppercase" x-text="event.location"></span>
+                                                        <span class="slogkoledard-infotext  " x-text="event.loc.name_sl" ></span>
                                                     </div>
                                                 </template>
                             
@@ -111,7 +106,7 @@
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="slogkoledard-info-icondialog" viewBox="0 0 16 16">
                                                             <path d="M8.5.5a.5.5 0 0 0-1 0v.518A7 7 0 0 0 1.018 7.5H.5a.5.5 0 0 0 0 1h.518A7 7 0 0 0 7.5 14.982v.518a.5.5 0 0 0 1 0v-.518A7 7 0 0 0 14.982 8.5h.518a.5.5 0 0 0 0-1h-.518A7 7 0 0 0 8.5 1.018zm-6.48 7A6 6 0 0 1 7.5 2.02v.48a.5.5 0 0 0 1 0v-.48a6 6 0 0 1 5.48 5.48h-.48a.5.5 0 0 0 0 1h.48a6 6 0 0 1-5.48 5.48v-.48a.5.5 0 0 0-1 0v.48A6 6 0 0 1 2.02 8.5h.48a.5.5 0 0 0 0-1zM8 10a2 2 0 1 0 0-4 2 2 0 0 0 0 4"></path>
                                                         </svg>
-                                                        <span class="slogkoledard-infotext" x-text="event.venue"></span>
+                                                        <span class="slogkoledard-infotext " x-text="event.loc.venuename_sl" ></span>
 
                                                     </div>
                                                 </template>
@@ -125,15 +120,13 @@
 
                                             <div class="kkcatwrapper">
                                                 <a class="kkcatname" x-text="event.subcategory"></a>
-                                                <span class="kkcategory" x-bind:class="lngorg ? '' : 'active'">Kategorija</span>
-                                                <span class="kkcategory" x-bind:class="lngorg ? 'active' : ''">Kategorija</span>
+                                                <span class="kkcategory" >Kategorija</span>
                                             </div>
 
-                                            <template x-for="organizer in event.organizers">
+                                            <template x-for="organizer in event.orga">
                                                 <div class="kkcatwrapper">  
-                                                    <a class="kkorganizername" x-text="organizer"></a>
-                                                    <span class="kkorganizer" x-bind:class="lngorg ? '' : 'active'">Prireditelj</span>
-                                                    <span class="kkorganizer" x-bind:class="lngorg ? 'active' : ''">Prireditelj</span>
+                                                    <a class="kkorganizername " x-text="organizer.name_sl" ></a>
+                                                    <span class="kkorganizer" >Prireditelj</span>
                                                 </div>
                                             </template>
                                                 
@@ -142,17 +135,13 @@
                                         <template x-if="event.image_landscape_thumbnail">
                                             <img class="slogkoledard-image" :src="`${event.image_landscape_thumbnail}`">
                                         </template>
+
+                                        <template x-if="event.image_portrait_thumbnail">
+                                            <img class="slogkoledard-image" :src="`${event.image_portrait_thumbnail}`">
+                                        </template>
                         
 
-                                            <div id="slogkoledardesc" x-html="event.desc_sl" x-bind:class="lngorg ? '' : 'active'"></div>
-                            
-                                            <div id="slogkoledardesc" x-html="event.desc_de" x-bind:class="lngorg ? 'active' : ''"></div>
-                                        
-                                        
-                                        
-                                        
-                                            
-                                        
+                                            <div id="slogkoledardesc" class="" x-html="event.desc_sl" ></div>
                                         
                                         
                                         <div class="slogkoledard-linkwrapper ">
@@ -216,6 +205,207 @@
                 </template>
            
           </section>
+
+          <section class="slider-wrapper langme"  x-bind:class="lngorg ? 'active' : ''">
+            <button class="slide-arrow" id="slide-arrow-prev" @click="showPrev()"> 
+              &#8249;
+            </button>
+            
+            <button class="slide-arrow" id="slide-arrow-next" @click="showNext()">
+              &#8250;
+            </button>
+            
+            
+            
+                <template x-if="eventsat">
+                    <ul class="slides-container" id="slides-container">
+                        <template x-for="(event, index) in eventssl">
+                            <div>
+                                <li class="slide slogkoledar-eventitem" @click="showDialog(''+index)">
+                                    <div class="slogkoledar-datewrapper">
+                                        <div class="slogkoledar-datewrapper2 slogkoledar-flex slogkoledar-items-center">
+                                            <span class="slogkoledar-date">
+                                                
+                                                <span class="slogkoledar-dateday" x-text="event.daytextde" ></span>
+                                         
+                                                <span class="slogkoledar-datemonth " x-text="event.datedm" ></span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="slogkoledar-eventwrapper ">
+                                        <span class="slogkoledar-eventinfo ">
+                                            <span class="flexme">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="slogkoledard-info-icon" viewBox="0 0 16 16">
+                                                    <path d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A32 32 0 0 1 8 14.58a32 32 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10"></path>
+                                                    <path d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4m0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6"></path>
+                                                </svg>
+                                              
+                                                <p class="slogkoledar-eventinfoplace" x-text="event.loc.name_de" ></p>
+                                            </span>
+                                            <p class="slogkoledar-eventinfotitle" x-text="event.title_de" ></p>
+                                        </span>
+                                        
+                                    </div>
+    
+                                    
+                                </li>  
+                                <dialog  :id="'kkdialog'+`${event.index}`">
+                                    <div class="kkdialog-header-wrapper">
+                                        <span class="kkdialog-header-dummy"></span>
+                                        <img src="https://slogled.at/wp-content/uploads/2024/03/kklogo.png">
+                                        <span class="kkbackwrapper">
+                                            <span class="kkbacklink" @click="hideDialogat(''+`${event.index}`)">
+                                                
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="slogkoledar-bi slogkoledar-bi-x-lg" viewBox="0 0 16 16">
+                                                    <path fill-rule="evenodd" d="M3.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L9.293 8 3.646 2.354a.5.5 0 0 1 0-.708"/>
+                                                    <path fill-rule="evenodd" d="M7.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L13.293 8 7.646 2.354a.5.5 0 0 1 0-.708"/>
+                                                  </svg>
+                                                <span class="kkdialogback" >Zurück</span>
+                                            </span>
+                                        </span>
+                                    </div>
+                                    <div class="slogkoledard-wrapper">
+                                        <div class="slogkoledard-datewrapper ">
+                                            <span class="slogkoledard-date" x-text="event.datedetail"></span>
+                                        </div>
+                                        <div class="">
+                                            <h2 class="slogkoledard-title" x-text="event.title_de" ></h2>
+                                        </div>
+
+                                        
+
+                                        <div class="slogkoledard-info-wrapper">
+                                            
+                                            <div class="slogkoledard-info">
+                                                
+
+                                                <template x-if="event.starting_at">
+                                                    <div class="flexme">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="slogkoledard-info-icondialog" viewBox="0 0 16 16">
+                                                            <path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71z"></path>
+                                                            <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16m7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0"></path>
+                                                        </svg>
+                                                        <span class="slogkoledard-infotext" x-text="event.starting_at"></span>
+                                                    </div>
+                                                </template>
+                                                
+                                                <template x-if="event.venue">
+                                                    <div class="flexme">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="slogkoledard-info-icondialog" viewBox="0 0 16 16">
+                                                            <path d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A32 32 0 0 1 8 14.58a32 32 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10"></path>
+                                                            <path d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4m0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6"></path>
+                                                        </svg>
+                                                        <span class="slogkoledard-infotext  " x-text="event.loc.name_de" ></span>
+                                                    </div>
+                                                </template>
+                            
+                                                <template x-if="event.venue">
+                                                    <div class="flexme">   
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="slogkoledard-info-icondialog" viewBox="0 0 16 16">
+                                                            <path d="M8.5.5a.5.5 0 0 0-1 0v.518A7 7 0 0 0 1.018 7.5H.5a.5.5 0 0 0 0 1h.518A7 7 0 0 0 7.5 14.982v.518a.5.5 0 0 0 1 0v-.518A7 7 0 0 0 14.982 8.5h.518a.5.5 0 0 0 0-1h-.518A7 7 0 0 0 8.5 1.018zm-6.48 7A6 6 0 0 1 7.5 2.02v.48a.5.5 0 0 0 1 0v-.48a6 6 0 0 1 5.48 5.48h-.48a.5.5 0 0 0 0 1h.48a6 6 0 0 1-5.48 5.48v-.48a.5.5 0 0 0-1 0v.48A6 6 0 0 1 2.02 8.5h.48a.5.5 0 0 0 0-1zM8 10a2 2 0 1 0 0-4 2 2 0 0 0 0 4"></path>
+                                                        </svg>
+                                                        <span class="slogkoledard-infotext " x-text="event.loc.venuename_de" ></span>
+
+                                                    </div>
+                                                </template>
+                            
+                                            </div>
+                                            
+                            
+                                        </div>
+
+                                        <div class="kkinfowrapper">
+
+                                            <div class="kkcatwrapper">
+                                                <a class="kkcatname" x-text="event.subcategory"></a>
+                                                <span class="kkcategory" >Kategorie</span>
+                                            </div>
+
+                                            <template x-for="organizer in event.orga">
+                                                <div class="kkcatwrapper">  
+                                                    <a class="kkorganizername " x-text="organizer.name_de" ></a>
+                                                    <span class="kkorganizer" >Veranstalter</span>
+                                                </div>
+                                            </template>
+                                                
+                                        </div>
+                                        
+                                        <template x-if="event.image_landscape_thumbnail">
+                                            <img class="slogkoledard-image" :src="`${event.image_landscape_thumbnail}`">
+                                        </template>
+
+                                        <template x-if="event.image_portrait_thumbnail">
+                                            <img class="slogkoledard-image" :src="`${event.image_portrait_thumbnail}`">
+                                        </template>
+                        
+
+                            
+                                            <div id="slogkoledardesc" class="" x-html="event.desc_de" ></div>
+                                        
+                                        
+                                        <div class="slogkoledard-linkwrapper ">
+                                            
+                                            <div class="slogkoledard-linkw">
+
+
+                                                <template x-for="link in event.links">
+                                                    <div>
+                                                        <span class="flexme-bottom-description">Download</span>  
+                                                        <div class="flexme-bottom">
+                                                             
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="slogkoledard-info-icon-bottom" viewBox="0 0 16 16">
+                                                                <path fill-rule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0z"></path>
+                                                                <path fill-rule="evenodd" d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708z"></path>
+                                                            </svg>
+                                                            <a class="slogkoledard-infotext-bottom" x-text="link.label" x-bind:href="''+link.url"></a>
+                                                        </div>
+                                                    </div>
+                                                
+                                                    
+                                                </template>
+                            
+                                                <template x-for="attachment in event.attachments">
+                                                    <div>
+                                                        <span class="flexme-bottom-description">link</span> 
+                                                        <div class="flexme-bottom">  
+                                                               
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="slogkoledard-info-icon-bottom" viewBox="0 0 16 16">
+                                                                <path d="M6.354 5.5H4a3 3 0 0 0 0 6h3a3 3 0 0 0 2.83-4H9q-.13 0-.25.031A2 2 0 0 1 7 10.5H4a2 2 0 1 1 0-4h1.535c.218-.376.495-.714.82-1z"></path>
+                                                                <path d="M9 5.5a3 3 0 0 0-2.83 4h1.098A2 2 0 0 1 9 6.5h3a2 2 0 1 1 0 4h-1.535a4 4 0 0 1-.82 1H12a3 3 0 1 0 0-6z"></path>
+                                                            </svg>
+                                                            <a class="slogkoledard-infotext-bottom" x-text="attachment.label" x-bind:href="''+attachment.file.url"></a>
+                                                        </div>
+                                                    </div>
+                                                        
+                                                </template> 
+                            
+                                            </div>
+
+                                        </div>
+                                        <!---20220305T103000/20220305T184500-->
+                                        <div>
+                                            <div class="kkgcallink">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-calendar-week" viewBox="0 0 16 16">
+                                                    <path d="M11 6.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm-3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm-5 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5z"/>
+                                                    <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5M1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4z"/>
+                                                </svg>
+                                                <a target="_blank" x-bind:href="''+event.gcallink">Google Calendar</a>
+                                            </div>
+                                        </div>
+                                        
+                                       
+                                    </div>
+                                
+                                </dialog>
+                            </div>
+                            
+                        </template>
+                    </ul>
+                </template>
+           
+          </section>
+
+
 
         
         
