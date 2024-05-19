@@ -1,3 +1,29 @@
+.langme{
+  display: none;
+}
+.langme.active{
+  display: block; 
+}
+
+#slogkoledarapp .kkdialog-header-wrapper .kkbackwrapper .kkbacklink{
+  display: flex;
+  align-items: center;
+  margin-top: -5rem;
+  font-size: 20px;
+  text-decoration: none;
+  text-transform: uppercase;
+  color: #cbcbcb;
+  gap: 0.5rem;
+  outline: none; 
+}
+@media screen and (min-width: 600px) {
+  #slogkoledarapp .kkdialog-header-wrapper .kkbackwrapper .kkbacklink{
+    font-size: 30px;
+  }
+
+}
+
+
 /*****/
 
 #slogkoledar-loadmorebutton{
@@ -80,12 +106,8 @@
   --tw-text-opacity: 1;
   color: #fff;
   text-transform: uppercase;
-  display: none;
 }
 
-.slogkoledar-dateday.active{    
-  display: block;
-}
 
 
 .slogkoledar-datemonth{    
@@ -97,13 +119,9 @@
   font-weight: 700;
   --tw-text-opacity: 1;
   color: #fff;
-  display: none;
 }
 
 
-.slogkoledar-datemonth.active{    
-  display: block;
-}
 
 
 .slogkoledar-eventwrapper{    
@@ -151,16 +169,11 @@
   margin:0 ;
   padding:0;
   font-size: 18px;
-  display: none;
   
-}
-.slogkoledar-eventinfotitle.active{    
-  display: block;
 }
 
 #slogkoldear{
   margin-left: -3.5rem;
-  
   padding: 0.5rem;
   transition-duration: 500ms;
   background-color: white;
@@ -179,7 +192,7 @@
 /*******************/
 #slogkoledardesc{
   padding: 0;
-  
+  word-break: break-word;
   font-family: sans-serif;
   --tw-text-opacity: 1;
   color: rgb(0 0 0 / var(--tw-text-opacity));
@@ -305,7 +318,6 @@
 
 #slogkoledarapp{
   flex:none;
-  display: none!important;
   width: 12.5rem;
   transition-duration: 500ms;
   flex:none;
@@ -412,8 +424,11 @@ body{
 }
 
 .lng-menu{
+  margin-top: 6px;
   width: 100%;
   text-align: right;
+  height: 17px;
+  display: block;
 }
 .lng-menu-item{
   cursor: pointer;
@@ -536,7 +551,7 @@ body{
 
 .tagg{
 
-
+    text-align: center;
     background-color: #952a5b;
     color: wi;
     color: white;
@@ -548,6 +563,7 @@ body{
   .flexmetags{
     justify-content: center;
     flex-wrap: wrap;
+    margin-bottom: 1rem;
   }
 
 

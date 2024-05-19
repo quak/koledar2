@@ -5,6 +5,24 @@
   display: block; 
 }
 
+#slogkoledarapp .kkdialog-header-wrapper .kkbackwrapper .kkbacklink{
+  display: flex;
+  align-items: center;
+  margin-top: -5rem;
+  font-size: 20px;
+  text-decoration: none;
+  text-transform: uppercase;
+  color: #cbcbcb;
+  gap: 0.5rem;
+  outline: none; 
+}
+@media screen and (min-width: 600px) {
+  #slogkoledarapp .kkdialog-header-wrapper .kkbackwrapper .kkbacklink{
+    font-size: 30px;
+  }
+
+}
+
 
 /**LNG MENU* START*/
 #slogkoledarapp .lng-menu {
@@ -477,14 +495,6 @@
   }
 }
 
-#slogkoledarapp .kkdialogback{
-  display: none;
-}
-
-#slogkoledarapp .kkdialogback.active{
-  display: block;
-}
-
 #slogkoledarapp .kkdialog-header-wrapper .kkbackwrapper{
   align-self: self-end;
 }
@@ -551,6 +561,14 @@
   min-width: 200px;
   text-align: center;
 
+}
+
+#slogkoledarapp .flexme-bottom {
+  display: flex;
+  gap: 0.5rem;
+  width: 100%;
+  justify-content: left;
+  align-items: center;
 }
 
 #slogkoledarapp .slogkoledard-info .flexme {
@@ -636,6 +654,7 @@ dialog::backdrop {
   gap: 1rem;
   flex-direction: column;
   align-items: center;
+  margin-bottom: 2rem;
 }
 
 #slogkoledarapp .kkgcallink{

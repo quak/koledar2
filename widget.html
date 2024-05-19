@@ -1,199 +1,239 @@
-    <div x-data="eventCal" id="slogkoldear" x-bind:class="mobopen ? 'moboc' : 'mobcc'" x-ref="theEl" @scroll.theEl.throttle="handleScroll(this)">
-
-        <div x-init="fetchEventList"></div>
+    <div x-data="eventCal" id="slogkoldear" :style="detailview ? 'background-color: var(--kkcdbg);' : 'background-color: var(--kkcolorbg);'" x-bind:class="mobopen ? 'moboc' : 'mobcc'" x-ref="theEl" @scroll.theEl.throttle="handleScroll(this)" >
         
-        <a id="koledarlink" href="https://www.koledar.at" target="_blank">
-            poglej vse na koledar.at
-        </a>
-        <div class="lng-menu">
-            <span class="lng-menu-item" x-on:click="lngorg = !lngorg" x-bind:class="lngorg ? '' : 'active'">SL</span>
-            <span class="lng-menu-item" x-on:click="lngorg = !lngorg" x-bind:class="lngorg ? 'active' : ''">AT</span>
-        </div>
-        
-        <div class="slogkoledard-logo"><img @click="hideDetail()" src="https://www.slogled.at/wp-content/themes/Slogled/js/dist/images/logo.webp"></div>
-        <template x-if="events">
-            <div x-show="listview" x-transition="">
-                <template x-for="event in events">
-                    <div class="slogkoledar-eventitem" @click="showDetail($data.event)">
-                        <div class="slogkoledar-datewrapper">
-                            <div class="slogkoledar-datewrapper2 slogkoledar-flex slogkoledar-items-center">
-                                <span class="slogkoledar-date">
-                                    <span class="slogkoledar-dateday" x-text="event.daytext" x-bind:class="lngorg ? '' : 'active'"></span>
-                                    <span class="slogkoledar-dateday" x-text="event.daytextde" x-bind:class="lngorg ? 'active' : ''"></span>
-                                    <span class="slogkoledar-datemonth " x-text="event.datedm" x-bind:class="lngorg ? '' : 'active'"></span>
-                                    <span class="slogkoledar-datemonth " x-text="event.datedm" x-bind:class="lngorg ? 'active' : ''"></span>
-                                </span>
+            <div x-init="fetchEventList"></div>
+            
+            <a id="koledarlink" href="https://www.koledar.at" target="_blank">
+                poglej vse na koledar.at
+            </a>
+            <div class="lng-menu">
+                <span :style="detailview ? 'display:none;' : ''">
+                    <span class="lng-menu-item" x-on:click="lngorg = !lngorg" x-bind:class="lngorg ? '' : 'active'" :style="detailview ? 'color: var(--kkclang);' : 'color: #fff;'">SL</span>
+                    <span class="lng-menu-item" x-on:click="lngorg = !lngorg" x-bind:class="lngorg ? 'active' : ''" :style="detailview ? 'color: var(--kkclang);' : 'color: #fff;'">AT</span>
+                </span>
+            </div>
+            
+            <div class="slogkoledard-logo"><img @click="hideDetail()" src="https://www.slogled.at/wp-content/themes/Slogled/js/dist/images/logo.webp"></div>
+            <template x-if="eventssl" >
+                <div x-show="listview" x-transition="" class="langme" x-bind:class="lngorg ? '' : 'active'">
+                    <template x-for="event in eventssl">
+                        <div class="slogkoledar-eventitem" @click="showDetail($data.event)">
+                            <div class="slogkoledar-datewrapper">
+                                <div class="slogkoledar-datewrapper2 slogkoledar-flex slogkoledar-items-center"  style="background-color: var(--kkcolorbgdate);">
+                                    <span class="slogkoledar-date">
+                                        <span class="slogkoledar-dateday" x-text="event.daytext"  style="color: var(--kkcolordatetext);"></span>
+                                        <span class="slogkoledar-datemonth " x-text="event.datedm"  style="color: var(--kkcolordatetext);" ></span>
+                                    </span>
+                                </div>
                             </div>
-                        </div>
-                        <div class="slogkoledar-eventwrapper ">
-                            <span class="slogkoledar-eventinfo ">
-                                <span class="flexme">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="slogkoledard-info-icon" viewBox="0 0 16 16">
+                            <div class="slogkoledar-eventwrapper ">
+                                <span class="slogkoledar-eventinfo ">
+                                    <span class="flexme">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" style="fill: var(--kkcicon);" class="slogkoledard-info-icon" viewBox="0 0 16 16">
+                                            <path d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A32 32 0 0 1 8 14.58a32 32 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10"></path>
+                                            <path d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4m0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6"></path>
+                                        </svg>
+                                        <p class="slogkoledar-eventinfoplace" x-text="event.loc.name_sl" style="color: var(--kkcolorplacetext);" ></p>
+                                    </span>
+                                    <p class="slogkoledar-eventinfotitle" x-text="event.title_sl" style="color: var(--kkcolortitletext);" ></p>
+                                </span>
+                                
+                            </div>
+                        </div>  
+                    </template>
+                </div>
+            </template>
+            <template x-if="eventsat" >
+                <div x-show="listview" x-transition="" class="langme" x-bind:class="lngorg ? 'active' : ''">
+                    <template x-for="event in eventsat">
+                        <div class="slogkoledar-eventitem" @click="showDetail($data.event)">
+                            <div class="slogkoledar-datewrapper">
+                                <div class="slogkoledar-datewrapper2 slogkoledar-flex slogkoledar-items-center"  style="background-color: var(--kkcolorbgdate);">
+                                    <span class="slogkoledar-date">
+                                        <span class="slogkoledar-dateday" x-text="event.daytextde"  style="color: var(--kkcolordatetext);"></span>
+                                        <span class="slogkoledar-datemonth " x-text="event.datedm"  style="color: var(--kkcolordatetext);" ></span>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="slogkoledar-eventwrapper ">
+                                <span class="slogkoledar-eventinfo ">
+                                    <span class="flexme">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" style="fill: var(--kkcicon);" class="slogkoledard-info-icon" viewBox="0 0 16 16">
+                                            <path d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A32 32 0 0 1 8 14.58a32 32 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10"></path>
+                                            <path d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4m0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6"></path>
+                                        </svg>
+                                        <p class="slogkoledar-eventinfoplace" x-text="event.loc.name_de" style="color: var(--kkcolorplacetext);" ></p>
+                                    </span>
+                                    <p class="slogkoledar-eventinfotitle" x-text="event.title_de" style="color: var(--kkcolortitletext);" ></p>
+                                </span>
+                                
+                            </div>
+                        </div>  
+                    </template>
+                </div>
+            </template>
+            <template x-if="actevent">
+                <div class="slogkoledard-wrapper">
+                    <div class="slogkoledard-datewrapper ">
+                        <span class="slogkoledard-date" x-text="actevent.datedetail" style="color: var(--kkcddatetext);"></span>
+                        <svg xmlns="http://www.w3.org/2000/svg" @click="hideDetail()" style="fill: var(--kkcdbacktext);" width="32" height="32" fill="currentColor" class="slogkoledar-bi slogkoledar-bi-x-lg" viewBox="0 0 16 16">
+                            <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z"></path>
+                        </svg>
+                        
+                    </div>
+                    <div class="">
+                        
+                        <h2 class="slogkoledard-title" x-text="actevent.title_sl" x-bind:class="lngorg ? '' : 'active'" style="color: var(--kkcdtitletext);"></h2>
+                        <h2 class="slogkoledard-title" x-text="actevent.title_de" x-bind:class="lngorg ? 'active' : ''" style="color: var(--kkcdtitletext);"></h2>
+                    </div>
+
+                    <div class="flexme flexmetags" > 
+                        <template x-for="organizer in actevent.orga">
+                            <span>
+                                <a class="tagg langme" x-text="organizer.name_sl" x-bind:class="lngorg ? '' : 'active'" style="background-color: var(--kkcdbgcattext);color: var(--kkcdcattext);"></a>
+                                <a class="tagg langme" x-text="organizer.name_de" x-bind:class="lngorg ? 'active' : ''" style="background-color: var(--kkcdbgcattext);color: var(--kkcdcattext);"></a>
+                            </span>
+                            
+                        </template>
+                    
+                            
+                        <a class="tagg langme" x-text="actevent.cat.name_sl" x-bind:class="lngorg ? '' : 'active'" style="background-color: var(--kkcdbgcattext);color: var(--kkcdcattext);"></a>
+                        <a class="tagg langme" x-text="actevent.cat.name_de" x-bind:class="lngorg ? 'active' : ''" style="background-color: var(--kkcdbgcattext);color: var(--kkcdcattext);"></a>
+                            
+                    </div>
+
+                    <div class="slogkoledard-info-wrapper">
+                        
+                        <div class="slogkoledard-info">
+                            
+
+                            <template x-if="actevent.starting_at">
+                                <div class="flexme">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" style="fill: var(--kkcdinfoicon);" class="slogkoledard-info-icon" viewBox="0 0 16 16">
+                                        <path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71z"></path>
+                                        <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16m7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0"></path>
+                                    </svg>
+                                    <span class="slogkoledard-infotext" x-text="actevent.starting_at" style="color: var(--kkcdinfotext);"></span>
+                                </div>
+                            </template>
+                            
+                            <template x-if="actevent.loc">
+                                <div class="flexme">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" style="fill: var(--kkcdinfoicon);" class="slogkoledard-info-icon" viewBox="0 0 16 16">
                                         <path d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A32 32 0 0 1 8 14.58a32 32 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10"></path>
                                         <path d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4m0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6"></path>
                                     </svg>
-                                    <p class="slogkoledar-eventinfoplace" x-text="event.location"></p>
-                                </span>
-                                <p class="slogkoledar-eventinfotitle" x-text="event.title_sl" x-bind:class="lngorg ? '' : 'active'"></p>
-                                <p class="slogkoledar-eventinfotitle" x-text="event.title_de" x-bind:class="lngorg ? 'active' : ''"></p>
-                            </span>
-                            
-                        </div>
-                    </div>  
-                </template>
-            </div>
-        </template>
-        <template x-if="actevent">
-            <div class="slogkoledard-wrapper">
-                <div class="slogkoledard-datewrapper ">
-                    <span class="slogkoledard-date" x-text="actevent.datedetail"></span>
-                    <svg xmlns="http://www.w3.org/2000/svg" @click="hideDetail()" width="32" height="32" fill="currentColor" class="slogkoledar-bi slogkoledar-bi-x-lg" viewBox="0 0 16 16">
-                        <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z"></path>
-                    </svg>
-                    
-                </div>
-                <div class="">
-                    
-                    <h2 class="slogkoledard-title" x-text="actevent.title_sl" x-bind:class="lngorg ? '' : 'active'"></h2>
-                    <h2 class="slogkoledard-title" x-text="actevent.title_de" x-bind:class="lngorg ? 'active' : ''"></h2>
-                </div>
-
-                <div class="flexme flexmetags" > 
-                    <template x-for="organizer in actevent.organizers">
-                        
-                        <a class="tagg" x-text="organizer"></a>
-                        
-                    </template>
-                   
-                        
-                        <a class="tagg" x-text="actevent.subcategory"></a>
-                        
-                </div>
-
-                <div class="slogkoledard-info-wrapper">
-                    
-                    <div class="slogkoledard-info">
-                        
-
-                        <template x-if="actevent.starting_at">
-                            <div class="flexme">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="slogkoledard-info-icon" viewBox="0 0 16 16">
-                                    <path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71z"></path>
-                                    <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16m7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0"></path>
-                                </svg>
-                                <span class="slogkoledard-infotext" x-text="actevent.starting_at"></span>
-                            </div>
-                        </template>
-                        
-                        <template x-if="actevent.venue">
-                            <div class="flexme">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="slogkoledard-info-icon" viewBox="0 0 16 16">
-                                    <path d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A32 32 0 0 1 8 14.58a32 32 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10"></path>
-                                    <path d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4m0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6"></path>
-                                </svg>
-                                <span class="slogkoledard-infotext" x-text="actevent.location"></span>
-                            </div>
-                        </template>
-    
-                        <template x-if="actevent.venue">
-                            <div class="flexme">   
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="slogkoledard-info-icon" viewBox="0 0 16 16">
-                                    <path d="M8.5.5a.5.5 0 0 0-1 0v.518A7 7 0 0 0 1.018 7.5H.5a.5.5 0 0 0 0 1h.518A7 7 0 0 0 7.5 14.982v.518a.5.5 0 0 0 1 0v-.518A7 7 0 0 0 14.982 8.5h.518a.5.5 0 0 0 0-1h-.518A7 7 0 0 0 8.5 1.018zm-6.48 7A6 6 0 0 1 7.5 2.02v.48a.5.5 0 0 0 1 0v-.48a6 6 0 0 1 5.48 5.48h-.48a.5.5 0 0 0 0 1h.48a6 6 0 0 1-5.48 5.48v-.48a.5.5 0 0 0-1 0v.48A6 6 0 0 1 2.02 8.5h.48a.5.5 0 0 0 0-1zM8 10a2 2 0 1 0 0-4 2 2 0 0 0 0 4"></path>
-                                </svg>
-                                <span class="slogkoledard-infotext" x-text="actevent.venue"></span>
-
-                            </div>
-                        </template>
-    
-                    </div>
-                    
-    
-                </div>
-                
-                <img class="slogkoledard-image" :src="`${actevent.image_landscape.url}`">
-                <div x-data="{ opendesc: false }"></div>
-                <div x-data="{ opendescmargin: true }"></div>
-                <div x-bind:class="opendesc ? 'skdmaxheight' : ''">
-                    <div id="slogkoledardesc" x-html="actevent.desc_sl" x-bind:class="lngorg ? '' : 'active'"></div>
-                </div>
-                <div x-bind:class="opendesc ? 'skdmaxheight' : ''">
-                    <div id="slogkoledardesc" x-html="actevent.desc_de" x-bind:class="lngorg ? 'active' : ''"></div>
-                </div>
-                
-                
-                <div class="descdetail" x-bind:class="lngorg ? '' : 'active'">
-
-                    <div id="slogkoledardescmore" x-on:click="opendescmargin = !opendescmargin" x-bind:class="opendescmargin ? 'opendescmargin' : ''">
-                        <span class="bg"></span>
-                        <span class="morelink" x-on:click="opendesc = !opendesc" x-bind:class="opendescmargin ? '' : 'active'"> več</span>
-                        <span class="morelink" x-on:click="opendesc = !opendesc" x-bind:class="opendescmargin ? 'active' : ''"> manj</span>
-                    </div>
-                </div>
-                <div class="descdetail" x-bind:class="lngorg ? 'active' : ''">
-
-                    <div id="slogkoledardescmore" x-on:click="opendescmargin = !opendescmargin" x-bind:class="opendescmargin ? 'opendescmargin' : ''">
-                        <span class="bg"></span>
-                        <span class="morelink" x-on:click="opendesc = !opendesc" x-bind:class="opendescmargin ? '' : 'active'">mehr</span>
-                        <span class="morelink" x-on:click="opendesc = !opendesc" x-bind:class="opendescmargin ? 'active' : ''">weniger</span>
-                    </div>
-                </div>
-                    
-                
-                
-                
-                <div class="slogkoledard-linkwrapper ">
-                    
-                    <div class="slogkoledard-linkw">
-
-
-                        <template x-for="link in actevent.links">
-                            
-                                <div class="flexme">   
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="slogkoledard-info-icon" viewBox="0 0 16 16">
-                                        <path fill-rule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0z"></path>
-                                        <path fill-rule="evenodd" d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708z"></path>
-                                    </svg>
-                                    <a class="slogkoledard-infotext" x-text="link.label" x-bind:href="''+link.url"></a>
+                                    <span class="slogkoledard-infotext langme" x-text="actevent.loc.name_sl" style="color: var(--kkcdinfotext);" x-bind:class="lngorg ? '' : 'active'"></span>
+                                    <span class="slogkoledard-infotext langme" x-text="actevent.loc.name_sl" style="color: var(--kkcdinfotext);" x-bind:class="lngorg ? 'active' : ''"></span>
                                 </div>
-                        
-                            
-                        </template>
-    
-                        <template x-for="attachment in actevent.attachments">
-                                <div class="flexme">   
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="slogkoledard-info-icon" viewBox="0 0 16 16">
-                                        <path d="M6.354 5.5H4a3 3 0 0 0 0 6h3a3 3 0 0 0 2.83-4H9q-.13 0-.25.031A2 2 0 0 1 7 10.5H4a2 2 0 1 1 0-4h1.535c.218-.376.495-.714.82-1z"></path>
-                                        <path d="M9 5.5a3 3 0 0 0-2.83 4h1.098A2 2 0 0 1 9 6.5h3a2 2 0 1 1 0 4h-1.535a4 4 0 0 1-.82 1H12a3 3 0 1 0 0-6z"></path>
-                                    </svg>
-                                    <a class="slogkoledard-infotext" x-text="attachment.label" x-bind:href="''+attachment.file.url"></a>
-                                </div>
-                        </template>
-    
-                    </div>
-
-                </div>
-                
-                <div class="slogkoledard-exiticon">
-                    <svg xmlns="http://www.w3.org/2000/svg" @click="hideDetail()" width="32" height="32" fill="currentColor" class="" viewBox="0 0 16 16">
-                        <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z"></path>
-                    </svg>
-                </div>
-            </div>
-    
-        </template>
-        <template x-if="showbutton">
-            <a href="#" id="slogkoledar-loadmorebutton" class="" x-on:click="fetchAddEventList('append')" style="display:none;">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" style="margin-right: 1rem;" viewBox="0 0 16 16">
-                <path fill-rule="evenodd" d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5"></path>
-                <path fill-rule="evenodd" d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0z"></path>
-                </svg><span  class="buttontext" x-bind:class="lngorg ? '' : 'active'">več terminov</span><span class="buttontext" x-bind:class="lngorg ? 'active' : ''">mehr Termine</span>
-            </a>
-        </template>
-        <span class="mobbutton" x-on:click="mobopen = !mobopen">
-            <span class="buttontext"> Koledar.at</span>
-            <image src="https://spz.slo.at/wp-content/uploads/2024/02/logok.png"/>
-        </span>
+                            </template>
         
+                            <template x-if="actevent.loc">
+                                <div class="flexme">   
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" style="fill: var(--kkcdinfoicon);" class="slogkoledard-info-icon" viewBox="0 0 16 16">
+                                        <path d="M8.5.5a.5.5 0 0 0-1 0v.518A7 7 0 0 0 1.018 7.5H.5a.5.5 0 0 0 0 1h.518A7 7 0 0 0 7.5 14.982v.518a.5.5 0 0 0 1 0v-.518A7 7 0 0 0 14.982 8.5h.518a.5.5 0 0 0 0-1h-.518A7 7 0 0 0 8.5 1.018zm-6.48 7A6 6 0 0 1 7.5 2.02v.48a.5.5 0 0 0 1 0v-.48a6 6 0 0 1 5.48 5.48h-.48a.5.5 0 0 0 0 1h.48a6 6 0 0 1-5.48 5.48v-.48a.5.5 0 0 0-1 0v.48A6 6 0 0 1 2.02 8.5h.48a.5.5 0 0 0 0-1zM8 10a2 2 0 1 0 0-4 2 2 0 0 0 0 4"></path>
+                                    </svg>
+                                    <span class="slogkoledard-infotext langme" x-text="actevent.loc.venuename_sl" style="color: var(--kkcdinfotext);" x-bind:class="lngorg ? '' : 'active'"></span>
+                                    <span class="slogkoledard-infotext langme" x-text="actevent.loc.venuename_sl" style="color: var(--kkcdinfotext);" x-bind:class="lngorg ? 'active' : ''"></span>
+
+                                </div>
+                            </template>
+        
+                        </div>
+                        
+        
+                    </div>
+                    
+                    <template x-if="actevent.image_landscape_thumbnail">
+                        <img class="slogkoledard-image" :src="`${actevent.image_landscape_thumbnail}`">
+                    </template>
+
+                    <template x-if="actevent.image_portrait">
+                        <img class="slogkoledard-image" :src="actevent.image_portrait.url">
+                    </template>
+
+                    <div x-data="{ opendesc: false }"></div>
+                    <div x-data="{ opendescmargin: true }"></div>
+                    <div x-bind:class="opendesc ? 'skdmaxheight' : ''">
+                        <div id="slogkoledardesc" x-html="actevent.desc_sl" x-bind:class="lngorg ? '' : 'active'" style="color: var(--kkcdtext);"></div>
+                    </div>
+                    <div x-bind:class="opendesc ? 'skdmaxheight' : ''">
+                        <div id="slogkoledardesc" x-html="actevent.desc_de" x-bind:class="lngorg ? 'active' : ''" style="color: var(--kkcdtext);"></div>
+                    </div>
+                    
+                    
+                    <div class="descdetail" x-bind:class="lngorg ? '' : 'active'">
+
+                        <div id="slogkoledardescmore" x-on:click="opendescmargin = !opendescmargin" x-bind:class="opendescmargin ? 'opendescmargin' : ''">
+                            <span class="bg" style="background-color: var(--kkcdbg);"></span>
+                            <span class="morelink" x-on:click="opendesc = !opendesc" x-bind:class="opendescmargin ? '' : 'active'" style="background-color: var(--kkcdbgcattext);color: var(--kkcdcattext);"> več</span>
+                            <span class="morelink" x-on:click="opendesc = !opendesc" x-bind:class="opendescmargin ? 'active' : ''" style="background-color: var(--kkcdbgcattext);color: var(--kkcdcattext);"> manj</span>
+                        </div>
+                    </div>
+                    <div class="descdetail" x-bind:class="lngorg ? 'active' : ''">
+
+                        <div id="slogkoledardescmore" x-on:click="opendescmargin = !opendescmargin" x-bind:class="opendescmargin ? 'opendescmargin' : ''">
+                            <span class="bg" style="background-color: var(--kkcdbg);"></span>
+                            <span class="morelink" x-on:click="opendesc = !opendesc" x-bind:class="opendescmargin ? '' : 'active'" style="background-color: var(--kkcdbgcattext);color: var(--kkcdcattext);">mehr</span>
+                            <span class="morelink" x-on:click="opendesc = !opendesc" x-bind:class="opendescmargin ? 'active' : ''" style="background-color: var(--kkcdbgcattext);color: var(--kkcdcattext);">weniger</span>
+                        </div>
+                    </div>
+                        
+                    
+                    
+                    
+                    <div class="slogkoledard-linkwrapper ">
+                        
+                        <div class="slogkoledard-linkw">
+
+
+                            <template x-for="link in actevent.links">
+                                
+                                    <div class="flexme">   
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" style="fill: var(--kkcddlbg);" class="slogkoledard-info-icon" viewBox="0 0 16 16">
+                                            <path fill-rule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0z"></path>
+                                            <path fill-rule="evenodd" d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708z"></path>
+                                        </svg>
+                                        <a class="slogkoledard-infotext" x-text="link.label" x-bind:href="''+link.url" style="color: var(--kkcddltext);"></a>
+                                    </div>
+                            
+                                
+                            </template>
+        
+                            <template x-for="attachment in actevent.attachments">
+                                    <div class="flexme">   
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" style="fill: var(--kkcddlbg);" class="slogkoledard-info-icon" viewBox="0 0 16 16">
+                                            <path d="M6.354 5.5H4a3 3 0 0 0 0 6h3a3 3 0 0 0 2.83-4H9q-.13 0-.25.031A2 2 0 0 1 7 10.5H4a2 2 0 1 1 0-4h1.535c.218-.376.495-.714.82-1z"></path>
+                                            <path d="M9 5.5a3 3 0 0 0-2.83 4h1.098A2 2 0 0 1 9 6.5h3a2 2 0 1 1 0 4h-1.535a4 4 0 0 1-.82 1H12a3 3 0 1 0 0-6z"></path>
+                                        </svg>
+                                        <a class="slogkoledard-infotext" x-text="attachment.label" x-bind:href="''+attachment.file.url" style="color: var(--kkcddltext);"></a>
+                                    </div>
+                            </template>
+        
+                        </div>
+
+                    </div>
+                    
+                    <div class="slogkoledard-exiticon">
+                        <svg xmlns="http://www.w3.org/2000/svg" @click="hideDetail()" width="32" height="32" fill="currentColor" style="fill: var(--kkcdbacktext);" class="" viewBox="0 0 16 16">
+                            <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z"></path>
+                        </svg>
+                    </div>
+                </div>
+        
+            </template>
+            <template x-if="showbutton">
+                <a href="#" id="slogkoledar-loadmorebutton" class="" x-on:click="fetchAddEventList('append')" style="display:none;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" style="margin-right: 1rem;" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5"></path>
+                    <path fill-rule="evenodd" d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0z"></path>
+                    </svg><span  class="buttontext" x-bind:class="lngorg ? '' : 'active'">več terminov</span><span class="buttontext" x-bind:class="lngorg ? 'active' : ''">mehr Termine</span>
+                </a>
+            </template>
+            <span class="mobbutton" x-on:click="mobopen = !mobopen">
+                <span class="buttontext"> Koledar.at</span>
+                <image src="https://spz.slo.at/wp-content/uploads/2024/02/logok.png"/>
+            </span>
+    
     </div>
     
     

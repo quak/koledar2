@@ -48,6 +48,7 @@ const initAlpine = () => {
              kklocations: false,
              kkevents: false,
              kkorganizers: false,
+             kkcategories:false,
 
 
             // EVENT DATA SL & AT(DE) 
@@ -60,6 +61,13 @@ const initAlpine = () => {
             events: null,   // we get all Events but then split it here because it is like it is
             eventssl: null,
             eventsat: null,
+
+
+            async getAllCategories() {
+                let response = await fetch('https://admin.koledar.at/v1/categories?includeChildren=true')
+                return await response.json();
+            },
+
 
             async getAllLocations() {
                 let response = await fetch('https://admin.koledar.at/v1/locations?includeChildren=true')
@@ -100,7 +108,11 @@ const initAlpine = () => {
                 kscript = document.querySelector('script[src*=app]');
                 var limit = kscript.getAttribute('kk-data-amount');  
                 var kkcat = kscript.getAttribute('kk-cat');  
+
+
                 
+                
+                this.loadColors();
                 
                 loadingcycles=loadingcycles+1;
                 
@@ -110,10 +122,11 @@ const initAlpine = () => {
 
                 
                 this.kklocations  = (await this.getAllLocations()).items;
+                this.kkcategories  = (await this.getAllCategories()).items;
                 this.kkorganizers = (await this.getAllOrganizers()).items;
                 this.kkevents     = (await this.getEvents(limit,datestr,kkcat)).items;
              
-                console.log(this.kkevents);
+                
                 this.isLoading = false;
                         
                 let evsl = new Array();
@@ -200,6 +213,7 @@ const initAlpine = () => {
 
                     event.loc = this.getLocationforSlug(event.location,event.venue);
                     event.orga = this.getOrgas(event.organizers);
+                    event.cat = this.getCat(event.subcategory);
                     
 
                     if(event.title_sl!=""){
@@ -207,14 +221,9 @@ const initAlpine = () => {
                     }
                     if(event.title_de!=""){
                         evat.push(event);
-
-                        if(event.day == 24){
-                            
-                        }
                     }
 
-                    if(event.day == 24){
-                    }
+                   
                     
                 });
                 
@@ -226,7 +235,7 @@ const initAlpine = () => {
                     for (let i = 0; i < evsl.length; i += chunkSize) {
                         chunksl.push(evsl.slice(i, i + chunkSize));
                     }
-                    for (let j = 0; j < evsl.length; j += chunkSize) {
+                    for (let j = 0; j < evat.length; j += chunkSize) {
                         chunkat.push(evat.slice(j, j + chunkSize));
                     }
                    
@@ -234,9 +243,10 @@ const initAlpine = () => {
                     this.eventsat = chunkat;
                 }else{
                     this.eventssl = evsl;
-                    this.eventsat = evsl;
+                    this.eventsat = evat;
                 }
-
+                console.log(this.eventssl);
+                console.log(this.eventsat);
                 
            
                 
@@ -379,18 +389,25 @@ const initAlpine = () => {
                     
                     (this.kkevents).push(...ev);
                     
-                    const chunkSize = parseInt(kscript.getAttribute('kk-chunksize'));
-                    var chunksl = new Array;
-                    var chunkat = new Array;
-                    for (let i = 0; i < evsl.length; i += chunkSize) {
-                        chunksl.push(evsl.slice(i, i + chunkSize));
+                    if(kscript.getAttribute('kk-style')=="list"){
+                        const chunkSize = parseInt(kscript.getAttribute('kk-chunksize'));
+                        var chunksl = new Array;
+                        var chunkat = new Array;
+                        for (let i = 0; i < evsl.length; i += chunkSize) {
+                            chunksl.push(evsl.slice(i, i + chunkSize));
+                        }
+                        for (let j = 0; j < evat.length; j += chunkSize) {
+                            chunkat.push(evat.slice(j, j + chunkSize));
+                        }
+                        this.eventssl.push(...chunksl); 
+                        this.eventsat.push(...chunkat); 
                     }
-                    for (let j = 0; j < evat.length; j += chunkSize) {
-                        chunkat.push(evat.slice(j, j + chunkSize));
+                    else{
+                        this.eventssl.push(...evsl); 
+                        this.eventsat.push(...evat); 
                     }
+                    
                    
-                    this.eventssl.push(...chunksl); 
-                    this.eventsat.push(...chunkat); 
 
 
                     
@@ -420,14 +437,30 @@ const initAlpine = () => {
             getOrgas(orgs) {
                
                 let ret = new Array();
-             
-                this.kkorganizers.forEach((orgaslug,i)=>{
+
+                orgs.forEach((orgaslug,i)=>{
                     this.kkorganizers.forEach((orga,index) => {
                        
                         if(orgaslug===orga.organizer_key){
                             ret.push(orga);
                         }
                     });
+                });
+                
+                return ret;
+            },
+            getCat(cat) {
+               
+                let ret = false;
+             
+                this.kkcategories.forEach((mastercat,i)=>{
+                    mastercat.subcategories.forEach((subcat,index) => {
+
+                        if(cat===subcat.subcategory_key){
+                            ret = subcat;
+                        }
+                    });
+                    
                 });
                 
                 return ret;
@@ -497,6 +530,243 @@ const initAlpine = () => {
 
             hastStateSat(ev) {
                 return this.sat;
+            },
+
+            loadColors() {
+
+                var kkcolorschema = kscript.getAttribute('kkc-schema');  
+
+                var kklangcolor = "";
+
+                var kkcolorbg = "";
+                var kkcolorbgdate = "";
+                var kkcolordatetext = "";
+                var kkcolorplacetext = "";
+                var kkcolortitletext = "";
+                var kkcicon = "";
+
+                var kkcddatetext = "";
+                var kkcdtitletext = "";
+                var kkcdinfotext = "";
+                var kkcdinfoicon = "";
+                var kkcdbacktext = "";
+                var kkcdbgcattext = "";
+                var kkcdcattext = "";
+                var kkcdcatdesctext = "";
+                var kkcdbgcal= "";
+                var kkcdcaltext = "";
+                var kkcdbg= "";
+                var kkcdtext = "";
+
+                var kkcddldesc = "";
+                var kkcddlbg= "";
+                var kkcddltext = "";
+
+
+
+                if(kkcolorschema=="dark"){
+                    
+                    kklangcolor ="#000";
+
+                    kkcolorbg = "#272727";
+                    kkcolorbgdate = "#B0C2A7";
+                    kkcolordatetext = "#fff";
+                    kkcolorplacetext = "#ece0c6";
+                    kkcolortitletext = "#fff";
+                    kkcicon = "#1a7a91";
+
+                    kkcddatetext = "#96264C";
+                    kkcdtitletext = "000";
+                    kkcdinfotext = "#E8A273";
+                    kkcdinfoicon = "#000";
+                    kkcdbacktext = "#cbcbcb";
+
+                    kkcdbgcattext = "#B0C2A7";
+                    kkcdcattext = "#fff";
+                    kkcdcatdesctext = "#007A91";
+
+                    kkcdbgcal= "#F0DCCD";
+                    kkcdcaltext = "#000";
+
+                    kkcdbg= "#fff";
+                    kkcdtext = "#000";
+
+                    kkcddldesc= "#007A91";
+                    kkcddlbg= "#b0c2a7";
+                    kkcddltext = "#000";
+                }else{
+
+                    kklangcolor ="#000";
+
+                    kkcolorbg = "#fff";
+                    kkcolorbgdate = "#B0C2A7";
+                    kkcolordatetext = "#fff";
+                    kkcolorplacetext = "#952a5a";
+                    kkcolortitletext = "#000";
+                    kkcicon = "#1a7a91";
+
+                    kkcddatetext = "#96264C";
+                    kkcdtitletext = "000";
+                    kkcdinfotext = "#E8A273";
+                    kkcdinfoicon = "#000";
+                    kkcdbacktext = "#cbcbcb";
+
+                    kkcdbgcattext = "#B0C2A7";
+                    kkcdcattext = "#fff";
+                    kkcdcatdesctext = "#007A91";
+
+                    kkcdbgcal= "#F0DCCD";
+                    kkcdcaltext = "#000";
+
+                    kkcdbg= "#fff";
+                    kkcdtext = "#000";
+
+                    kkcddldesc= "#007A91";
+                    kkcddlbg= "#b0c2a7";
+                    kkcddltext = "#000";
+                }
+
+
+                var kklangcolor_overwrite = kscript.getAttribute('kkc-lang');
+                if(kklangcolor_overwrite != null){
+                    kklangcolor = kklangcolor_overwrite;
+                }
+                document.documentElement.style.setProperty('--kkclang', kklangcolor); 
+
+                /***COLORS OVERVIEW Start */
+                var kkcolorbg_overwrite = kscript.getAttribute('kkc-bg');
+                if(kkcolorbg_overwrite != null){
+                    kkcolorbg = kkcolorbg_overwrite;
+                }
+                document.documentElement.style.setProperty('--kkcolorbg', kkcolorbg);  
+
+                var kkcolorbgdate_overwrite = kscript.getAttribute('kkc-bgdate');
+                if(kkcolorbgdate_overwrite != null){
+                    kkcolorbgdate = kkcolorbgdate_overwrite;
+                }
+                document.documentElement.style.setProperty('--kkcolorbgdate', kkcolorbgdate); 
+
+                var kkcolordatetext_overwrite = kscript.getAttribute('kkc-datetext');
+                if(kkcolordatetext_overwrite != null){
+                    kkcolordatetext = kkcolordatetext_overwrite;
+                }
+                document.documentElement.style.setProperty('--kkcolordatetext', kkcolordatetext); 
+
+                var kkcolorplacetext_overwrite = kscript.getAttribute('kkc-placetext');
+                if(kkcolorplacetext_overwrite != null){
+                    kkcolorplacetext = kkcolorplacetext_overwrite;
+                }
+                document.documentElement.style.setProperty('--kkcolorplacetext', kkcolorplacetext); 
+
+                var kkcolortitletext_overwrite = kscript.getAttribute('kkc-titletext');
+                if(kkcolortitletext_overwrite != null){
+                    kkcolortitletext = kkcolortitletext_overwrite;
+                }
+                document.documentElement.style.setProperty('--kkcolortitletext', kkcolortitletext); 
+
+                var kkcicon_overwrite = kscript.getAttribute('kkc-icon');
+                if(kkcicon_overwrite != null){
+                    kkcicon = kkcicon_overwrite;
+                }
+                document.documentElement.style.setProperty('--kkcicon', kkcicon); 
+
+                /***COLORS OVERVIEW END */
+
+                /***COLORS DIALOG START */
+                var kkcddatetext_overwrite = kscript.getAttribute('kkcd-datetext');
+                if(kkcddatetext_overwrite != null){
+                    kkcddatetext = kkcddatetext_overwrite;
+                }
+                document.documentElement.style.setProperty('--kkcddatetext', kkcddatetext);  
+                
+                var kkcdtitletext_overwrite = kscript.getAttribute('kkcd-titletext');
+                if(kkcdtitletext_overwrite != null){
+                    kkcdtitletext = kkcdtitletext_overwrite;
+                }
+                document.documentElement.style.setProperty('--kkcdtitletext', kkcdtitletext);  
+
+                var kkcdinfotext_overwrite = kscript.getAttribute('kkcd-infotext');
+                if(kkcdinfotext_overwrite != null){
+                    kkcdinfotext = kkcdinfotext_overwrite;
+                }
+                document.documentElement.style.setProperty('--kkcdinfotext', kkcdinfotext);  
+
+                var kkcdinfoicon_overwrite = kscript.getAttribute('kkcd-infoicon');
+                if(kkcdinfoicon_overwrite != null){ 
+                    kkcdinfoicon = kkcdinfoicon_overwrite;
+                }
+                document.documentElement.style.setProperty('--kkcdinfoicon', kkcdinfoicon);
+
+                var kkcdbacktext_overwrite = kscript.getAttribute('kkcd-backtext');
+                if(kkcdbacktext_overwrite != null){
+                    kkcdbacktext = kkcdbacktext_overwrite;
+                }
+                document.documentElement.style.setProperty('--kkcdbacktext', kkcdbacktext); 
+                
+                var kkcdbgcat_overwrite = kscript.getAttribute('kkcd-bgcat');
+                if(kkcdbgcat_overwrite != null){
+                    kkcdbgcattext = kkcdbgcat_overwrite;
+                }
+                document.documentElement.style.setProperty('--kkcdbgcattext', kkcdbgcattext);  
+
+                var kkcdcattext_overwrite = kscript.getAttribute('kkcd-cattext');
+                if(kkcdcattext_overwrite != null){
+                    kkcdcattext = kkcdcattext_overwrite;
+                }
+                document.documentElement.style.setProperty('--kkcdcattext', kkcdcattext); 
+
+                var kkcdcatdesctext_overwrite = kscript.getAttribute('kkcd-catdesctext');
+                if(kkcdcatdesctext_overwrite != null){
+                    kkcdcatdesctext = kkcdcatdesctext_overwrite;
+                }
+                document.documentElement.style.setProperty('--kkcdcatdesctext', kkcdcatdesctext); 
+
+                var kkcdbgcal_overwrite = kscript.getAttribute('kkcd-bgcal');
+                if(kkcdbgcal_overwrite != null){
+                    kkcdbgcal = kkcdbgcal_overwrite;
+                }
+                document.documentElement.style.setProperty('--kkcdbgcal', kkcdbgcal); 
+
+                var kkcdcaltext_overwrite = kscript.getAttribute('kkcd-caltext');
+                if(kkcdcaltext_overwrite != null){
+                    kkcdcaltext = kkcdcaltext_overwrite;
+                }
+                document.documentElement.style.setProperty('--kkcdcaltext', kkcdcaltext); 
+
+               
+
+                var kkcdbg_overwrite = kscript.getAttribute('kkcd-bg');
+                if(kkcdbg_overwrite != null){
+                    kkcdbg = kkcdbg_overwrite;
+                }
+                document.documentElement.style.setProperty('--kkcdbg', kkcdbg); 
+                
+
+                var kkcdtext_overwrite = kscript.getAttribute('kkcd-text');
+                if(kkcdtext_overwrite != null){
+                    kkcdtext = kkcdtext_overwrite;
+                }
+                document.documentElement.style.setProperty('--kkcdtext', kkcdtext); 
+                /***** */
+
+                var kkcddldesc_overwrite = kscript.getAttribute('kkcd-dldesc');
+                if(kkcddldesc_overwrite != null){
+                    kkcddldesc = kkcddldesc_overwrite;
+                }
+                document.documentElement.style.setProperty('--kkcddldesc', kkcddldesc); 
+
+                var kkcdtdlbg_overwrite = kscript.getAttribute('kkcd-dlbg');
+                if(kkcdtdlbg_overwrite != null){
+                    kkcddlbg = kkcdtdlbg_overwrite;
+                }
+                document.documentElement.style.setProperty('--kkcddlbg', kkcddlbg); 
+
+                var kkcddltext_overwrite = kscript.getAttribute('kkcd-dltext');
+                if(kkcddltext_overwrite != null){
+                    kkcddltext = kkcddltext_overwrite;
+                }
+                document.documentElement.style.setProperty('--kkcddltext', kkcddltext); 
+                /***COLORS DIALOG END */
             },
             
 
