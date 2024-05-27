@@ -2,8 +2,10 @@ const injectCSS = () => {
     // Create a <link> element
     var link = document.createElement("link");
 
-    var kscript = document.querySelector('script[src*=app]');
+    //var kscript = document.querySelector('script[src*=app]');
+    var kscript = document.getElementById('slogkoledarapp');
     var kkstyle = kscript.getAttribute('kk-style'); 
+    
     
     // Set the link type to and rel attributes
     link.type = "text/css";

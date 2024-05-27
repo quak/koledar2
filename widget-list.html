@@ -122,10 +122,15 @@
       
                                               <div class="kkinfowrapper">
       
-                                                  <div class="kkcatwrapper">
-                                                      <span class="kkcatname" x-text="event.cat.name_sl"  style="background-color: var(--kkcdbgcattext);color: var(--kkcdcattext);"></span>
-                                                      <span class="kkcategory" style="color: var(--kkcdcatdesctext);">Kategorija</span>
-                                                  </div>
+                                                <template x-if="event.cat">
+                                                    <span class="kkw1">
+                                                        <img :src="`${event.cat.image.url}`"/>
+                                                        <div class="kkcatwrapper">                                                    
+                                                            <a class="kkcatname" x-text="event.cat.name_de" style="background-color: var(--kkcdbgcattext);color: var(--kkcdcattext);"></a>
+                                                            <span class="kkcategory" style="color: var(--kkcdcatdesctext);">Kategorie</span>
+                                                        </div>
+                                                    </span>
+                                                </template>
       
                                                   <template x-for="organizer in event.orga">
                                                       <div class="kkcatwrapper">  
@@ -326,10 +331,17 @@
     
                                             <div class="kkinfowrapper">
     
-                                                <div class="kkcatwrapper">
-                                                    <a class="kkcatname" x-text="event.cat.name_de" style="background-color: var(--kkcdbgcattext);color: var(--kkcdcattext);"></a>
-                                                    <span class="kkcategory" style="color: var(--kkcdcatdesctext);">Kategorie</span>
-                                                </div>
+                                                <template x-if="event.cat">
+                                                    <span class="kkw1">
+                                                        <img :src="`${event.cat.image.url}`"/>
+                                                        <div class="kkcatwrapper">                                                    
+                                                            <a class="kkcatname" x-text="event.cat.name_de" style="background-color: var(--kkcdbgcattext);color: var(--kkcdcattext);"></a>
+                                                            <span class="kkcategory" style="color: var(--kkcdcatdesctext);">Kategorie</span>
+                                                        </div>
+                                                    </span>
+                                                </template>
+
+                                                
     
                                                 <template x-for="organizer in event.orga">
                                                     <div class="kkcatwrapper">  

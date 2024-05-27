@@ -39,6 +39,16 @@
   display: none;
 }
 /***LNG MENU* END*/
+#slogkoledarapp .kkw1{
+  display: flex;
+  flex-direction: row;
+}
+
+#slogkoledarapp .kkw1 img{
+  max-height: 30px;
+  margin-right: 12px;
+}
+
 
 #koledarlink {
     background-color: #952a5b;

@@ -70,20 +70,30 @@ const initAlpine = () => {
 
 
             async getAllLocations() {
-                let response = await fetch('https://admin.koledar.at/v1/locations?includeChildren=true')
+                let response = await fetch('https://admin.koledar.at/v1/locations?includeChildren=true&limit=200')
                 return await response.json();
             },
             async getAllOrganizers() {
                 let response = await fetch('https://admin.koledar.at/v1/organizers?offset=0&limit=200')
                 return await response.json();
             },
-            async getEvents(limit,datestr,kkcat) {
+            async getEvents(limit,datestr,kkcat,kkorga,kkintern) {
 
                 let catquery="";
+                let orgaquery="";
+                let internquery="";
+                console.log(kkintern);
                 if(kkcat!="" && kkcat != null){
                     catquery="&subcategories="+kkcat;
                 }
-                let response = await fetch('https://admin.koledar.at/v1/events?limit='+limit+'&offset=0&from='+datestr+catquery)
+                if(kkorga!="" && kkorga != null){
+                    orgaquery="&organizers="+kkorga;
+                }
+
+                if(kkintern!="" && kkintern != null){
+                    internquery="&event-types=internal&event-types=public";
+                }
+                let response = await fetch('https://admin.koledar.at/v1/events?limit='+limit+'&offset=0&from='+datestr+catquery+orgaquery+internquery)
 
                 return await response.json();
             },
@@ -105,9 +115,13 @@ const initAlpine = () => {
            
                 
                 
-                kscript = document.querySelector('script[src*=app]');
+                //kscript = document.querySelector('script[src*=app]');
+                kscript = document.getElementById('slogkoledarapp');
+                
                 var limit = kscript.getAttribute('kk-data-amount');  
                 var kkcat = kscript.getAttribute('kk-cat');  
+                var kkorga = kscript.getAttribute('kk-orga');  
+                var kkintern = kscript.getAttribute('kk-intern');  
 
 
                 
@@ -116,15 +130,17 @@ const initAlpine = () => {
                 
                 loadingcycles=loadingcycles+1;
                 
-                if(kscript.getAttribute('kk-style') == "list" && (kscript.getAttribute('kk-chunksize')*2 >= kscript.getAttribute('kk-data-amount'))){
-                    limit=kscript.getAttribute('kk-chunksize')*2+1;
+                if(kscript.getAttribute('kk-style') == "list"){
+                    //limit=kscript.getAttribute('kk-chunksize')*2;
+                    limit = parseInt(kscript.getAttribute('kk-data-amount'))*parseInt(kscript.getAttribute('kk-chunksize'));
+     
                 }
 
                 
                 this.kklocations  = (await this.getAllLocations()).items;
                 this.kkcategories  = (await this.getAllCategories()).items;
                 this.kkorganizers = (await this.getAllOrganizers()).items;
-                this.kkevents     = (await this.getEvents(limit,datestr,kkcat)).items;
+                this.kkevents     = (await this.getEvents(limit,datestr,kkcat,kkorga,kkintern)).items;
              
                 
                 this.isLoading = false;
@@ -223,7 +239,7 @@ const initAlpine = () => {
                         evat.push(event);
                     }
 
-                   
+                    
                     
                 });
                 
@@ -252,7 +268,7 @@ const initAlpine = () => {
                 
             },
             fetchAddEventList() {
-
+                
 
                 let actdateforq = new Date();
                 let qday = (actdateforq.getDate()).toString();
@@ -268,8 +284,10 @@ const initAlpine = () => {
                 let datestr = qyear + "-" + qmonth + "-"+ qday;
                 
                 this.isLoading = true;
-                var kscript = document.querySelector('script[src*=app]');
+                //var kscript = document.querySelector('script[src*=app]');
+                var kscript = document.getElementById('slogkoledarapp');
                 var limit = kscript.getAttribute('kk-data-amount');
+                var limit = parseInt(kscript.getAttribute('kk-data-amount'))*parseInt(kscript.getAttribute('kk-chunksize'));
                 var offset = limit *loadingcycles;
                 loadingcycles=loadingcycles+1;
 
@@ -277,7 +295,24 @@ const initAlpine = () => {
                 let evsl = new Array();
                 let evat = new Array();
 
-                fetch('https://admin.koledar.at/v1/events?limit='+limit+'&offset='+offset+'&from='+datestr)
+                let catquery="";
+                let orgaquery="";
+                var kkcat = kscript.getAttribute('kk-cat');  
+                var kkorga = kscript.getAttribute('kk-orga');  
+                var kkintern = kscript.getAttribute('kk-intern');  
+                if(kkcat!="" && kkcat != null){
+                    catquery="&subcategories="+kkcat;
+                }
+                if(kkorga!="" && kkorga != null){
+                    orgaquery="&organizers="+kkorga;
+                }
+                
+                if(kkintern!="" && kkintern != null){
+                    internquery="&event-types=internal&event-types=public";
+                }
+                
+
+                fetch('https://admin.koledar.at/v1/events?limit='+limit+'&offset='+offset+'&from='+datestr+catquery+orgaquery+internquery)
                 .then(res => res.json())
                 .then(data => {
                     
@@ -416,6 +451,24 @@ const initAlpine = () => {
             getLocationforSlug(locationslug,venueslug) {
                 let ret = false;
                
+                if(locationslug==="sentjanz-v-rozu"){
+                    console.log(locationslug);     
+                    this.kklocations.forEach((locobj,index) => {
+                    console.log(locobj.location_key);
+                        if(locationslug===locobj.location_key){
+                           console.log("locobj");
+                           console.log(locobj);
+                            locobj.venues.forEach((vobj,index) => {
+                                if(venueslug===vobj.venue_key){
+                                    locobj.venuename_de = vobj.name_de;
+                                    locobj.venuename_sl = vobj.name_sl;
+                                }
+                            });
+    
+                            
+                        }
+                    });
+                }
                  
                 this.kklocations.forEach((locobj,index) => {
                     
@@ -831,7 +884,8 @@ const initAlpine = () => {
 
     Alpine.start();
 
-    var kscript = document.querySelector('script[src*=app]');
+    //var kscript = document.querySelector('script[src*=app]');
+    var kscript = document.getElementById('slogkoledarapp');
     var kkstyle = kscript.getAttribute('kk-style');  
 
     // #app is a div that we're going to inject our markup into
