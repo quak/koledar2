@@ -297,6 +297,7 @@ const initAlpine = () => {
 
                 let catquery="";
                 let orgaquery="";
+                let internquery="";
                 var kkcat = kscript.getAttribute('kk-cat');  
                 var kkorga = kscript.getAttribute('kk-orga');  
                 var kkintern = kscript.getAttribute('kk-intern');  

@@ -3685,6 +3685,7 @@ var initAlpine = function initAlpine() {
         var evat = new Array();
         var catquery = "";
         var orgaquery = "";
+        var internquery = "";
         var kkcat = kscript.getAttribute('kk-cat');
         var kkorga = kscript.getAttribute('kk-orga');
         var kkintern = kscript.getAttribute('kk-intern');
@@ -4175,24 +4176,21 @@ var injectCSS = function injectCSS() {
   // Set the link type to and rel attributes
   link.type = "text/css";
   link.rel = "stylesheet";
-  var environment = 'productionX';
+  var environment = 'production';
   if (environment == 'production' && kkstyle == "list") {
     link.href = "https://cdn.jsdelivr.net/gh/quak/koledar2@main/dist/styles-list.css";
-    link.href = "https://cdn.jsdelivr.net/gh/quak/koledar2/dist/styles-list.css";
   }
   if (environment != 'production' && kkstyle == "list") {
     link.href = "./../dist/styles-list.css";
   }
   if (environment == 'production' && kkstyle == "carousel") {
     link.href = "https://cdn.jsdelivr.net/gh/quak/koledar2@main/dist/styles-carousel.css";
-    /*link.href = "https://cdn.jsdelivr.net/gh/quak/koledar2/dist/styles-carousel.css";*/
   }
   if (environment != 'production' && kkstyle == "carousel") {
     link.href = "./../dist/styles-carousel.css";
   }
   if (environment == 'production' && kkstyle == "pro") {
     link.href = "https://cdn.jsdelivr.net/gh/quak/koledar2@main/dist/styles-pro.css";
-    link.href = "https://cdn.jsdelivr.net/gh/quak/koledar2/dist/styles-pro.css";
   }
   if (environment != 'production' && kkstyle == "pro") {
     link.href = "./../dist/styles-pro.css";
